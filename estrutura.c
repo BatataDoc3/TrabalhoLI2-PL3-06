@@ -27,22 +27,18 @@ typedef struct {CASA tab[8][8];
 
 // Função que deve ser completada e colocada na camada de dados
 ESTADO *inicializar_estado() {
+    int linha, coluna;
     ESTADO *e = (ESTADO *) malloc(sizeof(ESTADO));
     e->jogador_atual = 1;
     e->num_jogadas = 0;
-    COORDENADA *c = (COORDENADA *) malloc (sizeof(COORDENADA));
-    c -> coluna = 5;
-    c -> linha = 4;
-    JOGADA *j = (JOGADA *) malloc (sizeof(JOGADA));
-    j -> jogador1 = *c;
-    e->jogadas = JOGADAS[0];
-    // Falta a resto da inicialização.
-    return e;
+    for (linha = 0; linha < 8 ; linha ++) {
+        for (coluna = 0; coluna < 8; coluna ++) {
+            if (linha == 3 && coluna == 4) 
+            e -> tab [linha] [coluna] = BRANCA;
+            else 
+            e -> tab [linha] [coluna] = VAZIO;
+        }
+    }
+    e -> ultima_jogada.coluna = 4;
+    e -> ultima_jogada.linha = 3;
 }
-
-
-
-void mostrar_tabuleiro(ESTADO *e) {
-
-}
-
