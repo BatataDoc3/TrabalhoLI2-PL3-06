@@ -1,12 +1,9 @@
-int interpretador(ESTADO *e) {
-    char linha[BUF_SIZE];
-    char col[2], lin[2];
-    if(fgets(linha, BUF_SIZE, stdin) == NULL) return 0;
-    if(strlen(linha) == 3 && sscanf(linha, "%[0-7]%[0-7]", col, lin) == 2) {COORDENADA coord = {*col -'0', *lin -'0'};
-    jogar(e, coord);mostrar_tabuleiro(e);
-    }
-    return 1;
-}
+#include "logicaProg.h"
+#include "estrutura.h"
+#include <stdio.h>
+#include <string.h>
+
+
 
 void mostrar_tabuleiro (ESTADO *e) {
     int linha,coluna;
@@ -21,3 +18,17 @@ void mostrar_tabuleiro (ESTADO *e) {
         printf ("\n");
     }
 }
+
+
+
+int interpretador(ESTADO *e) {
+    char linha[BUF_SIZE];
+    char col[2], lin[2];
+    if(fgets(linha, BUF_SIZE, stdin) == NULL) return 0;
+    if(strlen(linha) == 3 && sscanf(linha, "%[0-7]%[0-7]", col, lin) == 2) {COORDENADA coord = {*col -'0', *lin -'0'};
+        jogar(e, coord);
+        mostrar_tabuleiro(e);
+    }
+    return 1;
+}
+
