@@ -1,8 +1,6 @@
-//
-// Created by josejoao on 09/03/20.
-//
+
 
 #ifndef PROJETO_LOGICAPROG_H
 #define PROJETO_LOGICAPROG_H
-ESTADO *inicializar_estado();
+int jogar(ESTADO *e, COORDENADA c);
 #endif //PROJETO_LOGICAPROG_H
