@@ -1,8 +1,7 @@
-//
-// Created by josejoao on 09/03/20.
-//
-
-
+#include "estrutura.h"
+#include "logicaProg.h"
+#include "camadaInterface.h"
+#include <stdio.h>
 
 int main(){
     ESTADO *e = inicializar_estado();
