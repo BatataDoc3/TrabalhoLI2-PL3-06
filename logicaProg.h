@@ -1,6 +1,7 @@
+#ifndef PROJETO_LI2_LOGICAPROG_H
+#define PROJETO_LI2_LOGICAPROG_H
 
+#include "estrutura.h"
 
-#ifndef PROJETO_LOGICAPROG_H
-#define PROJETO_LOGICAPROG_H
 int jogar(ESTADO *e, COORDENADA c);
-#endif //PROJETO_LOGICAPROG_H
+#endif //PROJETO_LI2_LOGICAPROG_H
