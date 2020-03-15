@@ -17,6 +17,8 @@ typedef struct {CASA tab[8][8];
 CASA obter_estado_casa (ESTADO *e, COORDENADA *x);
 int obter_numero_de_jogadas (ESTADO *e);
 int obter_jogador_atual (ESTADO *e);
+int atualizar_jogador_atual (ESTADO *e);
+int atualizar_num_jogadas (ESTADO *e);
 ESTADO *inicializar_estado();
 
 #endif //PROJETO_LI2_ESTRUTURA_H
