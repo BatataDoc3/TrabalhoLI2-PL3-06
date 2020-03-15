@@ -13,8 +13,6 @@ CASA obter_estado_casa (ESTADO *e, COORDENADA *x){
 
 
 
-
-
 int obter_numero_de_jogadas (ESTADO *e) {
     int num_jogadas;
     num_jogadas = e -> num_jogadas;
@@ -30,7 +28,18 @@ int obter_jogador_atual (ESTADO *e) {
     return jogadorAtual;
 }
 
+int atualizar_jogador_atual (ESTADO *e) {
+    int jogador;
+    if (obter_jogador_atual(e) == 1)  jogador = 2;
+    else jogador = 1;
+    return jogador;
+}
 
+int atualizar_num_jogadas (ESTADO *e) {
+    int num = obter_numero_de_jogadas (e);
+    if (obter_jogador_atual(e) == 2) num++;
+    return num;
+}
 
 
 ESTADO *inicializar_estado() {
