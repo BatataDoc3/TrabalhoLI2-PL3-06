@@ -15,3 +15,6 @@ Após esta fase e ter lido pela segunda vez o guião, continuamos com algumas d�
 funções. Começamos pela função que inicializa o estado do jogo, e desde logo, tivemos dificuldades de perceber como funcionava
 a sintaxe para atribuir os valores ao Estado. Mas depois de algum tempo, acabamos por conseguir entender e fazer.
 A partir daqui e após ter percebido minimamente o conceito, definir o resto das funções foi relativamente mais fácil.
+
+As funções que definimos são basicamente as que estão enunciadas no Guião 5, portanto os seus objetivos já estão explicadas no guião.
+Assim sendo, o nosso programa, por enquanto, não verifica se uma jogada é válida, não substitui a antiga posição da peça branca por uma preta e joga infinitamente.
