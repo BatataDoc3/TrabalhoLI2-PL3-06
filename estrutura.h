@@ -30,5 +30,9 @@ int atualizar_jogador_atual (ESTADO *e);
 int atualizar_num_jogadas (ESTADO *e);
 ESTADO *inicializar_estado();
 int jogada_valida (ESTADO *e, COORDENADA c);
+int jogo_finalizado (ESTADO *e, COORDENADA c);
+int rodeado_pretas (ESTADO *e, COORDENADA c);
+int casa_Preta (ESTADO*e, COORDENADA c);
+int parabens_jogador (ESTADO *e);
 
 #endif //PROJETO_LI2_ESTRUTURA_H
