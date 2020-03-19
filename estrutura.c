@@ -20,8 +20,6 @@ int obter_numero_de_jogadas (ESTADO *e) {
 }
 
 
-
-
 int obter_jogador_atual (ESTADO *e) {
     int jogadorAtual;
     jogadorAtual = e -> jogador_atual;
@@ -58,4 +56,46 @@ ESTADO *inicializar_estado() {
     e -> ultima_jogada.coluna = 4;
     e -> ultima_jogada.linha = 3;
     return e ;
+}
+
+CASA atualizar_casa (ESTADO *e, COORDENADA c) {
+    CASA casa;
+    casa = e -> tab [c.linha] [c.coluna] = BRANCA;
+    return casa;
+}
+
+void atualizar_casa_preta (ESTADO *e) {
+    int linha, coluna;
+    for (linha = 7; linha >= 0; linha --) {
+        for (coluna = 0; coluna <=7 ; coluna ++) {
+            if (e -> tab [linha] [coluna] == BRANCA) e -> tab [linha] [coluna] = PRETA;
+        }
+    }
+}
+
+int jogada_valida_pecaBranca (ESTADO*e, COORDENADA c) {
+    int linha,coluna;
+    linha = c.linha;
+    coluna = c.coluna;
+    if (e -> tab [linha+1] [coluna] == '*' ||
+        e -> tab [linha] [coluna + 1] == '*' ||
+        e -> tab [linha + 1] [coluna + 1] == '*' ||
+        e -> tab [linha - 1] [coluna] == '*' ||
+        e -> tab [linha] [coluna - 1] == '*' ||
+        e -> tab [linha - 1] [coluna - 1] == '*' ||
+        e -> tab [linha - 1] [coluna + 1] == '*' ||
+        e -> tab [linha + 1] [coluna - 1] == '*')
+        return 1;
+    else return 0;
+}
+
+int jogada_valida (ESTADO *e , COORDENADA c) {
+    if (jogada_valida_pecaBranca(e,c) == 1) {
+        if (e-> tab [c.linha] [c.coluna] == '.' &&
+            c.coluna >= 0 && c.coluna <= 7 &&
+            c.linha >= 0 && c.coluna <= 7)
+            return 1;
+        else return (-1);
+    }
+    else return (-1);
 }
