@@ -7,16 +7,21 @@
 
 void mostrar_tabuleiro (ESTADO *e) {
     int linha,coluna;
+    char letra = 'H';
     for (linha = 7; linha >= 0; linha--) {
+        putchar (letra) ;
+        letra--;
         for (coluna = 0; coluna < 8; coluna ++) {
-            if (linha == 7 && coluna ==7) putchar ('2');
-            else if (linha == 0 && coluna == 0) putchar ('1');
-            else if (e -> tab [linha] [coluna]  == VAZIO) putchar ('.') ;
-            else if (e -> tab [linha] [coluna]  == BRANCA) putchar ('*');
-            else putchar ('#');
+            if (linha == 7 && coluna ==7) printf (" 2");
+            else if (linha == 0 && coluna == 0) printf (" 1");
+            else if (e -> tab [linha] [coluna]  == VAZIO) printf (" .") ;
+            else if (e -> tab [linha] [coluna]  == BRANCA) printf (" *");
+            else printf (" #");
         }
         printf ("\n");
     }
+    printf ("  1 2 3 4 5 6 7 8 \n");
+    printf ("Jogador atual : %d \nNúmero de jogadas : %d \n", obter_jogador_atual(e), obter_numero_de_jogadas(e));
 }
 
 
@@ -35,4 +40,3 @@ int interpretador(ESTADO *e) {
     }
     return 1;
 }
-
