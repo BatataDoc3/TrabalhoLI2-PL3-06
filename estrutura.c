@@ -99,3 +99,48 @@ int jogada_valida (ESTADO *e , COORDENADA c) {
     }
     else return (-1);
 }
+
+int casa_Preta (ESTADO*e, COORDENADA c) {
+    int linha,coluna;
+    linha = c.linha;
+    coluna = c.coluna;
+    if (e -> tab [linha + 1] [coluna] == '#' &&
+        e -> tab [linha] [coluna + 1] == '#' &&
+        e -> tab [linha - 1] [coluna] == '#' &&
+        e -> tab [linha] [coluna - 1] == '#' &&
+        e -> tab [linha - 1] [coluna - 1] == '#' &&
+        e -> tab [linha - 1] [coluna + 1] == '#' &&
+        e -> tab [linha + 1] [coluna - 1] == '#' &&
+        e -> tab [linha + 1] [coluna + 1] == '#' )
+        return 1;
+    else return 0;
+}
+
+int rodeado_pretas (ESTADO *e, COORDENADA c){
+    int x;
+    x = casa_Preta(e,c);
+    return x;
+    }
+
+
+int jogo_finalizado (ESTADO *e, COORDENADA c) {
+    int colunaJog, linhaJog;
+    int r = 0;
+    colunaJog = c.coluna;
+    linhaJog = c.linha;
+    if (obter_numero_de_jogadas(e) == 64 || (colunaJog == 0 && linhaJog == 0) ||
+        (colunaJog == 7 && linhaJog == 7) || rodeado_pretas(e, c)){
+        r = 1;
+     }
+    return r;
+}
+
+
+int parabens_jogador (ESTADO *e){
+    int x;
+    x = e -> jogador_atual;
+    return x;
+}
+
+
+// FALTA FAZER PARA O CASO DE O JOGADOR ESTAR ENCURRALADO NUM CANTO OU NUM DOS LADOS!!!!
