@@ -1,7 +1,13 @@
 #ifndef PROJETO_LI2_ESTRUTURA_H
 #define PROJETO_LI2_ESTRUTURA_H
 #define BUF_SIZE 1024
-typedef enum {VAZIO, BRANCA, PRETA} CASA;
+typedef enum {
+    UM = '1',
+    DOIS = '2',
+    VAZIO = '.',
+    BRANCA = '*',
+    PRETA = '#'
+} CASA ;
 typedef struct {int linha;int coluna;} COORDENADA;
 typedef struct {COORDENADA jogador1;
     COORDENADA jogador2;
@@ -14,11 +20,15 @@ typedef struct {CASA tab[8][8];
     int jogador_atual;
 } ESTADO;
 
+
 CASA obter_estado_casa (ESTADO *e, COORDENADA *x);
+CASA atualizar_casa (ESTADO *e, COORDENADA c);
+void atualizar_casa_preta (ESTADO *e);
 int obter_numero_de_jogadas (ESTADO *e);
 int obter_jogador_atual (ESTADO *e);
 int atualizar_jogador_atual (ESTADO *e);
 int atualizar_num_jogadas (ESTADO *e);
 ESTADO *inicializar_estado();
+int jogada_valida (ESTADO *e, COORDENADA c);
 
 #endif //PROJETO_LI2_ESTRUTURA_H
