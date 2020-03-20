@@ -10,10 +10,10 @@ void mostrar_tabuleiro (ESTADO *e) {
         putchar (letra) ;
         letra--;
         for (coluna = 0; coluna < 8; coluna ++) {
-            if (linha == 7 && coluna ==7) printf (" 2");
-            else if (linha == 0 && coluna == 0) printf (" 1");
-            else if (e -> tab [linha] [coluna]  == VAZIO) printf (" .") ;
-            else if (e -> tab [linha] [coluna]  == BRANCA) printf (" *");
+            if (obter_estado_casa(e,coluna,linha) == DOIS) printf (" 2");
+            else if (obter_estado_casa(e,coluna,linha) == UM) printf (" 1");
+            else if (obter_estado_casa(e,coluna,linha)  == VAZIO) printf (" .") ;
+            else if (obter_estado_casa(e,coluna,linha)  == BRANCA) printf (" *");
             else printf (" #");
         }
         printf ("\n");
@@ -29,10 +29,10 @@ void gravar_tabuleiro (FILE *f,ESTADO *e) {
         fputc(letra,f);
         letra--;
         for (coluna = 0; coluna < 8; coluna ++) {
-            if (linha == 7 && coluna ==7) fprintf (f," 2");
-            else if (linha == 0 && coluna == 0) fprintf (f," 1");
-            else if (e -> tab [linha] [coluna]  == VAZIO) fprintf (f," .") ;
-            else if (e -> tab [linha] [coluna]  == BRANCA) fprintf (f," *");
+            if (obter_estado_casa(e,coluna,linha) == DOIS) fprintf (f," 2");
+            else if (obter_estado_casa(e,coluna,linha) == UM) fprintf (f," 1");
+            else if (obter_estado_casa(e,coluna,linha)  == VAZIO) fprintf (f," .") ;
+            else if (obter_estado_casa(e,coluna,linha)  == BRANCA) fprintf (f," *");
             else fprintf (f," #");
         }
         fprintf (f,"\n");
