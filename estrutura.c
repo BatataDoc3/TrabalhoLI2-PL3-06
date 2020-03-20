@@ -149,7 +149,7 @@ int jogo_finalizado (ESTADO *e, COORDENADA c) {
     int r = 0;
     colunaJog = c.coluna;
     linhaJog = c.linha;
-    if (obter_numero_de_jogadas(e) == 64 || (colunaJog == 0 && linhaJog == 0) ||
+    if (obter_numero_de_jogadas(e) == 32 || (colunaJog == 0 && linhaJog == 0) ||
         (colunaJog == 7 && linhaJog == 7) || rodeado_pretas(e, c)){
         r = 1;
     }
@@ -159,6 +159,8 @@ int jogo_finalizado (ESTADO *e, COORDENADA c) {
 
 int parabens_jogador (ESTADO *e){
     int x;
-    x = e -> jogador_atual;
+    if (obter_estado_casa(e,7,7) == '*') x = 1;
+    else if (obter_estado_casa(e,0,0) == '*') x = 2;
+         else x = e -> jogador_atual;
     return x;
 }
