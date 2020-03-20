@@ -2,16 +2,11 @@
 #include <stdlib.h>
 
 
-CASA obter_estado_casa (ESTADO *e, COORDENADA *x){
+CASA obter_estado_casa (ESTADO *e, int coluna, int linha){
     CASA casa;
-    int coluna, linha;
-    coluna = x -> coluna;
-    linha = x -> linha;
     casa = e -> tab [linha] [coluna] ;
     return casa;
 }
-
-
 
 int obter_numero_de_jogadas (ESTADO *e) {
     int num_jogadas;
@@ -53,6 +48,8 @@ ESTADO *inicializar_estado() {
                 e -> tab [linha] [coluna] = VAZIO;
         }
     }
+    e -> tab [7] [7] = UM;
+    e -> tab [0] [0] = DOIS;
     e -> ultima_jogada.coluna = 4;
     e -> ultima_jogada.linha = 3;
     return e ;
@@ -73,32 +70,7 @@ void atualizar_casa_preta (ESTADO *e) {
     }
 }
 
-int jogada_valida_pecaBranca (ESTADO*e, COORDENADA c) {
-    int linha,coluna;
-    linha = c.linha;
-    coluna = c.coluna;
-    if (e -> tab [linha+1] [coluna] == '*' ||
-        e -> tab [linha] [coluna + 1] == '*' ||
-        e -> tab [linha + 1] [coluna + 1] == '*' ||
-        e -> tab [linha - 1] [coluna] == '*' ||
-        e -> tab [linha] [coluna - 1] == '*' ||
-        e -> tab [linha - 1] [coluna - 1] == '*' ||
-        e -> tab [linha - 1] [coluna + 1] == '*' ||
-        e -> tab [linha + 1] [coluna - 1] == '*')
-        return 1;
-    else return 0;
-}
 
-int jogada_valida (ESTADO *e , COORDENADA c) {
-    if (jogada_valida_pecaBranca(e,c) == 1) {
-        if (e-> tab [c.linha] [c.coluna] == '.' &&
-            c.coluna >= 0 && c.coluna <= 7 &&
-            c.linha >= 0 && c.coluna <= 7)
-            return 1;
-        else return (-1);
-    }
-    else return (-1);
-}
 
 int casa_Preta (ESTADO*e, COORDENADA c) {
     int linha,coluna;
