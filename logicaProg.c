@@ -1,4 +1,3 @@
-
 #include "estrutura.h"
 #include <stdio.h>
 
@@ -25,6 +24,99 @@ int jogada_valida (ESTADO *e , COORDENADA c) {
         else return 1;
     }
     else return (-1);
+}
+
+int casa_Preta (ESTADO*e, COORDENADA c) {
+    int linha,coluna;
+    linha = c.linha;
+    coluna = c.coluna;
+    if (e -> tab [linha + 1] [coluna] == '#' &&
+        e -> tab [linha] [coluna + 1] == '#' &&
+        e -> tab [linha - 1] [coluna] == '#' &&
+        e -> tab [linha] [coluna - 1] == '#' &&
+        e -> tab [linha - 1] [coluna - 1] == '#' &&
+        e -> tab [linha - 1] [coluna + 1] == '#' &&
+        e -> tab [linha + 1] [coluna - 1] == '#' &&
+        e -> tab [linha + 1] [coluna + 1] == '#' )
+        return 1;
+    else if (linha == 0 && coluna == 0 &&
+             e -> tab [linha + 1] [coluna] == '#' &&
+             e -> tab [linha + 1] [coluna + 1] == '#' &&
+             e -> tab [linha] [coluna + 1] == '#')
+        return 1;
+    else if (linha == 0 && coluna == 7 &&
+             e -> tab [linha + 1] [coluna] == '#' &&
+             e -> tab [linha + 1] [coluna - 1] == '#' &&
+             e -> tab [linha] [coluna - 1] == '#')
+        return 1;
+    else if (linha == 7 && coluna == 0 &&
+             e -> tab [linha - 1] [coluna] == '#' &&
+             e -> tab [linha - 1] [coluna + 1] == '#' &&
+             e -> tab [linha] [coluna + 1] == '#')
+        return 1;
+    else if (linha == 7 && coluna == 7 &&
+             e -> tab [linha - 1] [coluna] == '#' &&
+             e -> tab [linha - 1] [coluna - 1] == '#' &&
+             e -> tab [linha] [coluna - 1] == '#')
+        return 1;
+    else if (linha == 7 &&
+             e -> tab [linha - 1] [coluna] == '#' &&
+             e -> tab [linha - 1] [coluna - 1] == '#' &&
+             e -> tab [linha] [coluna - 1] == '#' &&
+             e -> tab [linha] [coluna + 1] == '#' &&
+             e -> tab [linha - 1] [coluna + 1] == '#')
+        return 1;
+    else if (linha == 0 &&
+             e -> tab [linha + 1] [coluna] == '#' &&
+             e -> tab [linha + 1] [coluna - 1] == '#' &&
+             e -> tab [linha] [coluna - 1] == '#' &&
+             e -> tab [linha] [coluna + 1] == '#' &&
+             e -> tab [linha + 1] [coluna + 1] == '#')
+        return 1;
+    else if (coluna == 0 &&
+             e -> tab [linha - 1] [coluna] == '#' &&
+             e -> tab [linha + 1] [coluna] == '#' &&
+             e -> tab [linha + 1] [coluna +1] == '#' &&
+             e -> tab [linha - 1] [coluna + 1] == '#' &&
+             e -> tab [linha] [coluna + 1] == '#')
+        return 1;
+    else if (coluna == 7 &&
+             e -> tab [linha] [coluna - 1] == '#' &&
+             e -> tab [linha - 1] [coluna] == '#' &&
+             e -> tab [linha + 1] [coluna] == '#' &&
+             e -> tab [linha - 1] [coluna - 1] == '#' &&
+             e -> tab [linha + 1] [coluna - 1] == '#')
+        return 1;
+    else return 0;
+}
+
+
+int rodeado_pretas (ESTADO *e, COORDENADA c){
+    int x;
+    x = casa_Preta(e,c);
+    return x;
+}
+
+
+int jogo_finalizado (ESTADO *e, COORDENADA c) {
+    int colunaJog, linhaJog;
+    int r = 0;
+    colunaJog = c.coluna;
+    linhaJog = c.linha;
+    if (obter_numero_de_jogadas(e) == 32 || (colunaJog == 0 && linhaJog == 0) ||
+        (colunaJog == 7 && linhaJog == 7) || rodeado_pretas(e, c)){
+        r = 1;
+    }
+    return r;
+}
+
+
+int parabens_jogador (ESTADO *e){
+    int x;
+    if (obter_estado_casa(e,7,7) == '*') x = 2;
+    else if (obter_estado_casa(e,0,0) == '*') x = 1;
+    else x = e -> jogador_atual;
+    return x;
 }
 
 
