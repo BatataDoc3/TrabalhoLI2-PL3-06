@@ -1,3 +1,4 @@
+
 #ifndef PROJETO_LI2_ESTRUTURA_H
 #define PROJETO_LI2_ESTRUTURA_H
 #define BUF_SIZE 1024
@@ -22,7 +23,7 @@ typedef struct {CASA tab[8][8];
 } ESTADO;
 
 
-CASA obter_estado_casa (ESTADO *e, COORDENADA *x);
+CASA obter_estado_casa (ESTADO *e, int coluna, int linha);
 CASA atualizar_casa (ESTADO *e, COORDENADA c);
 void atualizar_casa_preta (ESTADO *e);
 int obter_numero_de_jogadas (ESTADO *e);
@@ -30,7 +31,6 @@ int obter_jogador_atual (ESTADO *e);
 int atualizar_jogador_atual (ESTADO *e);
 int atualizar_num_jogadas (ESTADO *e);
 ESTADO *inicializar_estado();
-int jogada_valida (ESTADO *e, COORDENADA c);
 int jogo_finalizado (ESTADO *e, COORDENADA c);
 int rodeado_pretas (ESTADO *e, COORDENADA c);
 int casa_Preta (ESTADO*e, COORDENADA c);
