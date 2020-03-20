@@ -120,7 +120,7 @@ int rodeado_pretas (ESTADO *e, COORDENADA c){
     int x;
     x = casa_Preta(e,c);
     return x;
-    }
+}
 
 
 int jogo_finalizado (ESTADO *e, COORDENADA c) {
@@ -131,7 +131,7 @@ int jogo_finalizado (ESTADO *e, COORDENADA c) {
     if (obter_numero_de_jogadas(e) == 64 || (colunaJog == 0 && linhaJog == 0) ||
         (colunaJog == 7 && linhaJog == 7) || rodeado_pretas(e, c)){
         r = 1;
-     }
+    }
     return r;
 }
 
