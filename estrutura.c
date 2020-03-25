@@ -1,4 +1,3 @@
-
 #include "estrutura.h"
 #include <stdlib.h>
 
@@ -43,7 +42,7 @@ ESTADO *inicializar_estado() {
     e->num_jogadas = 0;
     for (linha = 0; linha < 8 ; linha ++) {
         for (coluna = 0; coluna < 8; coluna ++) {
-            if (linha == 3 && coluna == 4)
+            if (linha == 4 && coluna == 4)
                 e -> tab [linha] [coluna] = BRANCA;
             else
                 e -> tab [linha] [coluna] = VAZIO;
@@ -52,7 +51,7 @@ ESTADO *inicializar_estado() {
     e -> tab [0] [0] = UM;
     e -> tab [7] [7] = DOIS;
     e -> ultima_jogada.coluna = 4;
-    e -> ultima_jogada.linha = 3;
+    e -> ultima_jogada.linha = 4;
     return e ;
 }
 
@@ -68,5 +67,16 @@ void atualizar_casa_preta (ESTADO *e) {
         for (coluna = 0; coluna <=7 ; coluna ++) {
             if (e -> tab [linha] [coluna] == BRANCA) e -> tab [linha] [coluna] = PRETA;
         }
+    }
+}
+
+void atualizar_jogadas (ESTADO *e, COORDENADA c) {
+    if (obter_jogador_atual(e)==1) {
+        e->jogadas[obter_numero_de_jogadas(e)].jogador1.coluna = c.coluna;
+        e->jogadas[obter_numero_de_jogadas(e)].jogador1.linha = c.linha;
+    }
+    if (obter_jogador_atual(e)==2) {
+        e->jogadas[obter_numero_de_jogadas(e)].jogador2.coluna = c.coluna;
+        e->jogadas[obter_numero_de_jogadas(e)].jogador2.linha = c.linha;
     }
 }
