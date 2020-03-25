@@ -126,6 +126,7 @@ int jogar(ESTADO *e, COORDENADA c) {
         printf("jogar %d %d\n", c.coluna, c.linha);
         atualizar_casa_preta(e);
         atualizar_casa(e, c);
+        atualizar_jogadas (e, c);
         e->num_jogadas = atualizar_num_jogadas(e);
         e->jogador_atual = atualizar_jogador_atual(e);
         if (jogo_finalizado(e, c) == 1){
