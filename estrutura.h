@@ -49,7 +49,7 @@ typedef struct {
     int num_jogadas;
     /** jogador atual */
     int jogador_atual;
-    /** número de comandos efectuados */
+    /** número de  comandos efectuados */
     int num_comandos;
 } ESTADO;
 
@@ -103,6 +103,12 @@ int atualizar_jogador_atual (ESTADO *e);
  * @return a jogada para que vamos
  */
 int atualizar_num_jogadas (ESTADO *e);
+/**
+ *\brief função que atualiza o array das jogadas
+ * @param e pointer do estado
+ * @param c a cordenada
+ */
+void atualizar_jogadas (ESTADO *e, COORDENADA c);
 /**
  \brief Função que inicializa o estado inicial do jogo
  * @return  estado inicial
