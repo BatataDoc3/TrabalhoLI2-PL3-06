@@ -6,6 +6,7 @@
 #ifndef PROJETO_LI2_ESTRUTURA_H
 #define PROJETO_LI2_ESTRUTURA_H
 #define BUF_SIZE 1024
+#include <stdio.h>
 
 /**
  *\brief tipo de dados para a CASA
@@ -109,6 +110,17 @@ int atualizar_num_jogadas (ESTADO *e);
  * @param c a cordenada
  */
 void atualizar_jogadas (ESTADO *e, COORDENADA c);
+
+/**
+ * \brief função quê vai ao ficheiro guardado e altera o estado das casas, o jogadoe e o numero de jogadas de acordo com o que está no ficheiro
+ * @param e pointer do edtado
+ * @param f coordenada
+ * @param a numero de jogadas
+ * @param b jogador atual
+ * @return
+ */
+int le_ficheiro (ESTADO *e,FILE *f, int a, int b);
+
 /**
  \brief Função que inicializa o estado inicial do jogo
  * @return  estado inicial
