@@ -1,5 +1,6 @@
 #include "estrutura.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 
 CASA obter_estado_casa (ESTADO *e, int coluna, int linha){
@@ -79,4 +80,29 @@ void atualizar_jogadas (ESTADO *e, COORDENADA c) {
         e->jogadas[obter_numero_de_jogadas(e)].jogador2.coluna = c.coluna;
         e->jogadas[obter_numero_de_jogadas(e)].jogador2.linha = c.linha;
     }
+}
+
+
+int le_ficheiro (ESTADO *e , FILE *f, int a, int b) {
+    char linha[BUF_SIZE];
+    char *result;
+    int i=0, j;
+    while (!feof(f)){
+        result = fgets(linha, BUF_SIZE, f);
+        if (result) {
+            for (j = 7; j >= 0 ; j--) {
+                if (linha [j] == '.') e -> tab [7-i] [j] = VAZIO;
+                else if (linha [j] == '*') e -> tab [7-i] [j] = BRANCA;
+                else if (linha [j] == '#') e -> tab [7-i] [j] = PRETA;
+            }
+        }
+        i++;
+    }
+    e -> num_jogadas = a;
+    e -> jogador_atual = b;
+    if (b == 2) {
+        e->jogadas[a].jogador2.coluna = 0;
+        e->jogadas[a].jogador2.linha = 0;
+    }
+    return 1;
 }
