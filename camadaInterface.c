@@ -83,7 +83,7 @@ int ler (ESTADO *e,char *filename, int a, int b){
         return 0;
     }
     le_ficheiro(e, f, a, b);
-    mostrar_tabuleiro(e);
+    mostrar_tabuleiro(e);      //caso nao seja para mostrar o tabuleiro ao fazer a função ler, tirar esta função.
     return 1;
 }
 
