@@ -37,33 +37,33 @@ void gravar_tabuleiro (FILE *f,ESTADO *e) {
 }
 
 void print_array (FILE *f, ESTADO *e){
-  int i;
-  for (i=0;i <= (obter_numero_de_jogadas(e)); i++ ){
-      if (i<9){
-          if ((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) {
-              fprintf(f, "0%d: %c%d ", i + 1, (e->jogadas[i].jogador1.linha) + 'a', e->jogadas[i].jogador1.coluna + 1);
-          }
-          if ((e->jogadas[i].jogador2.linha)!= 0 || e->jogadas[i].jogador2.coluna != 0) {
-              fprintf(f, "%c%d ", (e->jogadas[i].jogador2.linha) + 'a', e->jogadas[i].jogador2.coluna + 1);
-              fprintf(f, "\n");
-          }
-          if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha)== 0 && e->jogadas[i].jogador2.coluna == 0)){
-              fprintf(f, "\n");
-          }
-      }
-      else {
-          if ((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) {
-              fprintf(f, "%d: %c%d ", i + 1, (e->jogadas[i].jogador1.linha) + 'a', e->jogadas[i].jogador1.coluna + 1);
-          }
-          if ((e->jogadas[i].jogador2.linha)!= 0 || e->jogadas[i].jogador2.coluna != 0) {
-              fprintf(f, "%c%d ", (e->jogadas[i].jogador2.linha) + 'a', e->jogadas[i].jogador2.coluna + 1);
-              fprintf(f, "\n");
-          }
-          if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha) ==  0 || e->jogadas[i].jogador2.coluna == 0)){
-              fprintf(f, "\n");
-          }
-      }
-  }
+    int i;
+    for (i=0;i <= (obter_numero_de_jogadas(e)); i++ ){
+        if (i<9){
+            if ((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) {
+                fprintf(f, "0%d: %c%d ", i + 1, (e->jogadas[i].jogador1.linha) + 'a', e->jogadas[i].jogador1.coluna + 1);
+            }
+            if ((e->jogadas[i].jogador2.linha)!= 0 || e->jogadas[i].jogador2.coluna != 0) {
+                fprintf(f, "%c%d ", (e->jogadas[i].jogador2.linha) + 'a', e->jogadas[i].jogador2.coluna + 1);
+                fprintf(f, "\n");
+            }
+            if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha)== 0 && e->jogadas[i].jogador2.coluna == 0)){
+                fprintf(f, "\n");
+            }
+        }
+        else {
+            if ((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) {
+                fprintf(f, "%d: %c%d ", i + 1, (e->jogadas[i].jogador1.linha) + 'a', e->jogadas[i].jogador1.coluna + 1);
+            }
+            if ((e->jogadas[i].jogador2.linha)!= 0 || e->jogadas[i].jogador2.coluna != 0) {
+                fprintf(f, "%c%d ", (e->jogadas[i].jogador2.linha) + 'a', e->jogadas[i].jogador2.coluna + 1);
+                fprintf(f, "\n");
+            }
+            if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha) ==  0 || e->jogadas[i].jogador2.coluna == 0)){
+                fprintf(f, "\n");
+            }
+        }
+    }
 }
 
 int gravar (ESTADO *e,char *filename) {
@@ -76,30 +76,22 @@ int gravar (ESTADO *e,char *filename) {
     return 1;
 }
 
-int ler (ESTADO *e,char *filename){
+int ler (ESTADO *e,char *filename, int a, int b){
     FILE *f = fopen (filename, "r");
     if (f == NULL){
         printf ("Erro ao abrir ficheiro\n");
         return 0;
     }
-    char linha[BUF_SIZE];
-    char *result;
-    int i=1;
-    while (!feof(f)){
-        result = fgets(linha, BUF_SIZE, f);
-        if (result)
-            printf("%s",linha);
-        i++;
-    }
+    le_ficheiro(e, f, a, b);
+    mostrar_tabuleiro(e);
     return 1;
-    }
-
+}
 
 int interpretador(ESTADO *e) {
     char linha[BUF_SIZE];
     char col[2], lin[2];
     char filename[BUF_SIZE];
-
+    int a,b;
     e -> num_comandos++;
     printf("# %02d  Jogador:%d  Número de jogada:%d> ", e -> num_comandos , e -> jogador_atual , e -> num_jogadas);
     if(fgets(linha, BUF_SIZE, stdin) == NULL)
@@ -112,9 +104,11 @@ int interpretador(ESTADO *e) {
     }
     if (sscanf (linha,"gr %s",filename) == 1){
         gravar (e,filename);
+        a= obter_numero_de_jogadas(e);
+        b = obter_jogador_atual(e) ;
     }
     if (sscanf (linha, "ler %s",filename) == 1){
-        ler (e,filename);
+        ler (e,filename,a,b);
     }
     char quit;
     if (sscanf (linha, "%[Q]" ,&quit) == 1){
@@ -127,4 +121,3 @@ int interpretador(ESTADO *e) {
     }
     return 1;
 }
-
