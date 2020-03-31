@@ -41,26 +41,26 @@ void print_array (FILE *f, ESTADO *e){
     for (i=0;i <= (obter_numero_de_jogadas(e)); i++ ){
         if (i<9){
             if ((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) {
-                fprintf(f, "0%d: %c%d ", i + 1, (e->jogadas[i].jogador1.coluna) + 'a', e->jogadas[i].jogador1.linha + 1);
+                fprintf(f, "0%d: %c%d", i + 1, (e->jogadas[i].jogador1.coluna) + 'a', e->jogadas[i].jogador1.linha + 1);
             }
             if ((e->jogadas[i].jogador2.linha)!= 0 || e->jogadas[i].jogador2.coluna != 0) {
-                fprintf(f, "%c%d ", (e->jogadas[i].jogador2.coluna) + 'a', e->jogadas[i].jogador2.linha + 1);
+                fprintf(f, " %c%d ", (e->jogadas[i].jogador2.coluna) + 'a', e->jogadas[i].jogador2.linha + 1);
                 fprintf(f, "\n");
             }
             if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha)== 0 && e->jogadas[i].jogador2.coluna == 0)){
-                fprintf(f, "\n");
+               fprintf(f, "\n");
             }
         }
         else {
             if ((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) {
-                fprintf(f, "%d: %c%d ", i + 1, (e->jogadas[i].jogador1.coluna) + 'a', e->jogadas[i].jogador1.linha + 1);
+                fprintf(f, "%d: %c%d", i + 1, (e->jogadas[i].jogador1.coluna) + 'a', e->jogadas[i].jogador1.linha + 1);
             }
             if ((e->jogadas[i].jogador2.linha)!= 0 || e->jogadas[i].jogador2.coluna != 0) {
-                fprintf(f, "%c%d ", (e->jogadas[i].jogador2.coluna) + 'a', e->jogadas[i].jogador2.linha + 1);
+                fprintf(f, " %c%d ", (e->jogadas[i].jogador2.coluna) + 'a', e->jogadas[i].jogador2.linha + 1);
                 fprintf(f, "\n");
             }
             if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha) ==  0 || e->jogadas[i].jogador2.coluna == 0)){
-                fprintf(f, "\n");
+                 fprintf(f, "\n");
             }
         }
     }
