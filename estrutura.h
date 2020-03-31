@@ -119,7 +119,14 @@ void atualizar_jogadas (ESTADO *e, COORDENADA c);
  * @param b jogador atual
  * @return
  */
-int le_ficheiro (ESTADO *e,FILE *f, int a, int b);
+int le_ficheiro (ESTADO *e,FILE *f);
+
+/**
+ * \brief função atualiza o estado para uma posição anterior (usada no comando pos)
+ * @param e estado
+ * @param posx número de uma jogada anterior
+ */
+void posicao (ESTADO *e,int posx);
 
 /**
  \brief Função que inicializa o estado inicial do jogo
