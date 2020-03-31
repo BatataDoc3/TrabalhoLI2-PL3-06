@@ -83,26 +83,90 @@ void atualizar_jogadas (ESTADO *e, COORDENADA c) {
 }
 
 
-int le_ficheiro (ESTADO *e , FILE *f, int a, int b) {
+int le_ficheiro (ESTADO *e , FILE *f) {
     char linha[BUF_SIZE];
     char *result;
-    int i=0, j;
+    int i=0, j,n_jogadas;
+    while (i<32){
+        e->jogadas[i].jogador1.linha = 0;
+        e->jogadas[i].jogador1.coluna = 0;
+        e->jogadas[i].jogador2.linha = 0;
+        e->jogadas[i].jogador2.coluna = 0;
+        i++;
+    }
+    e ->  num_jogadas = 0;
+    i = 0;
     while (!feof(f)){
         result = fgets(linha, BUF_SIZE, f);
         if (result) {
-            for (j = 7; j >= 0 ; j--) {
-                if (linha [j] == '.') e -> tab [7-i] [j] = VAZIO;
-                else if (linha [j] == '*') e -> tab [7-i] [j] = BRANCA;
-                else if (linha [j] == '#') e -> tab [7-i] [j] = PRETA;
+            if (i <= 7) {
+                for (j = 0; j <= 7; j++) {
+                    if (linha[j] == '.') e->tab[7 - i][j] = VAZIO;
+                    else if (linha[j] == '*') e->tab[7 - i][j] = BRANCA;
+                    else if (linha[j] == '#') e->tab[7 - i][j] = PRETA;
+                }
+            } else if (i>=9){
+                if ((linha[4] >= 'a' && linha[4] <= 'h') && (linha[5]>='1' && linha[5]<='8')) {
+                    e->jogador_atual = 2;
+                    e->jogadas[i - 9].jogador1.linha = linha[5] - '1';
+                    e->jogadas[i - 9].jogador1.coluna = linha[4] - 'a';
+                    e -> ultima_jogada.coluna = linha[4] - 'a';
+                    e -> ultima_jogada.linha = linha[5] - '1';
+                }
+                if (linha[6] == ' '){
+                    e->jogador_atual = atualizar_jogador_atual(e);
+                    e->jogadas[i - 9].jogador2.linha = linha[8] - '1';
+                    e->jogadas[i - 9].jogador2.coluna = linha[7] - 'a';
+                    e -> num_jogadas++;
+                    e -> ultima_jogada.coluna = linha[7] - 'a';
+                    e -> ultima_jogada.linha = linha[8] - '1';
+                }
             }
         }
         i++;
     }
-    e -> num_jogadas = a;
-    e -> jogador_atual = b;
-    if (b == 2) {
-        e->jogadas[a].jogador2.coluna = 0;
-        e->jogadas[a].jogador2.linha = 0;
-    }
     return 1;
+}
+
+void atualizar_tabuleiro_jogadas (ESTADO *e,int posx) {
+    int i=0, linha, coluna;
+    for (linha = 0; linha < 8 ; linha ++) {
+        for (coluna = 0; coluna < 8; coluna ++) {
+                e -> tab [linha] [coluna] = VAZIO;
+        }
+    }
+    while (i < posx) {
+        e->tab[e->jogadas[i].jogador1.linha][e->jogadas[i].jogador1.coluna] = PRETA;
+        e->tab[e->jogadas[i].jogador2.linha][e->jogadas[i].jogador2.coluna] = PRETA;
+        i++;
+    }
+    e->tab[e->ultima_jogada.linha][e->ultima_jogada.coluna] = BRANCA;
+    if (posx > 0)
+        e->tab[4][4] = PRETA;
+    e -> tab [0] [0] = UM;
+    e -> tab [7] [7] = DOIS;
+}
+
+void posicao (ESTADO *e,int posx) {
+    if (posx > e->num_jogadas || posx < 0) {
+        printf("Posição Inválida");
+    } else {
+        if (posx == 0) {
+            e->ultima_jogada.coluna = 4;
+            e->ultima_jogada.linha = 4;
+        } else {
+            e->ultima_jogada.coluna = e->jogadas[posx - 1].jogador2.coluna;
+            e->ultima_jogada.linha = e->jogadas[posx - 1].jogador2.linha;
+            e->num_jogadas = posx;
+            e->jogador_atual = 1;
+        }
+        atualizar_tabuleiro_jogadas(e, posx);
+        while (posx < 32) {
+            e->jogadas[posx].jogador1.linha = 0;
+            e->jogadas[posx].jogador1.coluna = 0;
+            e->jogadas[posx].jogador2.linha = 0;
+            e->jogadas[posx].jogador2.coluna = 0;
+            posx++;
+        }
+    }
 }
