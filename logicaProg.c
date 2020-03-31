@@ -115,7 +115,9 @@ int parabens_jogador (ESTADO *e){
     int x;
     if (obter_estado_casa(e,7,7) == '*') x = 2;
     else if (obter_estado_casa(e,0,0) == '*') x = 1;
-    else x = e -> jogador_atual;
+    //else x = e -> jogador_atual;
+    else {if (e -> jogador_atual == 1) x=2;
+          else if (e -> jogador_atual == 2) x=1;}
     return x;
 
 }
