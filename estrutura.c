@@ -38,7 +38,7 @@ int atualizar_num_jogadas (ESTADO *e) {
 
 ESTADO *inicializar_estado() {
     int linha, coluna;
-    ESTADO *e = (ESTADO *) malloc(sizeof(ESTADO));
+    ESTADO *e = (ESTADO *) calloc(1, sizeof(ESTADO));
     e->jogador_atual = 1;
     e->num_jogadas = 0;
     for (linha = 0; linha < 8 ; linha ++) {
@@ -86,7 +86,7 @@ void atualizar_jogadas (ESTADO *e, COORDENADA c) {
 int le_ficheiro (ESTADO *e , FILE *f) {
     char linha[BUF_SIZE];
     char *result;
-    int i=0, j,n_jogadas;
+    int i=0, j;
     while (i<32){
         e->jogadas[i].jogador1.linha = 0;
         e->jogadas[i].jogador1.coluna = 0;
