@@ -129,6 +129,13 @@ int le_ficheiro (ESTADO *e,FILE *f);
 void posicao (ESTADO *e,int posx);
 
 /**
+ * \brief esta função atualiza o tabuleiro dependendo do input da pos
+ * @param e Estado 
+ * @param posx input do jogador para o comando pos
+ */
+void atualizar_tabuleiro_jogadas (ESTADO *e,int posx);
+
+/**
  \brief Função que inicializa o estado inicial do jogo
  * @return  estado inicial
  */
