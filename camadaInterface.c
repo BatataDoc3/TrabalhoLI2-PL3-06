@@ -60,8 +60,8 @@ void print_array (FILE *f, ESTADO *e){
                 fprintf(f, "\n");
             }
             else {
-            //if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha) ==  0 || e->jogadas[i].jogador2.coluna == 0)){
-               fprintf(f, "\n");
+                //if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha) ==  0 || e->jogadas[i].jogador2.coluna == 0)){
+                fprintf(f, "\n");
             }
         }
     }
@@ -98,10 +98,6 @@ int interpretador(ESTADO *e) {
     printf("# %02d  Jogador:%d  Número de jogada:%d> ", e -> num_comandos , e -> jogador_atual , e -> num_jogadas);
     if(fgets(linha, BUF_SIZE, stdin) == NULL)
         return 0;
-    if (sscanf (linha,"pos %d",&posx) == 1) {
-        atualizar_tabuleiro_jogadas (e,posx);
-        mostrar_tabuleiro(e);
-    }
     if(strlen(linha) == 3 && sscanf(linha, "%[a-h]%[1-8]", col, lin) == 2) {
         COORDENADA coord = {*lin - '1',*col - 'a'};
         jogar(e, coord, &posx);
@@ -113,14 +109,16 @@ int interpretador(ESTADO *e) {
     if (sscanf (linha, "ler %s",filename) == 1){
         ler (e,filename);
     }
-    char quit;
-    if (sscanf (linha, "%[Q]" ,&quit) == 1){
+    if(strcmp(linha, "Q\n") == 0) {
         e->num_jogadas=32;
         printf ("O jogo terminou.\n");
     }
-    char arr[BUF_SIZE];
-    if (sscanf (linha, "%[movs]", arr)) {
-            print_array(stdout, e);
+    if(strcmp(linha, "movs\n") == 0) {
+        print_array(stdout, e);
+    }
+    if (sscanf (linha,"pos %d",&posx) == 1) {
+        atualizar_tabuleiro_jogadas (e,posx);
+        mostrar_tabuleiro(e);
     }
     else return 0;
     return 1;
