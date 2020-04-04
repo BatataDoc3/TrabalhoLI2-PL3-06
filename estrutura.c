@@ -129,7 +129,7 @@ int le_ficheiro (ESTADO *e , FILE *f) {
 }
 
 void atualizar_tabuleiro_jogadas (ESTADO *e,int posx) {
-    if (posx > e->num_jogadas || posx < 0) {
+    if (posx > e->num_jogadas  || posx < 0) {
         printf("Posição Inválida \n");
     }
     else {
@@ -144,17 +144,9 @@ void atualizar_tabuleiro_jogadas (ESTADO *e,int posx) {
             e->tab[e->jogadas[i].jogador2.linha][e->jogadas[i].jogador2.coluna] = PRETA;
             i++;
         }
-        if (posx != 0) {
-            if (posx != obter_numero_de_jogadas(e) + 1)
+        if (posx != 0)
                 e->tab[e->jogadas[posx - 1].jogador2.linha][e->jogadas[posx - 1].jogador2.coluna] = BRANCA;
-            else {
-                if (e->jogadas[obter_numero_de_jogadas(e)].jogador2.linha == 0 &&
-                    e->jogadas[obter_numero_de_jogadas(e)].jogador2.coluna == 0) {
-                    e->tab[e->jogadas[posx - 1].jogador1.linha][e->jogadas[posx - 1].jogador1.coluna] = BRANCA;
-                    e->jogador_atual = 2;
-                } else e->tab[e->jogadas[posx].jogador2.linha][e->jogadas[posx].jogador2.coluna] = BRANCA;
-            }
-        } else e->tab[4][4] = BRANCA;
+        else e->tab[4][4] = BRANCA;
         if (posx > 0)
             e->tab[4][4] = PRETA;
         e->tab[0][0] = UM;
@@ -166,7 +158,7 @@ void posicao (ESTADO *e,int posx) {
     if (posx > e->num_jogadas || posx < 0) {
         printf("Posição Inválida \n");
     } else {
-        e -> num_jogadas = posx -1;
+        e -> num_jogadas = posx ;
         e -> jogador_atual = 1;
         if (posx == 0) {
             e->ultima_jogada.coluna = 4;
