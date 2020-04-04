@@ -126,9 +126,9 @@ int jogar(ESTADO *e, COORDENADA c, int *posx) {
     int x;
     if (jogada_valida(e, c) == 1) {
         printf("jogar %d %d\n", c.coluna, c.linha);
-        if (*posx != 0) {
+        if (*posx != 50) {
             posicao(e, *posx);
-            *posx = 0;
+            *posx = 50;
         }
         atualizar_casa_preta(e);
         atualizar_casa(e, c);
