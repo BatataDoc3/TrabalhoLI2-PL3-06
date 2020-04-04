@@ -115,17 +115,21 @@ int parabens_jogador (ESTADO *e){
     int x;
     if (obter_estado_casa(e,7,7) == '*') x = 2;
     else if (obter_estado_casa(e,0,0) == '*') x = 1;
-    //else x = e -> jogador_atual;
-    else {if (e -> jogador_atual == 1) x=2;
-          else if (e -> jogador_atual == 2) x=1;}
+    else {
+        if (e -> jogador_atual == 1) x=2;
+        else if (e -> jogador_atual == 2) x=1;}
     return x;
-
 }
 
-int jogar(ESTADO *e, COORDENADA c) {
+
+int jogar(ESTADO *e, COORDENADA c, int *posx) {
     int x;
     if (jogada_valida(e, c) == 1) {
         printf("jogar %d %d\n", c.coluna, c.linha);
+        if (*posx != 0) {
+            posicao(e, *posx);
+            *posx = 0;
+        }
         atualizar_casa_preta(e);
         atualizar_casa(e, c);
         atualizar_jogadas (e, c);
