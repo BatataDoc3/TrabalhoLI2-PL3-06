@@ -48,7 +48,7 @@ void print_array (FILE *f, ESTADO *e){
                 fprintf(f, "\n");
             }
             if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha)== 0 && e->jogadas[i].jogador2.coluna == 0)){
-               fprintf(f, "\n");
+                fprintf(f, "\n");
             }
         }
         else {
@@ -59,8 +59,9 @@ void print_array (FILE *f, ESTADO *e){
                 fprintf(f, " %c%d ", (e->jogadas[i].jogador2.coluna) + 'a', e->jogadas[i].jogador2.linha + 1);
                 fprintf(f, "\n");
             }
-            if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha) ==  0 || e->jogadas[i].jogador2.coluna == 0)){
-                 fprintf(f, "\n");
+            else {
+            //if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha) ==  0 || e->jogadas[i].jogador2.coluna == 0)){
+               fprintf(f, "\n");
             }
         }
     }
@@ -92,14 +93,18 @@ int interpretador(ESTADO *e) {
     char linha[BUF_SIZE];
     char col[2], lin[2];
     char filename[BUF_SIZE];
+    int posx;
     e -> num_comandos++;
     printf("# %02d  Jogador:%d  Número de jogada:%d> ", e -> num_comandos , e -> jogador_atual , e -> num_jogadas);
     if(fgets(linha, BUF_SIZE, stdin) == NULL)
         return 0;
-
+    if (sscanf (linha,"pos %d",&posx) == 1) {
+        atualizar_tabuleiro_jogadas (e,posx);
+        mostrar_tabuleiro(e);
+    }
     if(strlen(linha) == 3 && sscanf(linha, "%[a-h]%[1-8]", col, lin) == 2) {
         COORDENADA coord = {*lin - '1',*col - 'a'};
-        jogar(e, coord);
+        jogar(e, coord, &posx);
         mostrar_tabuleiro(e);
     }
     if (sscanf (linha,"gr %s",filename) == 1){
@@ -114,13 +119,9 @@ int interpretador(ESTADO *e) {
         printf ("O jogo terminou.\n");
     }
     char arr[BUF_SIZE];
-    if (sscanf(linha,"%[movs]",arr) == 1){
-        print_array (stdout,e);
+    if (sscanf (linha, "%[movs]", arr)) {
+            print_array(stdout, e);
     }
-    int posx;
-    if (sscanf (linha,"pos %d",&posx) == 1) {
-        posicao (e,posx);
-        mostrar_tabuleiro(e);
-    }
+    else return 0;
     return 1;
 }
