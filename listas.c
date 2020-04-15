@@ -1,9 +1,3 @@
-//
-// Created by josejoao on 15/04/20.
-//
-
-
-
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,34 +9,32 @@
 
 LISTA criar_lista(){
     LISTA new = malloc (sizeof (NODO));
-    return 0;
+    new -> valor = NULL;
+    new -> proximo = NULL;
+    return new;
 }
 
 
 
 LISTA insere_cabeca(LISTA L, void *valor){
-    LISTA lista = L;
     LISTA new = malloc (sizeof (NODO));
-    lista->valor = valor;
-    lista->proximo = L;
-    L=lista;
-    return 0;
+    new->valor = valor;
+    new->proximo = L;
+    L = new;
+    return L ;
 }
-
-
-
 
 void *devolve_cabeca(LISTA L){
-    LISTA lista = malloc (sizeof (NODO));
-    lista->valor = L->valor;
-    lista->proximo = NULL;
+   // LISTA lista = malloc (sizeof (NODO));
+   // lista->valor = L->valor;
+   // lista->proximo = NULL;
+   // L = lista;
+    return L->valor;
 }
 
-
-
 LISTA proximo(LISTA L){
-    L=L->proximo;
-    return L;
+    // L = L->proximo;
+    return L -> proximo;
 }
 
 
@@ -84,7 +76,7 @@ int main() {
         // Vai buscar a cabeça da lista
         // Passa do tipo genérico void * para char *
         char *str = (char *) devolve_cabeca(T);
-        printf("%s", str);
+        printf("%s",str);
     }
 
     printf("\n==============================\n");
