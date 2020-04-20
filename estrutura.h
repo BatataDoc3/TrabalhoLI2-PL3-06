@@ -52,6 +52,8 @@ typedef struct {
     int jogador_atual;
     /** número de  comandos efectuados */
     int num_comandos;
+    /** variável guardada utilizada no comando pos */
+    int posx;
 } ESTADO;
 
 /**
@@ -96,14 +98,14 @@ int obter_jogador_atual (ESTADO *e);
  * @param e pointer do estado
  * @return o próximo jogador a jogar
  */
-int atualizar_jogador_atual (ESTADO *e);
+void atualizar_jogador_atual (ESTADO *e);
 
 /**
  *\brief função que incrementa o número de jogadas
  * @param e pointer do estado
  * @return a jogada para que vamos
  */
-int atualizar_num_jogadas (ESTADO *e);
+void atualizar_num_jogadas (ESTADO *e);
 /**
  *\brief função que atualiza o array das jogadas
  * @param e pointer do estado
@@ -126,14 +128,14 @@ int le_ficheiro (ESTADO *e,FILE *f);
  * @param e estado
  * @param posx número de uma jogada anterior
  */
-void posicao (ESTADO *e,int posx);
+void posicao (ESTADO *e);
 
 /**
  * \brief esta função atualiza o tabuleiro dependendo do input da pos
  * @param e Estado 
  * @param posx input do jogador para o comando pos
  */
-void atualizar_tabuleiro_jogadas (ESTADO *e,int posx);
+void atualizar_tabuleiro_jogadas (ESTADO *e);
 
 /**
  \brief Função que inicializa o estado inicial do jogo
