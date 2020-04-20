@@ -122,19 +122,19 @@ int parabens_jogador (ESTADO *e){
 }
 
 
-int jogar(ESTADO *e, COORDENADA c, int *posx) {
+int jogar(ESTADO *e, COORDENADA c) {
     int x;
     if (jogada_valida(e, c) == 1) {
         printf("jogar %d %d\n", c.coluna, c.linha);
-        if (*posx != 50) {
-            posicao(e, *posx);
-            *posx = 50;
+        if (e -> posx != 50) {
+            posicao(e);
+            e -> posx = 50;
         }
         atualizar_casa_preta(e);
         atualizar_casa(e, c);
         atualizar_jogadas (e, c);
-        e->num_jogadas = atualizar_num_jogadas(e);
-        e->jogador_atual = atualizar_jogador_atual(e);
+        atualizar_num_jogadas(e);
+        atualizar_jogador_atual(e);
         if (jogo_finalizado(e, c) == 1){
             x = parabens_jogador(e);
             printf("Jogo Finalizado! Parabéns Jogador %d\n", x);
