@@ -15,7 +15,7 @@
  * @return
  */
 
-int jogar(ESTADO *e, COORDENADA c, int *posx);
+int jogar(ESTADO *e, COORDENADA c);
 
 /**
  * \brief Função que verifica se uma jogada é válida
