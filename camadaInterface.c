@@ -124,7 +124,7 @@ int interpretador(ESTADO *e) {
         atualizar_tabuleiro_jogadas (e);
         mostrar_tabuleiro(e);
     }
-    if (strcmp (linha,"jogs\n") == 0) {
+    if (strcmp (linha,"jog\n") == 0) {
         jogs (e);
         mostrar_tabuleiro(e);
     }
