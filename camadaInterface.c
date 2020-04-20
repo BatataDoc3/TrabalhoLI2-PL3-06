@@ -2,6 +2,7 @@
 #include "estrutura.h"
 #include <stdio.h>
 #include <string.h>
+#include "bot.h"
 
 void mostrar_tabuleiro (ESTADO *e) {
     int linha,coluna;
@@ -93,15 +94,16 @@ int interpretador(ESTADO *e) {
     char linha[BUF_SIZE];
     char col[2], lin[2];
     char filename[BUF_SIZE];
-    int posx;
+    //int posx;
     e -> num_comandos++;
     printf("# %02d  Jogador:%d  Número de jogada:%d> ", e -> num_comandos , e -> jogador_atual , e -> num_jogadas);
     if(fgets(linha, BUF_SIZE, stdin) == NULL)
         return 0;
     if(strlen(linha) == 3 && sscanf(linha, "%[a-h]%[1-8]", col, lin) == 2) {
         COORDENADA coord = {*lin - '1',*col - 'a'};
-        jogar(e, coord, &posx);
+        jogar(e, coord);
         mostrar_tabuleiro(e);
+       // printf ("%d %d\n",e->ultima_jogada.coluna,e->ultima_jogada.linha);
     }
     if (sscanf (linha,"gr %s",filename) == 1){
         gravar (e,filename);
@@ -116,8 +118,14 @@ int interpretador(ESTADO *e) {
     if(strcmp(linha, "movs\n") == 0) {
         print_array(stdout, e);
     }
-    if (sscanf (linha,"pos %d",&posx) == 1) {
-        atualizar_tabuleiro_jogadas (e,posx);
+    int x;
+    if (sscanf (linha,"pos %d",&x) == 1) {
+        e -> posx = x;
+        atualizar_tabuleiro_jogadas (e);
+        mostrar_tabuleiro(e);
+    }
+    if (strcmp (linha,"jogs\n") == 0) {
+        jogs (e);
         mostrar_tabuleiro(e);
     }
     else return 0;
