@@ -22,17 +22,17 @@ int obter_jogador_atual (ESTADO *e) {
     return jogadorAtual;
 }
 
-int atualizar_jogador_atual (ESTADO *e) {
+void atualizar_jogador_atual (ESTADO *e) {
     int jogador;
     if (obter_jogador_atual(e) == 1)  jogador = 2;
     else jogador = 1;
-    return jogador;
+    e -> jogador_atual = jogador;
 }
 
-int atualizar_num_jogadas (ESTADO *e) {
+void atualizar_num_jogadas (ESTADO *e) {
     int num = obter_numero_de_jogadas (e);
     if (obter_jogador_atual(e) == 2) num++;
-    return num;
+    e -> num_jogadas = num;
 }
 
 
@@ -80,6 +80,7 @@ void atualizar_jogadas (ESTADO *e, COORDENADA c) {
         e->jogadas[obter_numero_de_jogadas(e)].jogador2.coluna = c.coluna;
         e->jogadas[obter_numero_de_jogadas(e)].jogador2.linha = c.linha;
     }
+    e-> ultima_jogada = c;
 }
 
 
@@ -114,7 +115,7 @@ int le_ficheiro (ESTADO *e , FILE *f) {
                     e -> ultima_jogada.linha = linha[5] - '1';
                 }
                 if (linha[6] == ' '){
-                    e->jogador_atual = atualizar_jogador_atual(e);
+                    atualizar_jogador_atual(e);
                     e->jogadas[i - 9].jogador2.linha = linha[8] - '1';
                     e->jogadas[i - 9].jogador2.coluna = linha[7] - 'a';
                     e -> num_jogadas++;
@@ -128,7 +129,8 @@ int le_ficheiro (ESTADO *e , FILE *f) {
     return 1;
 }
 
-void atualizar_tabuleiro_jogadas (ESTADO *e,int posx) {
+void atualizar_tabuleiro_jogadas (ESTADO *e) {
+    int posx = e -> posx;
     if (posx > e->num_jogadas  || posx < 0) {
         printf("Posição Inválida \n");
     }
@@ -154,7 +156,8 @@ void atualizar_tabuleiro_jogadas (ESTADO *e,int posx) {
     }
 }
 
-void posicao (ESTADO *e,int posx) {
+void posicao (ESTADO *e) {
+    int posx = e -> posx ;
     if (posx > e->num_jogadas || posx < 0) {
         printf("Posição Inválida \n");
     } else {
@@ -164,12 +167,12 @@ void posicao (ESTADO *e,int posx) {
             e->ultima_jogada.coluna = 4;
             e->ultima_jogada.linha = 4;
         } else {
-            e->ultima_jogada.coluna = e->jogadas[posx - 1].jogador2.coluna;
-            e->ultima_jogada.linha = e->jogadas[posx - 1].jogador2.linha;
-            e->num_jogadas = posx;
-            e->jogador_atual = 1;
+            e->ultima_jogada = e->jogadas[posx - 1].jogador2;
+           // e->num_jogadas = posx;
+           // e->jogador_atual = 1;
+          // printf ("!.");
         }
-        atualizar_tabuleiro_jogadas(e, posx);
+        atualizar_tabuleiro_jogadas(e);
         while (posx < 32) {
             e->jogadas[posx].jogador1.linha = 0;
             e->jogadas[posx].jogador1.coluna = 0;
