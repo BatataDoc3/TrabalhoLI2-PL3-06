@@ -20,8 +20,7 @@ LISTA insere_cabeca(LISTA L, void *valor){
     LISTA new = malloc (sizeof (NODO));
     new->valor = valor;
     new->proximo = L;
-    L = new;
-    return L ;
+    return new ;
 }
 
 void *devolve_cabeca(LISTA L){
@@ -40,16 +39,16 @@ LISTA proximo(LISTA L){
 
 
 LISTA remove_cabeca(LISTA L){
-    LISTA tmp = L;
-    L=L->proximo;
-    free (tmp);
+    LISTA tmp = L -> proximo;
+    free (L);
+    L = tmp;
     return L;
 }
 
 
 
 int lista_esta_vazia(LISTA L){
-    if (L == NULL) return 1;
+    if (L -> proximo  == NULL) return 1;
     else return 0;
 }
 
