@@ -52,6 +52,7 @@ ESTADO *inicializar_estado() {
     e -> tab [0] [0] = UM;
     e -> tab [7] [7] = DOIS;
     e -> ultima_jogada.coluna = 4;
+    e -> posx = 50;
     e -> ultima_jogada.linha = 4;
     return e ;
 }
