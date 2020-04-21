@@ -13,98 +13,12 @@ LISTA poe_lista (LISTA L, COORDENADA *c, ESTADO *e) {
     return L ;
 }
 
-/*LISTA poe_lista2 (LISTA L, COORDENADA c, ESTADO *e) {
-    COORDENADA x;
-    if (e->tab[c.linha +1 ][c.coluna - 1] == VAZIO) {
-        x.coluna = c.coluna - 1;
-        x.linha = c.linha +1;
-        L = insere_cabeca (L, &x);
-    }
-    else if (e -> tab [c.linha + 1] [c.coluna]== VAZIO) {
-        x.coluna = c.coluna ;
-        x.linha = c.linha +1;
-        L = insere_cabeca (L, &x) ;
-    }
-    else if (e -> tab [c.linha + 1] [c.coluna + 1]== VAZIO) {
-        x.coluna = c.coluna + 1 ;
-        x.linha = c.linha + 1;
-        L = insere_cabeca (L, &x) ;
-    }
-    else if (e -> tab [c.linha] [c.coluna + 1]== VAZIO) {
-        x.coluna = c.coluna + 1;
-        x.linha = c.linha ;
-        L = insere_cabeca (L, &x) ;
-    }
-    else if (e -> tab [c.linha - 1] [c.coluna + 1]== VAZIO) {
-        x.coluna = c.coluna + 1 ;
-        x.linha = c.linha - 1;
-        L = insere_cabeca (L, &x) ;
-    }
-    else if (e -> tab [c.linha - 1] [c.coluna]== VAZIO) {
-        x.coluna = c.coluna ;
-        x.linha = c.linha - 1;
-        L = insere_cabeca (L, &x) ;
-    }
-    else if (e -> tab [c.linha - 1] [c.coluna - 1]== VAZIO) {
-        x.coluna = c.coluna - 1 ;
-        x.linha = c.linha  - 1;
-        L = insere_cabeca (L, &x) ;
-    }
-    else if (e -> tab [c.linha] [c.coluna - 1]== VAZIO) {
-        x.coluna = c.coluna - 1;
-        x.linha = c.linha ;
-        L = insere_cabeca (L, &x) ;
-    }
-    return L ;
-}
-
-
-LISTA vizinhas (COORDENADA c,ESTADO *e) {
-    COORDENADA c1, c2, c3, c4, c5, c6, c7, c8;
-    c1.linha = c.linha + 1;
-    c1.coluna = c.coluna - 1;
-    //vizinhas = insere_cabeca(vizinhas,&c1);
-    c2.linha = c.linha + 1;
-    c2.coluna = c.coluna;
-    //vizinhas = insere_cabeca(vizinhas,&c2);
-    c3.linha = c.linha + 1;
-    c3.coluna = c.coluna + 1;
-    //vizinhas = insere_cabeca(vizinhas,&c3);
-    c4.linha = c.linha;
-    c4.coluna = c.coluna - 1;
-    //vizinhas = insere_cabeca(vizinhas,&c4);
-    c5.linha = c.linha;
-    c5.coluna = c.coluna + 1;
-    //vizinhas = insere_cabeca(vizinhas,&c5);
-    c6.linha = c.linha - 1;
-    c6.coluna = c.coluna - 1;
-    //vizinhas = insere_cabeca(vizinhas,&c6);
-    c7.linha = c.linha - 1;
-    c7.coluna = c.coluna;
-    //vizinhas = insere_cabeca(vizinhas,&c7);
-    c8.linha = c.linha - 1;
-    c8.coluna = c.coluna + 1;
-    //vizinhas = insere_cabeca(vizinhas,&c8);
-    //COORDENADA array[8] = {*c1,*c2,*c3,*c4,*c5,*c6,*c7,*c8};
-    //vizinhas = fromArray (array,8);
-    COORDENADA vizinhas[8] = {c1,c2,c3,c4,c5,c6,c7,c8};
-    LISTA livres = malloc (sizeof(NODO));
-    int i = 0;
-    while (i<8){
-        poe_lista(livres,&vizinhas[i],e);
-        i++;
-    }
-    return livres;
-}
-*/
-
 int comprimentoLista (LISTA l){
     int i = 0;
     while (l!=NULL) {
         i++;
         l = l->proximo;
     }
-    printf ("%d",i);
     return i;
 }
 
@@ -114,57 +28,48 @@ void jogs (ESTADO *e) {
         e->posx = 50;
     }
     COORDENADA c;
-    COORDENADA *c1 = malloc (sizeof(COORDENADA));
-    COORDENADA *c2 = malloc (sizeof(COORDENADA));
-    COORDENADA *c3 = malloc (sizeof(COORDENADA));
-    COORDENADA *c4 = malloc (sizeof(COORDENADA));
-    COORDENADA *c5 = malloc (sizeof(COORDENADA));
-    COORDENADA *c6 = malloc (sizeof(COORDENADA));
-    COORDENADA *c7 = malloc (sizeof(COORDENADA));
-    COORDENADA *c8 = malloc (sizeof(COORDENADA));
+    COORDENADA *c1 = (COORDENADA *) malloc (sizeof(COORDENADA));
+    COORDENADA *c2 = (COORDENADA *) malloc (sizeof(COORDENADA));
+    COORDENADA *c3 = (COORDENADA *) malloc (sizeof(COORDENADA));
+    COORDENADA *c4 = (COORDENADA *) malloc (sizeof(COORDENADA));
+    COORDENADA *c5 = (COORDENADA *) malloc (sizeof(COORDENADA));
+    COORDENADA *c6 = (COORDENADA *) malloc (sizeof(COORDENADA));
+    COORDENADA *c7 = (COORDENADA *) malloc (sizeof(COORDENADA));
+    COORDENADA *c8 = (COORDENADA *) malloc (sizeof(COORDENADA));
     c = e->ultima_jogada;
     c1->linha = c.linha + 1;
     c1->coluna = c.coluna - 1;
-    //vizinhas = insere_cabeca(vizinhas,&c1);
     c2->linha = c.linha + 1;
     c2->coluna = c.coluna;
-    //vizinhas = insere_cabeca(vizinhas,&c2);
     c3->linha = c.linha + 1;
     c3->coluna = c.coluna + 1;
-    //vizinhas = insere_cabeca(vizinhas,&c3);
     c4->linha = c.linha;
     c4->coluna = c.coluna - 1;
-    //vizinhas = insere_cabeca(vizinhas,&c4);
     c5->linha = c.linha;
     c5->coluna = c.coluna + 1;
-    //vizinhas = insere_cabeca(vizinhas,&c5);
     c6->linha = c.linha - 1;
     c6->coluna = c.coluna - 1;
-    //vizinhas = insere_cabeca(vizinhas,&c6);
     c7->linha = c.linha - 1;
     c7->coluna = c.coluna;
-    //vizinhas = insere_cabeca(vizinhas,&c7);
     c8->linha = c.linha - 1;
     c8->coluna = c.coluna + 1;
-    //vizinhas = insere_cabeca(vizinhas,&c8);
-    //COORDENADA array[8] = {*c1,*c2,*c3,*c4,*c5,*c6,*c7,*c8};
-    //vizinhas = fromArray (array,8);
     COORDENADA vizinhas[8] = {*c1, *c2, *c3, *c4, *c5, *c6, *c7, *c8};
-    LISTA livres = malloc(sizeof(NODO));
     int i = 0;
+    LISTA livres = malloc(sizeof(NODO));
     while (i < 8) {
-        poe_lista(livres, &vizinhas[i], e);
+        if (jogada_valida(e, vizinhas [i]) == 1)
+            livres = insere_cabeca(livres, &vizinhas[i]) ;
         i++;
     }
-    int comprimento_da_lista = comprimentoLista(livres);
+    int comprimento_da_lista = comprimentoLista(livres) - 1;
     srandom(time(NULL));
-    int x = random() % comprimento_da_lista - 1;
+    int x = random() % comprimento_da_lista ;
     i = 0;
     while (i != x) {
         livres = livres->proximo;
         i++;
     }
-    COORDENADA *cord = (COORDENADA *) devolve_cabeca(livres->valor);
+    COORDENADA *cord = (COORDENADA *) devolve_cabeca(livres);
     jogar(e, *cord);
+    free (c1); free (c2) ; free (c3); free (c4) ; free (c5); free (c6) ; free (c7); free (c8);
 }
-
