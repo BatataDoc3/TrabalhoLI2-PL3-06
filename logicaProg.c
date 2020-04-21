@@ -18,10 +18,14 @@ int jogada_valida_pecaBranca (ESTADO*e, COORDENADA c) {
 }
 
 int jogada_valida (ESTADO *e , COORDENADA c) {
-    if (jogada_valida_pecaBranca(e,c) == 1) {
-        if (e-> tab [c.linha] [c.coluna] == '#')
-            return (-1);
-        else return 1;
+    if (c.linha < 8 && c.linha >= 0) {
+        if (c.coluna < 8 && c.coluna >= 0) {
+            if (jogada_valida_pecaBranca(e, c) == 1) {
+                if (e->tab[c.linha][c.coluna] == '#')
+                    return (-1);
+                else return 1;
+            }
+        }
     }
     else return (-1);
 }
