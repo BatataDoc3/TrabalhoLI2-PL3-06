@@ -53,12 +53,12 @@ void jogs (ESTADO *e) {
     c7->coluna = c.coluna;
     c8->linha = c.linha - 1;
     c8->coluna = c.coluna + 1;
-    COORDENADA vizinhas[8] = {*c1, *c2, *c3, *c4, *c5, *c6, *c7, *c8};
+    COORDENADA *vizinhas[8] = {c1, c2, c3, c4, c5, c6, c7, c8};
     int i = 0;
     LISTA livres = malloc(sizeof(NODO));
     while (i < 8) {
-        if (jogada_valida(e, vizinhas [i]) == 1)
-            livres = insere_cabeca(livres, &vizinhas[i]) ;
+        if (jogada_valida(e, *vizinhas [i]) == 1)
+            livres = insere_cabeca(livres, vizinhas[i]) ;
         i++;
     }
     int comprimento_da_lista = comprimentoLista(livres) - 1;
