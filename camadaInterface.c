@@ -128,6 +128,10 @@ int interpretador(ESTADO *e) {
         jogs (e);
         mostrar_tabuleiro(e);
     }
+     if (strcmp (linha,"jog2\n") == 0) {
+        jog2 (e);
+        mostrar_tabuleiro(e);
+    }
     else return 0;
     return 1;
 }
