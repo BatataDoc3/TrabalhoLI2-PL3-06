@@ -158,15 +158,26 @@ TREE arvore_3nivel (COORDENADA cord){
     return arvore;
 }
 
+int jogada_valida_bot (ESTADO *e , COORDENADA c) {
+    if (c.linha < 0 || c.linha > 7) return (-1);
+    if (c.coluna < 0 || c.coluna > 7)  return (-1);
+        if (devolve_posicao(e,c.linha,c.coluna) == '#')
+            return (-1);
+        else return 1;
+}
+
 float classificacao (COORDENADA c,ESTADO *e) {
     float clas;
-    if (jogada_valida(e,c) == 1){
+    if (jogada_valida_bot(e,c) == 1){
         if (obter_jogador_atual(e)==1)
             clas = sqrt (pow(c.coluna,2) + pow(c.linha,2));
         else
             clas = sqrt (pow(7 - c.coluna,2) + pow(7-c.linha,2));
     }
-    else clas = 1000;
+    else {
+        clas = 1000;
+       // printf ("ERRADO \n");
+    }
     //printf ("%f\n",clas);
     return clas;
 }
@@ -190,7 +201,9 @@ COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore){
 
 
 float analisa_1nivel (TREE arvore,ESTADO *e){
+        COORDENADA c = arvore -> CE -> valor ;
         float x = classificacao (arvore->CE->valor,e);
+        //printf ("\n%d %d \n", c.coluna , c.linha);
         if (classificacao(arvore->BD->valor,e) < x) x = classificacao (arvore->BD->valor,e);
         if (classificacao(arvore->BE->valor,e) < x) x = classificacao (arvore->BE->valor,e);
         if (classificacao(arvore->EE->valor,e) < x) x = classificacao (arvore->EE->valor,e);
@@ -224,6 +237,7 @@ float analisa_2nivel (TREE arvore,ESTADO *e) { //FIXME  mudar para 2nivel
     if (analisa_1nivel(arvore->BD,e)> pior) {
         pior = analisa_1nivel(arvore->BD,e);
     }
+    printf ("%f\n", pior );
     return pior;
 }
 
@@ -258,7 +272,7 @@ COORDENADA verifica_melhor_pos (ESTADO *e, TREE arvore){
         melhor = analisa_2nivel(arvore->BD,e);
         c_melhor = arvore->BD->valor;
     }
-    printf ("%f",melhor);
+    printf ("\n\n%f\n",melhor);
     return c_melhor;
 }
 
