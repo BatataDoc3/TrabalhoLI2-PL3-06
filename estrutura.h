@@ -149,5 +149,6 @@ ESTADO *inicializar_estado();
  * @param c coordenada
  * @return 1 caso o jogo finalizou ou 0 se não
  */
+CASA devolve_posicao (ESTADO *e, int linha, int coluna);
 
 #endif //PROJETO_LI2_ESTRUTURA_H
