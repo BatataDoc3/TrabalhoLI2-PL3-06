@@ -52,8 +52,8 @@ ESTADO *inicializar_estado() {
     e -> tab [0] [0] = UM;
     e -> tab [7] [7] = DOIS;
     e -> ultima_jogada.coluna = 4;
-    e -> posx = 50;
     e -> ultima_jogada.linha = 4;
+    e -> posx = 50;
     return e ;
 }
 
@@ -169,9 +169,6 @@ void posicao (ESTADO *e) {
             e->ultima_jogada.linha = 4;
         } else {
             e->ultima_jogada = e->jogadas[posx - 1].jogador2;
-           // e->num_jogadas = posx;
-           // e->jogador_atual = 1;
-          // printf ("!.");
         }
         atualizar_tabuleiro_jogadas(e);
         while (posx < 32) {
@@ -182,4 +179,10 @@ void posicao (ESTADO *e) {
             posx++;
         }
     }
+}
+
+CASA devolve_posicao (ESTADO *e,int linha, int coluna) {
+    CASA x;
+    x = e -> tab [linha] [coluna];
+    return x;
 }
