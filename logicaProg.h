@@ -26,6 +26,7 @@ int jogar(ESTADO *e, COORDENADA c);
 int jogada_valida (ESTADO *e, COORDENADA c);
 
 int jogo_finalizado (ESTADO *e, COORDENADA c);
+int jogo_finalizado_bot (ESTADO *e, COORDENADA c);
 
 /**
  * \brief Função que verifica se o jogador está rodeado de peças pretas
