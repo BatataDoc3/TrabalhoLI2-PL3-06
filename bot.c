@@ -176,19 +176,18 @@ COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore){
     c.linha = 10;
     c.coluna = 10;
     atualizar_casa_preta(e);
-    if (jogo_finalizado(e,arvore->BB->valor)==1) c = arvore->BB->valor;
-    if (jogo_finalizado(e,arvore->BE->valor)==1) c = arvore->BE->valor;
-    if (jogo_finalizado(e,arvore->BD->valor)==1) c = arvore->BD->valor;
-    if (jogo_finalizado(e,arvore->EE->valor)==1){
-        c = arvore->EE->valor;
-    }
-    if (jogo_finalizado(e,arvore->DD->valor)==1) c = arvore->DD->valor;
-    if (jogo_finalizado(e,arvore->CE->valor)==1) c = arvore->CE->valor;
-    if (jogo_finalizado(e,arvore->CC->valor)==1) c = arvore->CC->valor;
-    if (jogo_finalizado(e,arvore->CD->valor)==1) c = arvore->CD->valor;
+    if (jogo_finalizado_bot (e,arvore->BB->valor)==1) c = arvore->BB->valor;
+    if (jogo_finalizado_bot (e,arvore->BE->valor)==1) c = arvore->BE->valor;
+    if (jogo_finalizado_bot (e,arvore->BD->valor)==1) c = arvore->BD->valor;
+    if (jogo_finalizado_bot (e,arvore->EE->valor)==1) c = arvore->EE->valor;
+    if (jogo_finalizado_bot (e,arvore->DD->valor)==1) c = arvore->DD->valor;
+    if (jogo_finalizado_bot (e,arvore->CE->valor)==1) c = arvore->CE->valor;
+    if (jogo_finalizado_bot (e,arvore->CC->valor)==1) c = arvore->CC->valor;
+    if (jogo_finalizado_bot (e,arvore->CD->valor)==1) c = arvore->CD->valor;
     e -> tab [arvore->valor.linha] [arvore->valor.coluna] = BRANCA;
     return c;
 }
+
 
 float analisa_1nivel (TREE arvore,ESTADO *e){
         float x = classificacao (arvore->CE->valor,e);
