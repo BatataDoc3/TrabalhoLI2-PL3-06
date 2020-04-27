@@ -75,6 +75,15 @@ void jogs (ESTADO *e) {
     free (c1); free (c2) ; free (c3); free (c4) ; free (c5); free (c6) ; free (c7); free (c8);
 }
 
+int casa_valida_bot (int linha,int coluna,ESTADO *e){
+    int r = 0;
+    if ((linha + 1 >= 0 || linha + 1 < 8 || coluna - 1 >= 0 || coluna - 1 < 8)
+        && (obter_estado_casa(e,linha + 1,coluna - 1) != PRETA))
+        r = 1;
+    return r;
+}
+
+
 TREE singular (int linha, int coluna){
     TREE r;
     COORDENADA c;
@@ -82,23 +91,50 @@ TREE singular (int linha, int coluna){
     c.coluna = coluna;
     r = malloc (sizeof (struct nodoArv));
     r->valor = c;
+    //if (c.coluna > 7 || c.coluna < 0 || c.linha < 0 || c.linha > 7)
+      //  return NULL;
     r->CE = r->CC = r->CD = r->DD = r->BD = r->BB = r->BE = r->EE= NULL;
     return r;
 }
 
-TREE arvore_1nivel (int linha, int coluna) {
+TREE arvore_1nivel (int linha, int coluna,ESTADO *e) {
     COORDENADA cord;
     cord.linha = linha;
     cord.coluna = coluna;
     TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce = singular(cord.linha + 1,cord.coluna - 1);
-    TREE cc = singular(cord.linha + 1,cord.coluna);
-    TREE cd = singular(cord.linha + 1,cord.coluna + 1);
-    TREE dd = singular(cord.linha,cord.coluna + 1);
-    TREE bd = singular(cord.linha - 1,cord.coluna + 1);
-    TREE bb = singular(cord.linha - 1,cord.coluna);
-    TREE be = singular(cord.linha - 1,cord.coluna - 1);
-    TREE ee = singular(cord.linha,cord.coluna - 1);
+    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna - 1,e) == 1)
+        ce = singular (cord.linha + 1,cord.coluna - 1);
+    else
+        ce = NULL;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna,e) == 1)
+        cc = singular (cord.linha + 1,cord.coluna);
+    else
+        cc = NULL;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna + 1,e) == 1)
+        cd = singular (cord.linha + 1,cord.coluna + 1);
+    else
+        cd = NULL;
+    if (casa_valida_bot (cord.linha,cord.coluna + 1,e) == 1)
+        dd = singular (cord.linha,cord.coluna + 1);
+    else
+        dd = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna + 1,e) == 1)
+        bd = singular (cord.linha - 1,cord.coluna + 1);
+    else
+        bd = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna,e) == 1)
+        bb = singular (cord.linha - 1,cord.coluna);
+    else
+        bb = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna - 1,e) == 1)
+        be = singular (cord.linha - 1,cord.coluna - 1);
+    else
+        be = NULL;
+    if (casa_valida_bot (cord.linha,cord.coluna - 1,e) == 1)
+        ee = singular (cord.linha,cord.coluna - 1);
+    else
+        ee = NULL;
     arvore -> valor = cord;
     arvore -> CE = ce;
     arvore -> CC = cc;
@@ -111,19 +147,44 @@ TREE arvore_1nivel (int linha, int coluna) {
     return arvore;
 }
 
-TREE arvore_2nivel (int linha, int coluna){
+TREE arvore_2nivel (int linha, int coluna,ESTADO *e){
     COORDENADA cord;
     cord.linha = linha;
     cord.coluna = coluna;
     TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce = arvore_1nivel (cord.linha + 1,cord.coluna - 1);
-    TREE cc = arvore_1nivel (cord.linha + 1,cord.coluna);
-    TREE cd = arvore_1nivel (cord.linha + 1,cord.coluna + 1);
-    TREE dd = arvore_1nivel (cord.linha,cord.coluna + 1);
-    TREE bd = arvore_1nivel (cord.linha - 1,cord.coluna + 1);
-    TREE bb = arvore_1nivel (cord.linha - 1,cord.coluna);
-    TREE be = arvore_1nivel (cord.linha - 1,cord.coluna - 1);
-    TREE ee = arvore_1nivel (cord.linha,cord.coluna - 1);
+    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna - 1,e) == 1)
+        ce = arvore_1nivel (cord.linha + 1,cord.coluna - 1,e);
+    else
+        ce = NULL;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna,e) == 1)
+        cc = arvore_1nivel (cord.linha + 1,cord.coluna,e);
+    else
+        cc = NULL;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna + 1,e) == 1)
+        cd = arvore_1nivel (cord.linha + 1,cord.coluna + 1,e);
+    else
+        cd = NULL;
+    if (casa_valida_bot (cord.linha,cord.coluna + 1,e) == 1)
+        dd = arvore_1nivel (cord.linha,cord.coluna + 1,e);
+    else
+        dd = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna + 1,e) == 1)
+        bd = arvore_1nivel (cord.linha - 1,cord.coluna + 1,e);
+    else
+        bd = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna,e) == 1)
+        bb = arvore_1nivel (cord.linha - 1,cord.coluna,e);
+    else
+        bb = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna - 1,e) == 1)
+        be = arvore_1nivel (cord.linha - 1,cord.coluna - 1,e);
+    else
+        be = NULL;
+    if (casa_valida_bot (cord.linha,cord.coluna - 1,e) == 1)
+        ee = arvore_1nivel (cord.linha,cord.coluna - 1,e);
+    else
+        ee = NULL;
     arvore -> valor = cord;
     arvore -> CE = ce;
     arvore -> CC = cc;
@@ -136,16 +197,42 @@ TREE arvore_2nivel (int linha, int coluna){
     return arvore;
 }
 
-TREE arvore_3nivel (COORDENADA cord){
+TREE arvore_3nivel (ESTADO *e){
+    COORDENADA cord = e -> ultima_jogada;
     TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce = arvore_2nivel (cord.linha + 1,cord.coluna - 1);
-    TREE cc = arvore_2nivel (cord.linha + 1,cord.coluna);
-    TREE cd = arvore_2nivel (cord.linha + 1,cord.coluna + 1);
-    TREE dd = arvore_2nivel (cord.linha,cord.coluna + 1);
-    TREE bd = arvore_2nivel (cord.linha - 1,cord.coluna + 1);
-    TREE bb = arvore_2nivel (cord.linha - 1,cord.coluna);
-    TREE be = arvore_2nivel (cord.linha - 1,cord.coluna - 1);
-    TREE ee = arvore_2nivel (cord.linha,cord.coluna - 1);
+    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna - 1,e) == 1)
+        ce = arvore_2nivel (cord.linha + 1,cord.coluna - 1,e);
+    else
+        ce = NULL;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna,e) == 1)
+        cc = arvore_2nivel (cord.linha + 1,cord.coluna,e);
+    else
+        cc = NULL;
+    if (casa_valida_bot (cord.linha + 1,cord.coluna + 1,e) == 1)
+        cd = arvore_2nivel (cord.linha + 1,cord.coluna + 1,e);
+    else
+        cd = NULL;
+    if (casa_valida_bot (cord.linha,cord.coluna + 1,e) == 1)
+        dd = arvore_2nivel (cord.linha,cord.coluna + 1,e);
+    else
+        dd = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna + 1,e) == 1)
+        bd = arvore_2nivel (cord.linha - 1,cord.coluna + 1,e);
+    else
+        bd = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna,e) == 1)
+        bb = arvore_2nivel (cord.linha - 1,cord.coluna,e);
+    else
+        bb = NULL;
+    if (casa_valida_bot (cord.linha - 1,cord.coluna - 1,e) == 1)
+        be = arvore_2nivel (cord.linha - 1,cord.coluna - 1,e);
+    else
+        be = NULL;
+    if (casa_valida_bot (cord.linha,cord.coluna - 1,e) == 1)
+        ee = arvore_2nivel (cord.linha,cord.coluna - 1,e);
+    else
+        ee = NULL;
     arvore -> valor = cord;
     arvore -> CE = ce;
     arvore -> CC = cc;
@@ -237,14 +324,13 @@ float analisa_2nivel (TREE arvore,ESTADO *e) { //FIXME  mudar para 2nivel
     if (analisa_1nivel(arvore->BD,e)> pior) {
         pior = analisa_1nivel(arvore->BD,e);
     }
-    printf ("%f\n", pior );
     return pior;
 }
 
 COORDENADA verifica_melhor_pos (ESTADO *e, TREE arvore){
     float melhor = analisa_2nivel (arvore->CE,e);
-    COORDENADA c_melhor;
-    if (analisa_2nivel(arvore->CC,e)< melhor &&  classificacao(arvore->CC->valor,e)!= 1000) {
+    COORDENADA c_melhor ;
+    if (analisa_2nivel(arvore->CC,e) < melhor &&  classificacao(arvore->CC->valor,e)!= 1000) {
         melhor = analisa_2nivel(arvore->CC,e);
         c_melhor = arvore->CC->valor;
     }
@@ -272,13 +358,12 @@ COORDENADA verifica_melhor_pos (ESTADO *e, TREE arvore){
         melhor = analisa_2nivel(arvore->BD,e);
         c_melhor = arvore->BD->valor;
     }
-    printf ("\n\n%f\n",melhor);
     return c_melhor;
 }
 
 void jog2 (ESTADO *e){
     TREE arvore;
-    arvore = arvore_3nivel(e->ultima_jogada);
+    arvore = arvore_3nivel(e);
     COORDENADA c;
     c = jogo_finalizado_arvore (e,arvore);
     if (c.linha != 10 ){
@@ -286,16 +371,7 @@ void jog2 (ESTADO *e){
     }
     else {
        c = verifica_melhor_pos(e,arvore);
-       /*
-       printf("\n%d %d\n",arvore->CE->CE->CE->valor.linha,arvore->CE->CE->CE->valor.coluna);
-       printf("\n%d %d\n",arvore->CC->valor.linha,arvore->CC->valor.coluna);
-        printf("\n%d %d\n",arvore->CD->valor.linha,arvore->CD->valor.coluna);
-        printf("\n%d %d\n",arvore->EE->valor.linha,arvore->EE->valor.coluna);
-        printf("\n%d %d\n",arvore->DD->valor.linha,arvore->DD->valor.coluna);
-        printf("\n%d %d\n",arvore->BE->valor.linha,arvore->BE->valor.coluna); */
-       
        jogar (e,c);
        free (arvore);
     }
 }
-
