@@ -113,7 +113,7 @@ int jogo_finalizado (ESTADO *e, COORDENADA c) {
 }
 
 int parabens_jogador (ESTADO *e){
-    int x;
+    int x=0;
     if (obter_estado_casa(e,7,7) == '*') x = 2;
     else if (obter_estado_casa(e,0,0) == '*') x = 1;
     else {
