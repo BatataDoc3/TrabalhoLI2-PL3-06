@@ -77,9 +77,10 @@ void jogs (ESTADO *e) {
 
 int casa_valida_bot (int linha,int coluna,ESTADO *e){
     int r = 0;
-    if ((linha + 1 >= 0 || linha + 1 < 8 || coluna - 1 >= 0 || coluna - 1 < 8)
-        && (obter_estado_casa(e,linha + 1,coluna - 1) != PRETA))
+    if ((linha  >= 0 && linha  < 8 && coluna >= 0 && coluna  < 8)
+        && (obter_estado_casa(e,coluna ,linha ) != PRETA))
         r = 1;
+    //printf ("%d", r);
     return r;
 }
 
@@ -92,7 +93,7 @@ TREE singular (int linha, int coluna){
     r = malloc (sizeof (struct nodoArv));
     r->valor = c;
     //if (c.coluna > 7 || c.coluna < 0 || c.linha < 0 || c.linha > 7)
-      //  return NULL;
+    //  return NULL;
     r->CE = r->CC = r->CD = r->DD = r->BD = r->BB = r->BE = r->EE= NULL;
     return r;
 }
@@ -248,9 +249,9 @@ TREE arvore_3nivel (ESTADO *e){
 int jogada_valida_bot (ESTADO *e , COORDENADA c) {
     if (c.linha < 0 || c.linha > 7) return (-1);
     if (c.coluna < 0 || c.coluna > 7)  return (-1);
-        if (devolve_posicao(e,c.linha,c.coluna) == '#')
-            return (-1);
-        else return 1;
+    if (devolve_posicao(e,c.linha,c.coluna) == '#')
+        return (-1);
+    else return 1;
 }
 
 float classificacao (COORDENADA c,ESTADO *e) {
@@ -263,7 +264,7 @@ float classificacao (COORDENADA c,ESTADO *e) {
     }
     else {
         clas = 1000;
-       // printf ("ERRADO \n");
+        // printf ("ERRADO \n");
     }
     //printf ("%f\n",clas);
     return clas;
@@ -274,89 +275,137 @@ COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore){
     c.linha = 10;
     c.coluna = 10;
     atualizar_casa_preta(e);
-    if (jogo_finalizado_bot (e,arvore->BB->valor)==1) c = arvore->BB->valor;
-    if (jogo_finalizado_bot (e,arvore->BE->valor)==1) c = arvore->BE->valor;
-    if (jogo_finalizado_bot (e,arvore->BD->valor)==1) c = arvore->BD->valor;
-    if (jogo_finalizado_bot (e,arvore->EE->valor)==1) c = arvore->EE->valor;
-    if (jogo_finalizado_bot (e,arvore->DD->valor)==1) c = arvore->DD->valor;
-    if (jogo_finalizado_bot (e,arvore->CE->valor)==1) c = arvore->CE->valor;
-    if (jogo_finalizado_bot (e,arvore->CC->valor)==1) c = arvore->CC->valor;
-    if (jogo_finalizado_bot (e,arvore->CD->valor)==1) c = arvore->CD->valor;
+    if (arvore -> BB != NULL && jogo_finalizado_bot (e,arvore->BB->valor)==1) c = arvore->BB->valor;
+    if (arvore -> BE != NULL && jogo_finalizado_bot (e,arvore->BE->valor)==1) c = arvore->BE->valor;
+    if (arvore -> BD != NULL && jogo_finalizado_bot (e,arvore->BD->valor)==1) c = arvore->BD->valor;
+    if (arvore -> EE != NULL && jogo_finalizado_bot (e,arvore->EE->valor)==1) c = arvore->EE->valor;
+    if (arvore -> DD != NULL && jogo_finalizado_bot (e,arvore->DD->valor)==1) c = arvore->DD->valor;
+    if (arvore -> CE != NULL && jogo_finalizado_bot (e,arvore->CE->valor)==1) c = arvore->CE->valor;
+    if (arvore -> CC != NULL && jogo_finalizado_bot (e,arvore->CC->valor)==1) c = arvore->CC->valor;
+    if (arvore -> CD != NULL && jogo_finalizado_bot (e,arvore->CD->valor)==1) c = arvore->CD->valor;
     e -> tab [arvore->valor.linha] [arvore->valor.coluna] = BRANCA;
     return c;
 }
 
 
 float analisa_1nivel (TREE arvore,ESTADO *e){
-        COORDENADA c = arvore -> CE -> valor ;
-        float x = classificacao (arvore->CE->valor,e);
-        //printf ("\n%d %d \n", c.coluna , c.linha);
+    //COORDENADA c = arvore -> CE -> valor ;
+    float x = 1000;
+    //printf ("\n%d %d \n", c.coluna , c.linha);
+    if (arvore -> CE != NULL) {
+        if (classificacao(arvore->CE->valor,e) < x) x = classificacao (arvore->CE->valor,e);
+    }
+    if (arvore -> BD != NULL) {
         if (classificacao(arvore->BD->valor,e) < x) x = classificacao (arvore->BD->valor,e);
+    }
+    if (arvore -> BE != NULL) {
         if (classificacao(arvore->BE->valor,e) < x) x = classificacao (arvore->BE->valor,e);
+    }
+    if (arvore -> EE != NULL) {
         if (classificacao(arvore->EE->valor,e) < x) x = classificacao (arvore->EE->valor,e);
+    }
+    if (arvore -> DD != NULL) {
         if (classificacao(arvore->DD->valor,e) < x) x = classificacao (arvore->DD->valor,e);
-        if (classificacao(arvore->BB->valor,e) < x) x = classificacao (arvore->CE->valor,e);
+    }
+    if (arvore -> BB != NULL) {
+        if (classificacao(arvore->BB->valor,e) < x) x = classificacao (arvore->BB->valor,e);
+    }
+    if (arvore -> CC != NULL) {
         if (classificacao(arvore->CC->valor,e) < x) x = classificacao (arvore->CC->valor,e);
+    }
+    if (arvore -> CD != NULL) {
         if (classificacao(arvore->CD->valor,e) < x) x = classificacao (arvore->CD->valor,e);
-        return x;
+    }
+    return x;
 }
 
 float analisa_2nivel (TREE arvore,ESTADO *e) { //FIXME  mudar para 2nivel
-    float pior = analisa_1nivel(arvore->CE,e);
-    if (analisa_1nivel(arvore->CC,e) > pior) {
-        pior = analisa_1nivel(arvore->CC,e);
+    float pior = 0;
+    if (arvore -> CE != NULL) {
+        if (analisa_1nivel(arvore->CE, e) > pior)
+            pior = analisa_1nivel(arvore->CE, e);
     }
-    if (analisa_1nivel(arvore->CD,e) > pior){
-        pior = analisa_1nivel(arvore->CD,e);
+    if (arvore -> CC != NULL) {
+        if (analisa_1nivel(arvore->CC,e) > pior)
+            pior = analisa_1nivel(arvore->CC,e);
     }
-    if (analisa_1nivel(arvore->EE,e)> pior){
-        pior = analisa_1nivel(arvore->EE,e);
+    if (arvore -> CD != NULL) {
+        if (analisa_1nivel(arvore->CD,e) > pior)
+            pior = analisa_1nivel(arvore->CD,e);
     }
-    if (analisa_1nivel(arvore->DD,e)> pior) {
-        pior = analisa_1nivel(arvore->DD,e);
+    if (arvore -> EE != NULL) {
+        if (analisa_1nivel(arvore->EE,e) > pior)
+            pior = analisa_1nivel(arvore->EE,e);
     }
-    if (analisa_1nivel(arvore->BE,e)> pior) {
-        pior = analisa_1nivel(arvore->BE,e);
+    if (arvore -> DD != NULL) {
+        if (analisa_1nivel(arvore->DD,e) > pior)
+            pior = analisa_1nivel(arvore->DD,e);
     }
-    if (analisa_1nivel(arvore->BB,e)> pior)   {
-        pior = analisa_1nivel(arvore->BB,e);
+    if (arvore -> BE != NULL) {
+        if (analisa_1nivel(arvore->BE,e) > pior)
+            pior = analisa_1nivel(arvore->BE,e);
     }
-    if (analisa_1nivel(arvore->BD,e)> pior) {
-        pior = analisa_1nivel(arvore->BD,e);
+    if (arvore -> BB != NULL) {
+        if (analisa_1nivel(arvore->BB,e) > pior)
+            pior = analisa_1nivel(arvore->BB,e);
+    }
+    if (arvore -> BD != NULL) {
+        if (analisa_1nivel(arvore->BD,e) > pior)
+            pior = analisa_1nivel(arvore->BD,e);
     }
     return pior;
 }
 
 COORDENADA verifica_melhor_pos (ESTADO *e, TREE arvore){
-    float melhor = analisa_2nivel (arvore->CE,e);
+    float melhor = 1000;
     COORDENADA c_melhor ;
-    if (analisa_2nivel(arvore->CC,e) < melhor &&  classificacao(arvore->CC->valor,e)!= 1000) {
-        melhor = analisa_2nivel(arvore->CC,e);
-        c_melhor = arvore->CC->valor;
+    if (arvore -> CE != NULL) {
+        if (analisa_2nivel(arvore->CE, e) < melhor && classificacao(arvore->CE->valor, e) != 1000) {
+            melhor = analisa_2nivel(arvore->CE, e);
+            c_melhor = arvore->CE->valor;
+        }
     }
-    if (analisa_2nivel(arvore->CD,e)< melhor &&  classificacao(arvore->CD->valor,e)!= 1000){
-        melhor = analisa_2nivel(arvore->CD,e);
-        c_melhor = arvore->CD->valor;
+    if (arvore -> CC != NULL) {
+        if (analisa_2nivel(arvore->CC, e) < melhor && classificacao(arvore->CC->valor, e) != 1000) {
+            melhor = analisa_2nivel(arvore->CC, e);
+            c_melhor = arvore->CC->valor;
+        }
     }
-    if (analisa_2nivel(arvore->EE,e)< melhor && classificacao(arvore->EE->valor,e)!= 1000){
-        melhor = analisa_2nivel(arvore->EE,e);
-        c_melhor = arvore->EE->valor;
+    if (arvore -> CD != NULL) {
+        if (analisa_2nivel(arvore->CD, e) < melhor && classificacao(arvore->CD->valor, e) != 1000) {
+            melhor = analisa_2nivel(arvore->CD, e);
+            c_melhor = arvore->CD->valor;
+        }
     }
-    if (analisa_2nivel(arvore->DD,e)< melhor && classificacao(arvore->DD->valor,e)!= 1000) {
-        melhor = analisa_2nivel(arvore->DD,e);
-        c_melhor = arvore->DD->valor;
+    if (arvore -> EE != NULL) {
+        if (analisa_2nivel(arvore->EE, e) < melhor && classificacao(arvore->EE->valor, e) != 1000) {
+            melhor = analisa_2nivel(arvore->EE, e);
+            c_melhor = arvore->EE->valor;
+        }
     }
-    if (analisa_2nivel(arvore->BE,e)< melhor && classificacao(arvore->BE->valor,e)!= 1000) {
-        melhor = analisa_2nivel(arvore->BE,e);
-        c_melhor = arvore->BE->valor;
+    if (arvore -> DD != NULL) {
+        if (analisa_2nivel(arvore->DD, e) < melhor && classificacao(arvore->DD->valor, e) != 1000) {
+            melhor = analisa_2nivel(arvore->DD, e);
+            c_melhor = arvore->DD->valor;
+        }
     }
-    if (analisa_2nivel(arvore->BB,e)< melhor && classificacao(arvore->BB->valor,e)!= 1000)   {
-        melhor = analisa_2nivel(arvore->BB,e);
-        c_melhor = arvore->BB->valor;
+    if (arvore -> BE != NULL) {
+        if (analisa_2nivel(arvore->BE, e) < melhor && classificacao(arvore->BE->valor, e) != 1000) {
+            melhor = analisa_2nivel(arvore->BE, e);
+            c_melhor = arvore->BE->valor;
+        }
     }
-    if (analisa_2nivel(arvore->BD,e)< melhor && classificacao(arvore->BD->valor,e)!= 1000) {
-        melhor = analisa_2nivel(arvore->BD,e);
-        c_melhor = arvore->BD->valor;
+    if (arvore -> BB != NULL) {
+        if (analisa_2nivel(arvore->BB, e) < melhor && classificacao(arvore->BB->valor, e) != 1000) {
+            melhor = analisa_2nivel(arvore->BB, e);
+            c_melhor = arvore->BB->valor;
+        }
+    }
+    if (arvore -> BD != NULL) {
+        if (analisa_2nivel(arvore->BD, e) < melhor && classificacao(arvore->BD->valor, e) != 1000) {
+            melhor = analisa_2nivel(arvore->BD, e);
+            c_melhor = arvore->BD->valor;
+        }
     }
     return c_melhor;
 }
@@ -370,8 +419,8 @@ void jog2 (ESTADO *e){
         jogar (e,c);
     }
     else {
-       c = verifica_melhor_pos(e,arvore);
-       jogar (e,c);
-       free (arvore);
+        c = verifica_melhor_pos(e,arvore);
+        jogar (e,c);
+        free (arvore);
     }
 }
