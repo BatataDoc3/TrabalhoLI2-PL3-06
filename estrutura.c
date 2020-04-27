@@ -88,7 +88,7 @@ void atualizar_jogadas (ESTADO *e, COORDENADA c) {
 int le_ficheiro (ESTADO *e , FILE *f) {
     char linha[BUF_SIZE];
     char *result;
-    int i=0, j,n_jogadas;
+    int i=0;
     while (i<32){
         e->jogadas[i].jogador1.linha = 0;
         e->jogadas[i].jogador1.coluna = 0;
