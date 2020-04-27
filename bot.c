@@ -100,9 +100,7 @@ TREE arvore_1nivel (int linha, int coluna,ESTADO *e) {
     cord.linha = linha;
     cord.coluna = coluna;
     TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce = malloc (sizeof(struct nodoArv)), cc = malloc (sizeof(struct nodoArv)) ,cd = malloc (sizeof(struct nodoArv)),
-    dd = malloc (sizeof(struct nodoArv)), ee = malloc (sizeof(struct nodoArv)), be = malloc (sizeof(struct nodoArv)),
-    bb = malloc (sizeof(struct nodoArv)), bd = malloc (sizeof(struct nodoArv));
+    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
     if (jogada_valida_bot (e,cord.linha + 1,cord.coluna - 1) == 1)
         ce = singular (cord.linha + 1,cord.coluna - 1);
     else
@@ -152,9 +150,7 @@ TREE arvore_2nivel (int linha, int coluna,ESTADO *e){
     cord.linha = linha;
     cord.coluna = coluna;
     TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce = malloc (sizeof(struct nodoArv)), cc = malloc (sizeof(struct nodoArv)) ,cd = malloc (sizeof(struct nodoArv)),
-            dd = malloc (sizeof(struct nodoArv)), ee = malloc (sizeof(struct nodoArv)), be = malloc (sizeof(struct nodoArv)),
-            bb = malloc (sizeof(struct nodoArv)), bd = malloc (sizeof(struct nodoArv));
+    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
     if (jogada_valida_bot (e,cord.linha + 1,cord.coluna - 1) == 1)
         ce = arvore_1nivel (cord.linha + 1,cord.coluna - 1,e);
     else
@@ -202,9 +198,7 @@ TREE arvore_2nivel (int linha, int coluna,ESTADO *e){
 TREE arvore_3nivel (ESTADO *e){
     COORDENADA cord = e -> ultima_jogada;
     TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce = malloc (sizeof(struct nodoArv)), cc = malloc (sizeof(struct nodoArv)) ,cd = malloc (sizeof(struct nodoArv)),
-            dd = malloc (sizeof(struct nodoArv)), ee = malloc (sizeof(struct nodoArv)), be = malloc (sizeof(struct nodoArv)),
-            bb = malloc (sizeof(struct nodoArv)), bd = malloc (sizeof(struct nodoArv));
+    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
     if (jogada_valida_bot (e,cord.linha + 1,cord.coluna - 1) == 1)
         ce = arvore_2nivel (cord.linha + 1,cord.coluna - 1,e);
     else
@@ -285,37 +279,28 @@ float analisa_1nivel (TREE arvore,ESTADO *e){
     float x = 1000;
     if (arvore -> CE != NULL) {
         if (classificacao(arvore->CE->valor,e) < x) x = classificacao (arvore->CE->valor,e);
-        //free (arvore->CE);
     }
     if (arvore -> BD != NULL) {
         if (classificacao(arvore->BD->valor,e) < x) x = classificacao (arvore->BD->valor,e);
-        //free (arvore->BD);
     }
     if (arvore -> BE != NULL) {
         if (classificacao(arvore->BE->valor,e) < x) x = classificacao (arvore->BE->valor,e);
-        //free (arvore->BE);
     }
     if (arvore -> EE != NULL) {
         if (classificacao(arvore->EE->valor,e) < x) x = classificacao (arvore->EE->valor,e);
-        //free (arvore->EE);
     }
     if (arvore -> DD != NULL) {
         if (classificacao(arvore->DD->valor,e) < x) x = classificacao (arvore->DD->valor,e);
-        //free (arvore->DD);
     }
     if (arvore -> BB != NULL) {
         if (classificacao(arvore->BB->valor,e) < x) x = classificacao (arvore->BB->valor,e);
-        //free (arvore->BB);
     }
     if (arvore -> CC != NULL) {
         if (classificacao(arvore->CC->valor,e) < x) x = classificacao (arvore->CC->valor,e);
-        //free (arvore->CC);
     }
     if (arvore -> CD != NULL) {
         if (classificacao(arvore->CD->valor,e) < x) x = classificacao (arvore->CD->valor,e);
-        //free (arvore->CD);
     }
-    free (arvore);
     return x;
 }
 
