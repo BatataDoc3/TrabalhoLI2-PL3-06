@@ -80,9 +80,9 @@ int jogada_valida_bot (ESTADO *e ,int linha,int coluna) {
 TREE criar_arvore (ESTADO *e,int linha,int coluna,int profundidade){
     TREE arvore = malloc (sizeof(struct nodoArv));
     if (profundidade == 0) return NULL;
-    if (profundidade == 1) arvore->classificacao = classificacao (arvore->valor, e);
     arvore->valor.linha = linha;
     arvore->valor.coluna = coluna;
+    if (profundidade == 1) arvore->classificacao = classificacao (arvore->valor, e);
     profundidade--;
     TREE ce, cc, cd, dd, ee, be, bb, bd;
     if (jogada_valida_bot (e, linha + 1 , coluna - 1) == 1)
@@ -132,12 +132,9 @@ float classificacao (COORDENADA c,ESTADO *e) {
     float clas;
     if (jogada_valida_bot(e,c.linha,c.coluna) == 1){
         if (obter_jogador_atual(e)==1)
-            clas = sqrt (pow(c.coluna,2) + pow(c.linha,2));
+            clas = 10 - sqrt (pow(c.coluna,2) + pow(c.linha,2));
         else
-            clas = sqrt (pow(7 - c.coluna,2) + pow(7-c.linha,2));
-    }
-    else {
-        clas = 1000;
+            clas = 10 - sqrt (pow(7 - c.coluna,2) + pow(7-c.linha,2));
     }
     return clas;
 }
@@ -322,3 +319,4 @@ void jog2 (ESTADO *e) {
     }
     free_arvore(arvore,profundidade+1);
 }
+
