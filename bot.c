@@ -160,48 +160,111 @@ COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore){
 }
 
 
-float min8 (float a1,float a2,float a3,float a4,float a5,float a6,float a7,float a8){
-    float menor = a1;
-    if (a2 < menor) menor = a2;
-    if (a3 < menor) menor = a3;
-    if (a4 < menor) menor = a4;
-    if (a5 < menor) menor = a5;
-    if (a6 < menor) menor = a6;
-    if (a7 < menor) menor = a7;
-    if (a8 < menor) menor = a8;
+float min8 (float *a,int n){
+    int i;
+    float menor = a[0];
+    for (i = 1 ; i < n ; i++){
+        if (a[i] < menor) menor = a[i];
+    }
     return menor;
 }
 
-float max8 (float a1,float a2,float a3,float a4,float a5,float a6,float a7,float a8){
-    float maior = a1;
-    if (a2 > maior) maior = a2;
-    if (a3 > maior) maior = a3;
-    if (a4 > maior) maior = a4;
-    if (a5 > maior) maior = a5;
-    if (a6 > maior) maior = a6;
-    if (a7 > maior) maior = a7;
-    if (a8 > maior) maior = a8;
+float max8  (float *a,int n){
+    int i;
+    float maior = a[0];
+    for (i = 1 ; i < n ; i++){
+        if (a[i] > maior) maior = a[i];
+    }
     return maior;
 }
 
 
 float preencher_class (TREE arvore,int profundidade){
     if (profundidade > 0) {
+        float arr[8];
+        int i=0, n=0;
+        if (arvore->CE != NULL) {
+            preencher_class(arvore->CE,profundidade-1);
+            arr[i++] = arvore->CE->classificacao;
+            n++;
+        }
+        if (arvore-> CC != NULL) {
+            preencher_class(arvore-> CC,profundidade-1);
+            arr[i++] = arvore-> CC->classificacao;
+            n++;
+        }
+        if (arvore->CD != NULL) {
+            preencher_class(arvore->CD,profundidade-1);
+            arr[i++] = arvore->CD->classificacao;
+            n++;
+        }
+        if (arvore->EE != NULL) {
+            preencher_class(arvore->EE,profundidade-1);
+            arr[i++] = arvore->EE->classificacao;
+            n++;
+        }
+        if (arvore->DD != NULL) {
+            preencher_class(arvore->DD,profundidade-1);
+            arr[i++] = arvore->DD->classificacao;
+            n++;
+        }
+        if (arvore->BE != NULL) {
+            preencher_class(arvore->BE,profundidade-1);
+            arr[i++] = arvore->BE->classificacao;
+            n++;
+        }
+        if (arvore->BB != NULL) {
+            preencher_class(arvore->BB,profundidade-1);
+            arr[i++] = arvore->BB->classificacao;
+            n++;
+        }
+        if (arvore->BD != NULL) {
+            preencher_class(arvore->BD,profundidade-1);
+            arr[i++] = arvore->BD->classificacao;
+            n++;
+        }
         if (profundidade % 2 != 0)
-             arvore->classificacao = max8 (preencher_class (arvore->CE,profundidade-1),preencher_class (arvore->CC,profundidade-1)
-                                          ,preencher_class (arvore->CD,profundidade-1),preencher_class (arvore->EE,profundidade-1)
-                                          ,preencher_class (arvore->DD,profundidade-1),preencher_class (arvore->BE,profundidade-1)
-                                          ,preencher_class (arvore->BB,profundidade-1),preencher_class (arvore->BD,profundidade-1));
-         else
-            arvore->classificacao = min8 (preencher_class (arvore->CE,profundidade-1),preencher_class (arvore->CC,profundidade-1)
-                                         ,preencher_class (arvore->CD,profundidade-1),preencher_class (arvore->EE,profundidade-1)
-                                         ,preencher_class (arvore->DD,profundidade-1),preencher_class (arvore->BE,profundidade-1)
-                                         ,preencher_class (arvore->BB,profundidade-1),preencher_class (arvore->BD,profundidade-1));
+            arvore->classificacao = max8 (arr,n);
+        else
+            arvore->classificacao = min8 (arr,n);
+        }
+    else {
+        float arr[8];
+        int i = 0, n = 0;
+        if (arvore->CE != NULL) {
+            arr[i++] = arvore->CE->classificacao;
+            n++;
+        }
+        if (arvore->CC != NULL) {
+            arr[i++] = arvore->CC->classificacao;
+            n++;
+        }
+        if (arvore->CD != NULL) {
+            arr[i++] = arvore->CD->classificacao;
+            n++;
+        }
+        if (arvore->EE != NULL) {
+            arr[i++] = arvore->EE->classificacao;
+            n++;
+        }
+        if (arvore->DD != NULL) {
+            arr[i++] = arvore->DD->classificacao;
+            n++;
+        }
+        if (arvore->BE != NULL) {
+            arr[i++] = arvore->BE->classificacao;
+            n++;
+        }
+        if (arvore->BB != NULL) {
+            arr[i++] = arvore->BB->classificacao;
+            n++;
+        }
+        if (arvore->BD != NULL) {
+            arr[i++] = arvore->BD->classificacao;
+            n++;
+        }
+        arvore->classificacao = max8(arr,n);
     }
-    else
-        arvore->classificacao = max8 (arvore->CE->classificacao, arvore->CC->classificacao,arvore->CD->classificacao
-                                    ,arvore->EE->classificacao,arvore->DD->classificacao,arvore->BE->classificacao
-                                    ,arvore->BB->classificacao,arvore->BD->classificacao);
     return 0;
 }
 
@@ -245,7 +308,7 @@ void jog2 (ESTADO *e) {
     if (c.linha != 10) {
         jogar(e, c);
     } else {
-        c = verifica_melhor_pos(e,arvore);
+        c = verifica_melhor_pos(arvore);
         jogar(e, c);
     }
     free_arvore(arvore,profundidade+1);
