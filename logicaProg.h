@@ -8,6 +8,16 @@
 
 #include "estrutura.h"
 
+
+/**
+ * Função que analisa se a peça branca esta nas posições à volta da atual para verificar se a posição é válida.
+ * @param e o estado.
+ * @param c a coordenada
+ * @return
+ */
+int jogada_valida_pecaBranca (ESTADO*e, COORDENADA c);
+
+
 /**
  * Função que verifica as Jogadas e analisa quando o jogo acaba.
  * @param e Apontador para o ESTADO.
@@ -25,7 +35,20 @@ int jogar(ESTADO *e, COORDENADA c);
  */
 int jogada_valida (ESTADO *e, COORDENADA c);
 
+/**
+ * Função que avalia se o jogo finaliza.
+ * @param e o estado.
+ * @param c a coordenada.
+ * @return
+ */
 int jogo_finalizado (ESTADO *e, COORDENADA c);
+
+/**
+ * Função que avalia se o jogo finaliza e que é usada para o bot.
+ * @param e o estado.
+ * @param c a coordenada
+ * @return
+ */
 int jogo_finalizado_bot (ESTADO *e, COORDENADA c);
 
 /**
