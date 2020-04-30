@@ -68,7 +68,7 @@ COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore);
  * @param arvore a árvore.
  * @return
  */
-COORDENADA verifica_melhor_pos (ESTADO *e,TREE arvore);
+COORDENADA verifica_melhor_pos (TREE arvore);
 
 /**
  * Fução que efetua jogadas aleatorias (comando jog1).
