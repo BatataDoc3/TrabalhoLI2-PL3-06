@@ -14,23 +14,6 @@ LISTA poe_lista (LISTA L, COORDENADA *c, ESTADO *e) {
     return L ;
 }
 
-int comprimentoLista (LISTA l){
-    int i = 0;
-    while (l!=NULL) {
-        i++;
-        l = l->proximo;
-    }
-    return i;
-}
-
-int jogada_valida_bot (ESTADO *e ,int linha,int coluna) {
-    if (linha < 0 || linha > 7) return (-1);
-    if (coluna < 0 || coluna > 7)  return (-1);
-    if (devolve_posicao(e,linha,coluna) == '#')
-        return (-1);
-    else return 1;
-}
-
 void jogs (ESTADO *e) {
     if (e->posx != 50) {
         posicao(e);
@@ -84,162 +67,64 @@ void jogs (ESTADO *e) {
 }
 
 
-TREE singular (int linha, int coluna){
-    TREE r;
-    COORDENADA c;
-    c.linha = linha;
-    c.coluna = coluna;
-    r = malloc (sizeof (struct nodoArv));
-    r->valor = c;
-    r->CE = r->CC = r->CD = r->DD = r->BD = r->BB = r->BE = r->EE= NULL;
-    return r;
+
+int jogada_valida_bot (ESTADO *e ,int linha,int coluna) {
+    if (linha < 0 || linha > 7) return (-1);
+    if (coluna < 0 || coluna > 7)  return (-1);
+    if (devolve_posicao(e,linha,coluna) == '#')
+        return (-1);
+    else return 1;
 }
 
-TREE arvore_1nivel (int linha, int coluna,ESTADO *e) {
-    COORDENADA cord;
-    cord.linha = linha;
-    cord.coluna = coluna;
-    TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna - 1) == 1)
-        ce = singular (cord.linha + 1,cord.coluna - 1);
-    else
-        ce = NULL;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna) == 1)
-        cc = singular (cord.linha + 1,cord.coluna);
-    else
-        cc = NULL;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna + 1) == 1)
-        cd = singular (cord.linha + 1,cord.coluna + 1);
-    else
-        cd = NULL;
-    if (jogada_valida_bot (e,cord.linha,cord.coluna + 1) == 1)
-        dd = singular (cord.linha,cord.coluna + 1);
-    else
-        dd = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna + 1) == 1)
-        bd = singular (cord.linha - 1,cord.coluna + 1);
-    else
-        bd = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna) == 1)
-        bb = singular (cord.linha - 1,cord.coluna);
-    else
-        bb = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna - 1) == 1)
-        be = singular (cord.linha - 1,cord.coluna - 1);
-    else
-        be = NULL;
-    if (jogada_valida_bot (e,cord.linha,cord.coluna - 1) == 1)
-        ee = singular (cord.linha,cord.coluna - 1);
-    else
-        ee = NULL;
-    arvore -> valor = cord;
-    arvore -> CE = ce;
-    arvore -> CC = cc;
-    arvore -> CD = cd;
-    arvore -> DD = dd;
-    arvore -> BD = bd;
-    arvore -> BB = bb;
-    arvore -> BE = be;
-    arvore -> EE = ee;
-    return arvore;
-}
 
-TREE arvore_2nivel (int linha, int coluna,ESTADO *e){
-    COORDENADA cord;
-    cord.linha = linha;
-    cord.coluna = coluna;
+TREE criar_arvore (ESTADO *e,int linha,int coluna,int profundidade){
     TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna - 1) == 1)
-        ce = arvore_1nivel (cord.linha + 1,cord.coluna - 1,e);
+    if (profundidade == 0) return NULL;
+    if (profundidade == 1) arvore->classificacao = classificacao (arvore->valor, e);
+    arvore->valor.linha = linha;
+    arvore->valor.coluna = coluna;
+    profundidade--;
+    TREE ce, cc, cd, dd, ee, be, bb, bd;
+    if (jogada_valida_bot (e, linha + 1 , coluna - 1) == 1)
+        ce = criar_arvore (e, linha + 1 , coluna - 1 , profundidade);
     else
         ce = NULL;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna) == 1)
-        cc = arvore_1nivel (cord.linha + 1,cord.coluna,e);
+    if (jogada_valida_bot (e, linha + 1 , coluna) == 1)
+        cc = criar_arvore (e, linha + 1, coluna, profundidade);
     else
         cc = NULL;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna + 1) == 1)
-        cd = arvore_1nivel (cord.linha + 1,cord.coluna + 1,e);
+    if (jogada_valida_bot (e, linha + 1 , coluna + 1) == 1)
+        cd = criar_arvore (e, linha + 1 , coluna + 1, profundidade);
     else
         cd = NULL;
-    if (jogada_valida_bot (e,cord.linha,cord.coluna + 1) == 1)
-        dd = arvore_1nivel (cord.linha,cord.coluna + 1,e);
+    if (jogada_valida_bot (e, linha , coluna + 1) == 1)
+        dd = criar_arvore (e,  linha, coluna + 1, profundidade);
     else
         dd = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna + 1) == 1)
-        bd = arvore_1nivel (cord.linha - 1,cord.coluna + 1,e);
+    if (jogada_valida_bot (e, linha - 1, coluna + 1) == 1)
+        bd = criar_arvore (e, linha - 1, coluna + 1, profundidade);
     else
         bd = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna) == 1)
-        bb = arvore_1nivel (cord.linha - 1,cord.coluna,e);
+    if (jogada_valida_bot (e, linha - 1, coluna) == 1)
+        bb = criar_arvore (e, linha - 1, coluna, profundidade);
     else
         bb = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna - 1) == 1)
-        be = arvore_1nivel (cord.linha - 1,cord.coluna - 1,e);
+    if (jogada_valida_bot (e, linha - 1, coluna - 1) == 1)
+        be = criar_arvore (e, linha - 1, coluna - 1, profundidade);
     else
         be = NULL;
-    if (jogada_valida_bot (e,cord.linha,cord.coluna - 1) == 1)
-        ee = arvore_1nivel (cord.linha,cord.coluna - 1,e);
+    if (jogada_valida_bot (e, linha, coluna - 1) == 1)
+        ee = criar_arvore (e, linha, coluna - 1, profundidade);
     else
         ee = NULL;
-    arvore -> valor = cord;
-    arvore -> CE = ce;
-    arvore -> CC = cc;
-    arvore -> CD = cd;
-    arvore -> DD = dd;
-    arvore -> BD = bd;
-    arvore -> BB = bb;
-    arvore -> BE = be;
-    arvore -> EE = ee;
-    return arvore;
-}
-
-TREE arvore_3nivel (ESTADO *e){
-    COORDENADA cord = e -> ultima_jogada;
-    TREE arvore = malloc (sizeof(struct nodoArv));
-    TREE ce , cc , cd , dd , ee ,be ,bb , bd;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna - 1) == 1)
-        ce = arvore_2nivel (cord.linha + 1,cord.coluna - 1,e);
-    else
-        ce = NULL;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna) == 1)
-        cc = arvore_2nivel (cord.linha + 1,cord.coluna,e);
-    else
-        cc = NULL;
-    if (jogada_valida_bot (e,cord.linha + 1,cord.coluna + 1) == 1)
-        cd = arvore_2nivel (cord.linha + 1,cord.coluna + 1,e);
-    else
-        cd = NULL;
-    if (jogada_valida_bot (e,cord.linha,cord.coluna + 1) == 1)
-        dd = arvore_2nivel (cord.linha,cord.coluna + 1,e);
-    else
-        dd = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna + 1) == 1)
-        bd = arvore_2nivel (cord.linha - 1,cord.coluna + 1,e);
-    else
-        bd = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna) == 1)
-        bb = arvore_2nivel (cord.linha - 1,cord.coluna,e);
-    else
-        bb = NULL;
-    if (jogada_valida_bot (e,cord.linha - 1,cord.coluna - 1) == 1)
-        be = arvore_2nivel (cord.linha - 1,cord.coluna - 1,e);
-    else
-        be = NULL;
-    if (jogada_valida_bot (e,cord.linha,cord.coluna - 1) == 1)
-        ee = arvore_2nivel (cord.linha,cord.coluna - 1,e);
-    else
-        ee = NULL;
-    arvore -> valor = cord;
-    arvore -> CE = ce;
-    arvore -> CC = cc;
-    arvore -> CD = cd;
-    arvore -> DD = dd;
-    arvore -> BD = bd;
-    arvore -> BB = bb;
-    arvore -> BE = be;
-    arvore -> EE = ee;
+    arvore->CE = ce;
+    arvore->CC = cc;
+    arvore->CD = cd;
+    arvore->DD = dd;
+    arvore->BD = bd;
+    arvore->BB = bb;
+    arvore->BE = be;
+    arvore->EE = ee;
     return arvore;
 }
 
@@ -275,174 +160,93 @@ COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore){
 }
 
 
-float analisa_1nivel (TREE arvore,ESTADO *e){
-    float x = 1000;
-    if (arvore -> CE != NULL) {
-        if (classificacao(arvore->CE->valor,e) < x) x = classificacao (arvore->CE->valor,e);
-    }
-    if (arvore -> BD != NULL) {
-        if (classificacao(arvore->BD->valor,e) < x) x = classificacao (arvore->BD->valor,e);
-    }
-    if (arvore -> BE != NULL) {
-        if (classificacao(arvore->BE->valor,e) < x) x = classificacao (arvore->BE->valor,e);
-    }
-    if (arvore -> EE != NULL) {
-        if (classificacao(arvore->EE->valor,e) < x) x = classificacao (arvore->EE->valor,e);
-    }
-    if (arvore -> DD != NULL) {
-        if (classificacao(arvore->DD->valor,e) < x) x = classificacao (arvore->DD->valor,e);
-    }
-    if (arvore -> BB != NULL) {
-        if (classificacao(arvore->BB->valor,e) < x) x = classificacao (arvore->BB->valor,e);
-    }
-    if (arvore -> CC != NULL) {
-        if (classificacao(arvore->CC->valor,e) < x) x = classificacao (arvore->CC->valor,e);
-    }
-    if (arvore -> CD != NULL) {
-        if (classificacao(arvore->CD->valor,e) < x) x = classificacao (arvore->CD->valor,e);
-    }
-    return x;
+float min8 (float a1,float a2,float a3,float a4,float a5,float a6,float a7,float a8){
+    float menor = a1;
+    if (a2 < menor) menor = a2;
+    if (a3 < menor) menor = a3;
+    if (a4 < menor) menor = a4;
+    if (a5 < menor) menor = a5;
+    if (a6 < menor) menor = a6;
+    if (a7 < menor) menor = a7;
+    if (a8 < menor) menor = a8;
+    return menor;
 }
 
-float analisa_2nivel (TREE arvore,ESTADO *e) {
-    float pior = 0;
-    if (arvore -> CE != NULL) {
-        if (analisa_1nivel(arvore->CE, e) > pior)
-            pior = analisa_1nivel(arvore->CE, e);
-    }
-    if (arvore -> CC != NULL) {
-        if (analisa_1nivel(arvore->CC,e) > pior)
-            pior = analisa_1nivel(arvore->CC,e);
-    }
-    if (arvore -> CD != NULL) {
-        if (analisa_1nivel(arvore->CD,e) > pior)
-            pior = analisa_1nivel(arvore->CD,e);
-    }
-    if (arvore -> EE != NULL) {
-        if (analisa_1nivel(arvore->EE,e) > pior)
-            pior = analisa_1nivel(arvore->EE,e);
-    }
-    if (arvore -> DD != NULL) {
-        if (analisa_1nivel(arvore->DD,e) > pior)
-            pior = analisa_1nivel(arvore->DD,e);
-    }
-    if (arvore -> BE != NULL) {
-        if (analisa_1nivel(arvore->BE,e) > pior)
-            pior = analisa_1nivel(arvore->BE,e);
-    }
-    if (arvore -> BB != NULL) {
-        if (analisa_1nivel(arvore->BB,e) > pior)
-            pior = analisa_1nivel(arvore->BB,e);
-    }
-    if (arvore -> BD != NULL) {
-        if (analisa_1nivel(arvore->BD,e) > pior)
-            pior = analisa_1nivel(arvore->BD,e);
-    }
-    return pior;
-}
-
-COORDENADA verifica_melhor_pos (ESTADO *e, TREE arvore){
-    float melhor = 1000;
-    COORDENADA c_melhor ;
-    if (arvore -> CE != NULL) {
-        if (analisa_2nivel(arvore->CE, e) < melhor && classificacao(arvore->CE->valor, e) != 1000) {
-            melhor = analisa_2nivel(arvore->CE, e);
-            c_melhor = arvore->CE->valor;
-        }
-    }
-    if (arvore -> CC != NULL) {
-        if (analisa_2nivel(arvore->CC, e) < melhor && classificacao(arvore->CC->valor, e) != 1000) {
-            melhor = analisa_2nivel(arvore->CC, e);
-            c_melhor = arvore->CC->valor;
-        }
-    }
-    if (arvore -> CD != NULL) {
-        if (analisa_2nivel(arvore->CD, e) < melhor && classificacao(arvore->CD->valor, e) != 1000) {
-            melhor = analisa_2nivel(arvore->CD, e);
-            c_melhor = arvore->CD->valor;
-        }
-    }
-    if (arvore -> EE != NULL) {
-        if (analisa_2nivel(arvore->EE, e) < melhor && classificacao(arvore->EE->valor, e) != 1000) {
-            melhor = analisa_2nivel(arvore->EE, e);
-            c_melhor = arvore->EE->valor;
-        }
-    }
-    if (arvore -> DD != NULL) {
-        if (analisa_2nivel(arvore->DD, e) < melhor && classificacao(arvore->DD->valor, e) != 1000) {
-            melhor = analisa_2nivel(arvore->DD, e);
-            c_melhor = arvore->DD->valor;
-        }
-    }
-    if (arvore -> BE != NULL) {
-        if (analisa_2nivel(arvore->BE, e) < melhor && classificacao(arvore->BE->valor, e) != 1000) {
-            melhor = analisa_2nivel(arvore->BE, e);
-            c_melhor = arvore->BE->valor;
-        }
-    }
-    if (arvore -> BB != NULL) {
-        if (analisa_2nivel(arvore->BB, e) < melhor && classificacao(arvore->BB->valor, e) != 1000) {
-            melhor = analisa_2nivel(arvore->BB, e);
-            c_melhor = arvore->BB->valor;
-        }
-    }
-    if (arvore -> BD != NULL) {
-        if (analisa_2nivel(arvore->BD, e) < melhor && classificacao(arvore->BD->valor, e) != 1000) {
-            melhor = analisa_2nivel(arvore->BD, e);
-            c_melhor = arvore->BD->valor;
-        }
-    }
-    return c_melhor;
+float max8 (float a1,float a2,float a3,float a4,float a5,float a6,float a7,float a8){
+    float maior = a1;
+    if (a2 > maior) maior = a2;
+    if (a3 > maior) maior = a3;
+    if (a4 > maior) maior = a4;
+    if (a5 > maior) maior = a5;
+    if (a6 > maior) maior = a6;
+    if (a7 > maior) maior = a7;
+    if (a8 > maior) maior = a8;
+    return maior;
 }
 
 
-void free_arvore_1nivel (TREE arvore) {
-    if (arvore -> CE != NULL) free(arvore -> CE);
-    if (arvore -> CC != NULL) free(arvore -> CC);
-    if (arvore -> CD != NULL) free(arvore -> CD);
-    if (arvore -> DD != NULL) free(arvore -> DD);
-    if (arvore -> BD != NULL) free(arvore -> BD);
-    if (arvore -> BB != NULL) free(arvore -> BB);
-    if (arvore -> BE != NULL) free(arvore -> BE);
-    if (arvore -> EE != NULL) free(arvore -> EE);
-    free (arvore);
+float preencher_class (TREE arvore,int profundidade){
+    if (profundidade > 0) {
+        if (profundidade % 2 != 0)
+             arvore->classificacao = max8 (preencher_class (arvore->CE,profundidade-1),preencher_class (arvore->CC,profundidade-1)
+                                          ,preencher_class (arvore->CD,profundidade-1),preencher_class (arvore->EE,profundidade-1)
+                                          ,preencher_class (arvore->DD,profundidade-1),preencher_class (arvore->BE,profundidade-1)
+                                          ,preencher_class (arvore->BB,profundidade-1),preencher_class (arvore->BD,profundidade-1));
+         else
+            arvore->classificacao = min8 (preencher_class (arvore->CE,profundidade-1),preencher_class (arvore->CC,profundidade-1)
+                                         ,preencher_class (arvore->CD,profundidade-1),preencher_class (arvore->EE,profundidade-1)
+                                         ,preencher_class (arvore->DD,profundidade-1),preencher_class (arvore->BE,profundidade-1)
+                                         ,preencher_class (arvore->BB,profundidade-1),preencher_class (arvore->BD,profundidade-1));
+    }
+    else
+        arvore->classificacao = max8 (arvore->CE->classificacao, arvore->CC->classificacao,arvore->CD->classificacao
+                                    ,arvore->EE->classificacao,arvore->DD->classificacao,arvore->BE->classificacao
+                                    ,arvore->BB->classificacao,arvore->BD->classificacao);
+    return 0;
 }
 
-void free_arvore_2nivel (TREE arvore) {
-    if (arvore -> CE != NULL) free_arvore_1nivel (arvore -> CE);
-    if (arvore -> CC != NULL) free_arvore_1nivel (arvore -> CC);
-    if (arvore -> CD != NULL) free_arvore_1nivel (arvore -> CD);
-    if (arvore -> DD != NULL) free_arvore_1nivel (arvore -> DD);
-    if (arvore -> BD != NULL) free_arvore_1nivel (arvore -> BD);
-    if (arvore -> BB != NULL) free_arvore_1nivel (arvore -> BB);
-    if (arvore -> BE != NULL) free_arvore_1nivel (arvore -> BE);
-    if (arvore -> EE != NULL) free_arvore_1nivel (arvore -> EE);
-    free (arvore);
-}
-
-void free_arvore_3nivel (TREE arvore) {
-    if (arvore -> CE != NULL) free_arvore_2nivel (arvore -> CE);
-    if (arvore -> CC != NULL) free_arvore_2nivel (arvore -> CC);
-    if (arvore -> CD != NULL) free_arvore_2nivel (arvore -> CD);
-    if (arvore -> DD != NULL) free_arvore_2nivel (arvore -> DD);
-    if (arvore -> BD != NULL) free_arvore_2nivel (arvore -> BD);
-    if (arvore -> BB != NULL) free_arvore_2nivel (arvore -> BB);
-    if (arvore -> BE != NULL) free_arvore_2nivel (arvore -> BE);
-    if (arvore -> EE != NULL) free_arvore_2nivel (arvore -> EE);
-    free (arvore);
-}
-
-void jog2 (ESTADO *e){
-    TREE arvore;
-    arvore = arvore_3nivel(e);
+COORDENADA verifica_melhor_pos (TREE arvore){
     COORDENADA c;
-    c = jogo_finalizado_arvore (e,arvore);
-    if (c.linha != 10 ){
-        jogar (e,c);
-    }
-    else {
+    if (arvore->classificacao == arvore->CE->classificacao)  c = arvore->CE->valor;
+    if (arvore->classificacao == arvore->CC->classificacao)  c = arvore->CC->valor;
+    if (arvore->classificacao == arvore->CD->classificacao)  c = arvore->CD->valor;
+    if (arvore->classificacao == arvore->EE->classificacao)  c = arvore->EE->valor;
+    if (arvore->classificacao == arvore->DD->classificacao)  c = arvore->DD->valor;
+    if (arvore->classificacao == arvore->BE->classificacao)  c = arvore->BE->valor;
+    if (arvore->classificacao == arvore->BB->classificacao)  c = arvore->BB->valor;
+    if (arvore->classificacao == arvore->BD->classificacao)  c = arvore->BD->valor;
+    return c;
+}
+
+
+void free_arvore (TREE arvore,int profundidade) {
+    if (profundidade == 0)
+        return;
+    profundidade--;
+    if (arvore -> CE != NULL) free_arvore (arvore -> CE,profundidade);
+    if (arvore -> CC != NULL) free_arvore (arvore -> CC,profundidade);
+    if (arvore -> CD != NULL) free_arvore (arvore -> CD,profundidade);
+    if (arvore -> DD != NULL) free_arvore (arvore -> DD,profundidade);
+    if (arvore -> BD != NULL) free_arvore (arvore -> BD,profundidade);
+    if (arvore -> BB != NULL) free_arvore (arvore -> BB,profundidade);
+    if (arvore -> BE != NULL) free_arvore (arvore -> BE,profundidade);
+    if (arvore -> EE != NULL) free_arvore (arvore -> EE,profundidade);
+    free (arvore);
+}
+
+
+void jog2 (ESTADO *e) {
+    TREE arvore;
+    int profundidade = 3;
+    arvore = criar_arvore (e, e->ultima_jogada.linha, e->ultima_jogada.coluna, profundidade + 1);
+    preencher_class (arvore,profundidade);
+    COORDENADA c;
+    c = jogo_finalizado_arvore(e, arvore);
+    if (c.linha != 10) {
+        jogar(e, c);
+    } else {
         c = verifica_melhor_pos(e,arvore);
-        jogar (e,c);
+        jogar(e, c);
     }
-    free_arvore_3nivel(arvore);
+    free_arvore(arvore,profundidade+1);
 }
