@@ -270,16 +270,25 @@ float preencher_class (TREE arvore,int profundidade){
 
 COORDENADA verifica_melhor_pos (TREE arvore){
     COORDENADA c;
-    if (arvore->classificacao == arvore->CE->classificacao)  c = arvore->CE->valor;
-    if (arvore->classificacao == arvore->CC->classificacao)  c = arvore->CC->valor;
-    if (arvore->classificacao == arvore->CD->classificacao)  c = arvore->CD->valor;
-    if (arvore->classificacao == arvore->EE->classificacao)  c = arvore->EE->valor;
-    if (arvore->classificacao == arvore->DD->classificacao)  c = arvore->DD->valor;
-    if (arvore->classificacao == arvore->BE->classificacao)  c = arvore->BE->valor;
-    if (arvore->classificacao == arvore->BB->classificacao)  c = arvore->BB->valor;
-    if (arvore->classificacao == arvore->BD->classificacao)  c = arvore->BD->valor;
+    if (arvore -> CE != NULL)
+        if (arvore->classificacao == arvore->CE->classificacao)  c = arvore->CE->valor;
+    if (arvore -> CC != NULL)
+        if (arvore->classificacao == arvore->CC->classificacao)  c = arvore->CC->valor;
+    if (arvore -> CD != NULL)
+        if (arvore->classificacao == arvore->CD->classificacao)  c = arvore->CD->valor;
+    if (arvore -> EE != NULL)
+        if (arvore->classificacao == arvore->EE->classificacao)  c = arvore->EE->valor;
+    if (arvore -> DD != NULL)
+        if (arvore->classificacao == arvore->DD->classificacao)  c = arvore->DD->valor;
+    if (arvore -> BE != NULL)
+        if (arvore->classificacao == arvore->BE->classificacao)  c = arvore->BE->valor;
+    if (arvore -> BB != NULL)
+        if (arvore->classificacao == arvore->BB->classificacao)  c = arvore->BB->valor;
+    if (arvore -> BD != NULL)
+        if (arvore->classificacao == arvore->BD->classificacao)  c = arvore->BD->valor;
     return c;
 }
+
 
 
 void free_arvore (TREE arvore,int profundidade) {
