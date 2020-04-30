@@ -395,6 +395,43 @@ COORDENADA verifica_melhor_pos (ESTADO *e, TREE arvore){
     return c_melhor;
 }
 
+
+void free_arvore_1nivel (TREE arvore) {
+    if (arvore -> CE != NULL) free(arvore -> CE);
+    if (arvore -> CC != NULL) free(arvore -> CC);
+    if (arvore -> CD != NULL) free(arvore -> CD);
+    if (arvore -> DD != NULL) free(arvore -> DD);
+    if (arvore -> BD != NULL) free(arvore -> BD);
+    if (arvore -> BB != NULL) free(arvore -> BB);
+    if (arvore -> BE != NULL) free(arvore -> BE);
+    if (arvore -> EE != NULL) free(arvore -> EE);
+    free (arvore);
+}
+
+void free_arvore_2nivel (TREE arvore) {
+    if (arvore -> CE != NULL) free_arvore_1nivel (arvore -> CE);
+    if (arvore -> CC != NULL) free_arvore_1nivel (arvore -> CC);
+    if (arvore -> CD != NULL) free_arvore_1nivel (arvore -> CD);
+    if (arvore -> DD != NULL) free_arvore_1nivel (arvore -> DD);
+    if (arvore -> BD != NULL) free_arvore_1nivel (arvore -> BD);
+    if (arvore -> BB != NULL) free_arvore_1nivel (arvore -> BB);
+    if (arvore -> BE != NULL) free_arvore_1nivel (arvore -> BE);
+    if (arvore -> EE != NULL) free_arvore_1nivel (arvore -> EE);
+    free (arvore);
+}
+
+void free_arvore_3nivel (TREE arvore) {
+    if (arvore -> CE != NULL) free_arvore_2nivel (arvore -> CE);
+    if (arvore -> CC != NULL) free_arvore_2nivel (arvore -> CC);
+    if (arvore -> CD != NULL) free_arvore_2nivel (arvore -> CD);
+    if (arvore -> DD != NULL) free_arvore_2nivel (arvore -> DD);
+    if (arvore -> BD != NULL) free_arvore_2nivel (arvore -> BD);
+    if (arvore -> BB != NULL) free_arvore_2nivel (arvore -> BB);
+    if (arvore -> BE != NULL) free_arvore_2nivel (arvore -> BE);
+    if (arvore -> EE != NULL) free_arvore_2nivel (arvore -> EE);
+    free (arvore);
+}
+
 void jog2 (ESTADO *e){
     TREE arvore;
     arvore = arvore_3nivel(e);
@@ -403,9 +440,9 @@ void jog2 (ESTADO *e){
     if (c.linha != 10 ){
         jogar (e,c);
     }
-   else {
+    else {
         c = verifica_melhor_pos(e,arvore);
         jogar (e,c);
-        free (arvore);
     }
+    free_arvore_3nivel(arvore);
 }
