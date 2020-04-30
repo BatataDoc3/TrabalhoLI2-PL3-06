@@ -1,6 +1,3 @@
-//
-// Created by josejoao on 15/04/20.
-//
 /**
  * @file listas.h
  \brief funções relativas às listas ligadas.
@@ -67,4 +64,12 @@ LISTA remove_cabeca(LISTA L);
  */
 int lista_esta_vazia(LISTA L);
 
+/**
+ * Função que devolve o comprimento de uma lista.
+ * @param l a lista.
+ * @return
+ */
+int comprimentoLista (LISTA l);
+
 #endif //PROJETO_LISTAS_H
+
