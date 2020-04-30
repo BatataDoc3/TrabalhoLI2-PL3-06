@@ -51,3 +51,12 @@ int lista_esta_vazia(LISTA L){
     if (L -> proximo  == NULL) return 1;
     else return 0;
 }
+
+int comprimentoLista (LISTA l){
+    int i = 0;
+    while (l!=NULL) {
+        i++;
+        l = l->proximo;
+    }
+    return i;
+}
