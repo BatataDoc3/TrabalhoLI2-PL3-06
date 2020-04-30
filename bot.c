@@ -129,14 +129,19 @@ TREE criar_arvore (ESTADO *e,int linha,int coluna,int profundidade){
 }
 
 float classificacao (COORDENADA c,ESTADO *e) {
-    float clas;
-    if (jogada_valida_bot(e,c.linha,c.coluna) == 1){
-        if (obter_jogador_atual(e)==1)
-            clas = 10 - sqrt (pow(c.coluna,2) + pow(c.linha,2));
-        else
-            clas = 10 - sqrt (pow(7 - c.coluna,2) + pow(7-c.linha,2));
-    }
-    return clas;
+    CLASSIFICACAO *f = (CLASSIFICACAO *) calloc(1,sizeof(CLASSIFICACAO));
+    *f = (CLASSIFICACAO){.clas1 = {{7,6,5,4,3,2,1,0},
+                                   {6,5,4,3,2,1,0,-1},
+                                   {5,4,3,2,1,0,-1,-2},
+                                   {4,3,2,1,0,-1,-2,-3},
+                                   {3,2,1,0,-1,-2,-3,-4},
+                                   {2,1,0,-1,-2,-3,-4,-5},
+                                   {1,0,-1,-2,-3,-4,-5,-6},
+                                   {0,-1,-2,-3,-4,-5,-6,-7}}};
+    if (obter_jogador_atual(e)==1)
+        return f->clas1 [c.linha] [c.coluna];
+    else
+        return (- (f->clas1 [c.linha] [c.coluna]));
 }
 
 COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore){
@@ -177,7 +182,7 @@ float max8  (float *a,int n){
 
 
 float preencher_class (TREE arvore,int profundidade){
-    if (profundidade > 0) {
+    if (profundidade > 1) {
         float arr[8];
         int i=0, n=0;
         if (arvore->CE != NULL) {
@@ -315,8 +320,8 @@ void jog2 (ESTADO *e) {
         jogar(e, c);
     } else {
         c = verifica_melhor_pos(arvore);
+        printf ("%d %d",c.linha,c.coluna);
         jogar(e, c);
     }
     free_arvore(arvore,profundidade+1);
 }
-
