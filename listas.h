@@ -19,8 +19,6 @@ typedef struct nodo {
 } NODO, *LISTA;
 
 
-
-
 /**
  * função que cria uma lista vazia.
  * @return lista vazia criada.
