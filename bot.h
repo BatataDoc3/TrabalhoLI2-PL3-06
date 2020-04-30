@@ -3,6 +3,11 @@
 #include "estrutura.h"
 #include "listas.h"
 
+typedef struct {
+    float clas1[8][8];
+    float clas2[8][8];
+} CLASSIFICACAO;
+
 /**
  * Struct de uma árvore com um valor e os respetivos nodos.
  */
