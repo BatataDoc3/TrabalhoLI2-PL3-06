@@ -5,7 +5,6 @@
 
 typedef struct {
     float clas1[8][8];
-    float clas2[8][8];
 } CLASSIFICACAO;
 
 /**
