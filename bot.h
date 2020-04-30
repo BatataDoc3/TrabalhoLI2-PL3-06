@@ -1,6 +1,7 @@
 #ifndef TRABALHOLI2_PL3_06_MASTER_4_BOT_H
 #define TRABALHOLI2_PL3_06_MASTER_4_BOT_H
 #include "estrutura.h"
+#include "listas.h"
 
 /**
  * Struct de uma árvore com um valor e os respetivos nodos.
