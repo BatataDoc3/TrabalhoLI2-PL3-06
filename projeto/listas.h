@@ -2,8 +2,9 @@
  * @file listas.h
  \brief funções relativas às listas ligadas.
  */
-#ifndef PROJETO_LISTAS_H
-#define PROJETO_LISTAS_H
+#ifndef PROJETO_FINALIZADO_LISTAS_H
+#define PROJETO_FINALIZADO_LISTAS_H
+
 #include "estrutura.h"
 
 /**
@@ -72,4 +73,4 @@ int lista_esta_vazia(LISTA L);
  */
 int comprimentoLista (LISTA l);
 
-#endif //PROJETO_LISTAS_H
+#endif //PROJETO_FINALIZADO_LISTAS_H
