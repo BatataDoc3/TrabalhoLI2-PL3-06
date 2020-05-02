@@ -1,8 +1,7 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "estrutura.h"
+
 #include "listas.h"
 #define BUF_SIZE 1024
 
@@ -13,8 +12,6 @@ LISTA criar_lista(){
     new -> proximo = NULL;
     return new;
 }
-
-
 
 LISTA insere_cabeca(LISTA L, void *valor){
     LISTA new = malloc (sizeof (NODO));
@@ -49,12 +46,4 @@ int comprimentoLista (LISTA l){
         l = l->proximo;
     }
     return i;
-}
-
-
-LISTA poe_lista (LISTA L, COORDENADA *c, ESTADO *e) {
-    if (obter_estado_casa(e,c.coluna,c.linha) == VAZIO) {
-        L = insere_cabeca (L, &c);
-    }
-    return L ;
 }
