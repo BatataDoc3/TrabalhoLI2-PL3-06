@@ -126,3 +126,5 @@ COORDENADA verifica_melhor_pos (TREE arvore);
 void jog2 (ESTADO *e);
 
 #endif //PROJETO_LI2_LOGICAPROG_H
+
+
