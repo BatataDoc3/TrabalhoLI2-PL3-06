@@ -1,5 +1,5 @@
-#ifndef PROJETO_LI2_ARVORES_H
-#define PROJETO_LI2_ARVORES_H
+#ifndef TRABALHOLI2_PL3_06_MASTER_8_2_CÓPIA_ARVORES_H
+#define TRABALHOLI2_PL3_06_MASTER_8_2_CÓPIA_ARVORES_H
 #include "estrutura.h"
 
 /**
@@ -20,45 +20,43 @@ typedef struct nodoArv {
     struct nodoArv *CE , *CC , *CD , *DD , *BD , *BB, *BE , *EE;
 } *TREE ;
 
-
 /**
- * Função que cria uma árvore.
- * @param e o estado.
- * @param linha a linha.
- * @param coluna a coluna.
- * @param profundidade a profundidade da árvore. (número de nodos)
- * @return
+ * Função que cria uma árvore com classificação nas ultimas folhas
+ * @param e estado
+ * @param linha para a coordenada a meter no valor da struct nodoArv
+ * @param coluna para a coordenada a meter no valor da struct nodoArv
+ * @param profundidade da arvore
+ * @return arvore
  */
 TREE criar_arvore (ESTADO *e,int linha,int coluna,int profundidade);
 
 /**
- * Função que calcula o minimo de um array de 8 elementos.
- * @param a a árvore.
- * @param n o tamanho do array.
- * @return
+ * Função que dado um array de 8 elementos retorna o menor
+ * @param a array
+ * @param n numero de elementos do array
+ * @return menor elemento
  */
 float min8 (float *a,int n);
 
 /**
- * Função que calcula o maximo de um array de 8 elementos.
- * @param a a arvore.
- * @param n o tamanho do array.
- * @return
+ * Função que dado um array de 8 elementos retorna o maior
+ * @param a array
+ * @param n numero de elementos do array
+ * @return maior elemento
  */
 float max8  (float *a,int n);
 
 /**
- * Preenche os nodos da árvore com as classificações utilizando a heurística MinMax.
- * @param arvore a árvore.
- * @param profundidade a profundidade.
- * @return
+ * Função que preenche o resto das classificações da arvore de acordo com a heurística min-max
+ * @param arvore a arvore
+ * @param profundidade a profundidade
  */
-float preencher_class (TREE arvore,int profundidade);
+void preencher_class (TREE arvore,int profundidade);
 
 /**
- * Função que liberta o espaço ocupado apos a criação de uma árvore.
- * @param arvore a árvore.
- * @param profundidade a profundidade.
+ * Função que dá free à árvore
+ * @param arvore a arvore
+ * @param profundidade a profundidade
  */
 void free_arvore (TREE arvore,int profundidade);
 
