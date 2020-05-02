@@ -151,4 +151,11 @@ ESTADO *inicializar_estado();
  */
 CASA devolve_posicao (ESTADO *e, int linha, int coluna);
 
+
+/**
+ * Função que atualiza o número de jogadas para o final (para 32).
+ * @param e o estado.
+ */
+void atualiza_num_jogadas_fim (ESTADO *e);
+
 #endif //PROJETO_LI2_ESTRUTURA_H
