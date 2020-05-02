@@ -2,8 +2,9 @@
  * @file listas.h
  \brief funções relativas às listas ligadas.
  */
-#ifndef PROJETO_LI2_LISTAS_H
-#define PROJETO_LI2_LISTAS_H
+#ifndef PROJETO_LISTAS_H
+#define PROJETO_LISTAS_H
+#include "estrutura.h"
 
 /**
  *\brief struct relativa à definição de uma lista.
@@ -67,9 +68,8 @@ int lista_esta_vazia(LISTA L);
 /**
  * Função que devolve o comprimento de uma lista.
  * @param l a lista.
- * @return
+ * @return do comprimento da lista
  */
 int comprimentoLista (LISTA l);
 
 #endif //PROJETO_LISTAS_H
-
