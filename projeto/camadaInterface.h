@@ -2,9 +2,8 @@
  * @file camadaInterface.h
  * \brief conjunto de funções que desenham o tabuleiro e recebem o input do jogador, e fazem várias ações dependendo do input
  */
-
-#ifndef PROJETO_LI2_CAMADAINTERFACE_H
-#define PROJETO_LI2_CAMADAINTERFACE_H
+#ifndef PROJETO_FINALIZADO_CAMADAINTERFACE_H
+#define PROJETO_FINALIZADO_CAMADAINTERFACE_H
 
 #include "estrutura.h"
 
@@ -54,4 +53,4 @@ int ler (ESTADO *e,char *filename);
  */
 int interpretador(ESTADO *e);
 
-#endif //PROJETO_LI2_CAMADAINTERFACE_H
+#endif //PROJETO_FINALIZADO_CAMADAINTERFACE_H
