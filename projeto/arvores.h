@@ -1,5 +1,10 @@
-#ifndef TRABALHOLI2_PL3_06_MASTER_8_2_CÓPIA_ARVORES_H
-#define TRABALHOLI2_PL3_06_MASTER_8_2_CÓPIA_ARVORES_H
+/**
+ * @file arvore.h
+ * \brief conjunto de funções correspondentes às arvores
+ */
+#ifndef PROJETO_FINALIZADO_ARVORES_H
+#define PROJETO_FINALIZADO_ARVORES_H
+
 #include "estrutura.h"
 
 /**
@@ -60,4 +65,4 @@ void preencher_class (TREE arvore,int profundidade);
  */
 void free_arvore (TREE arvore,int profundidade);
 
-#endif //TRABALHOLI2_PL3_06_MASTER_8_2_CÓPIA_ARVORES_H
+#endif //PROJETO_FINALIZADO_ARVORES_H
