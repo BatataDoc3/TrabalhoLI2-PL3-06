@@ -184,3 +184,7 @@ int devolve_posx (ESTADO *e){
 void atualiza_num_jogadas_fim (ESTADO *e){
     e -> num_jogadas = 32;
 }
+
+void atualizar_casa_branca(ESTADO *e,COORDENADA c){
+    e -> tab [c.linha] [c.coluna] = BRANCA;
+}
