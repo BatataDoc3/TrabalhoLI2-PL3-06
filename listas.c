@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "estrutura.h"
 #include "listas.h"
 #define BUF_SIZE 1024
 
@@ -24,19 +24,12 @@ LISTA insere_cabeca(LISTA L, void *valor){
 }
 
 void *devolve_cabeca(LISTA L){
-   // LISTA lista = malloc (sizeof (NODO));
-   // lista->valor = L->valor;
-   // lista->proximo = NULL;
-   // L = lista;
     return L->valor;
 }
 
 LISTA proximo(LISTA L){
-    // L = L->proximo;
     return L -> proximo;
 }
-
-
 
 LISTA remove_cabeca(LISTA L){
     LISTA tmp = L -> proximo;
@@ -45,11 +38,8 @@ LISTA remove_cabeca(LISTA L){
     return L;
 }
 
-
-
 int lista_esta_vazia(LISTA L){
-    if (L -> proximo  == NULL) return 1;
-    else return 0;
+    return L == NULL;
 }
 
 int comprimentoLista (LISTA l){
@@ -59,4 +49,12 @@ int comprimentoLista (LISTA l){
         l = l->proximo;
     }
     return i;
+}
+
+
+LISTA poe_lista (LISTA L, COORDENADA *c, ESTADO *e) {
+    if (obter_estado_casa(e,c.coluna,c.linha) == VAZIO) {
+        L = insere_cabeca (L, &c);
+    }
+    return L ;
 }
