@@ -252,7 +252,7 @@ COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore){
     if (arvore -> CE != NULL && jogo_finalizado_bot (e,arvore->CE->valor) == 1) c = arvore->CE->valor;
     if (arvore -> CC != NULL && jogo_finalizado_bot (e,arvore->CC->valor) == 1) c = arvore->CC->valor;
     if (arvore -> CD != NULL && jogo_finalizado_bot (e,arvore->CD->valor) == 1) c = arvore->CD->valor;
-    e -> tab [arvore->valor.linha] [arvore->valor.coluna] = BRANCA;
+    atualizar_casa_branca(e,arvore->valor);
     return c;
 }
 
