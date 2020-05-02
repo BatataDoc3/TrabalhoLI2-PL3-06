@@ -28,8 +28,8 @@ typedef struct {int linha;int coluna;} COORDENADA;
  * \brief Tipo de dados para a JOGADA
  */
 typedef struct {COORDENADA jogador1;
-    COORDENADA jogador2;
-} JOGADA;
+                COORDENADA jogador2;
+                } JOGADA;
 
 /**
  * \brief Tipo de dados para as JOGADAS
@@ -106,6 +106,7 @@ void atualizar_jogador_atual (ESTADO *e);
  * @return a jogada para que vamos
  */
 void atualizar_num_jogadas (ESTADO *e);
+
 /**
  *\brief função que atualiza o array das jogadas
  * @param e pointer do estado
@@ -119,9 +120,8 @@ void atualizar_jogadas (ESTADO *e, COORDENADA c);
  * @param f coordenada
  * @param a numero de jogadas
  * @param b jogador atual
- * @return
  */
-int le_ficheiro (ESTADO *e,FILE *f);
+void le_ficheiro (ESTADO *e,FILE *f);
 
 /**
  * \brief função atualiza o estado para uma posição anterior (usada no comando pos)
@@ -149,12 +149,18 @@ ESTADO *inicializar_estado();
  * @param c coordenada
  * @return 1 caso o jogo finalizou ou 0 se não
  */
-CASA devolve_posicao (ESTADO *e, int linha, int coluna);
-
+void atualiza_posx (ESTADO *e,int x);
 
 /**
- * Função que atualiza o número de jogadas para o final (para 32).
- * @param e o estado.
+ * Função que devolve a variável posx
+ * @param e estado
+ * @return o valor da variavel posx
+ */
+int devolve_posx (ESTADO *e);
+
+/**
+ * Função que atualiza o número de jogadas para o fim (num_jogadas=32)
+ * @param e estado
  */
 void atualiza_num_jogadas_fim (ESTADO *e);
 
