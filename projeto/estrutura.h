@@ -1,10 +1,6 @@
-/**
- * @file estrutura.h
- \brief conjunto de funções que alteram e definem o estado
- */
+#ifndef PROJETO_FINALIZADO_ESTRUTURA_H
+#define PROJETO_FINALIZADO_ESTRUTURA_H
 
-#ifndef PROJETO_LI2_ESTRUTURA_H
-#define PROJETO_LI2_ESTRUTURA_H
 #define BUF_SIZE 1024
 #include <stdio.h>
 
@@ -28,8 +24,8 @@ typedef struct {int linha;int coluna;} COORDENADA;
  * \brief Tipo de dados para a JOGADA
  */
 typedef struct {COORDENADA jogador1;
-                COORDENADA jogador2;
-                } JOGADA;
+    COORDENADA jogador2;
+} JOGADA;
 
 /**
  * \brief Tipo de dados para as JOGADAS
@@ -164,4 +160,4 @@ int devolve_posx (ESTADO *e);
  */
 void atualiza_num_jogadas_fim (ESTADO *e);
 
-#endif //PROJETO_LI2_ESTRUTURA_H
+#endif //PROJETO_FINALIZADO_ESTRUTURA_H
