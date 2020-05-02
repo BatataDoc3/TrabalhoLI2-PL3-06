@@ -2,9 +2,8 @@
  * @file logicaProg.h
  * \brief conjunto de funções que verificam se a jogada é válida e faz a jogada
  */
-
-#ifndef PROJETO_LI2_LOGICAPROG_H
-#define PROJETO_LI2_LOGICAPROG_H
+#ifndef PROJETO_FINALIZADO_LOGICAPROG_H
+#define PROJETO_FINALIZADO_LOGICAPROG_H
 #include "estrutura.h"
 #include "arvores.h"
 
@@ -125,6 +124,4 @@ COORDENADA verifica_melhor_pos (TREE arvore);
  */
 void jog2 (ESTADO *e);
 
-#endif //PROJETO_LI2_LOGICAPROG_H
-
-
+#endif //PROJETO_FINALIZADO_LOGICAPROG_H
