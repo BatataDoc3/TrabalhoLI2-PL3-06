@@ -2,8 +2,8 @@
  * @file listas.h
  \brief funções relativas às listas ligadas.
  */
-#ifndef PROJETO_LISTAS_H
-#define PROJETO_LISTAS_H
+#ifndef PROJETO_LI2_LISTAS_H
+#define PROJETO_LI2_LISTAS_H
 
 /**
  *\brief struct relativa à definição de uma lista.
