@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 
-CASA obter_estado_casa (ESTADO *e, int coluna, int linha){
+CASA obter_estado_casa (ESTADO *e, int linha, int coluna){
     CASA casa;
     casa = e -> tab [linha] [coluna] ;
     return casa;
@@ -15,11 +15,18 @@ int obter_numero_de_jogadas (ESTADO *e) {
     return num_jogadas ;
 }
 
-
 int obter_jogador_atual (ESTADO *e) {
     int jogadorAtual;
     jogadorAtual = e -> jogador_atual;
     return jogadorAtual;
+}
+
+int devolve_posx (ESTADO *e){
+    return e->posx;
+}
+
+void atualiza_posx (ESTADO *e,int x){ // FIXME DOCUMENTAÇAO
+    e->posx = x;
 }
 
 void atualizar_jogador_atual (ESTADO *e) {
@@ -179,10 +186,4 @@ void posicao (ESTADO *e) {
             posx++;
         }
     }
-}
-
-CASA devolve_posicao (ESTADO *e,int linha, int coluna) {
-    CASA x;
-    x = e -> tab [linha] [coluna];
-    return x;
 }
