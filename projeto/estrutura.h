@@ -160,4 +160,11 @@ int devolve_posx (ESTADO *e);
  */
 void atualiza_num_jogadas_fim (ESTADO *e);
 
+/**
+ * Função que atualiza a casa da respetiva cordenada recebida para BRANCA
+ * @param e estado
+ * @param c coordenada
+ */
+void atualizar_casa_branca(ESTADO *e,COORDENADA c);
+
 #endif //PROJETO_FINALIZADO_ESTRUTURA_H
