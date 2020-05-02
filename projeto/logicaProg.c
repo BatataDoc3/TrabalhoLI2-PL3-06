@@ -7,17 +7,14 @@
 #include "arvores.h"
 
 int jogada_valida_pecaBranca (ESTADO*e, COORDENADA c) {
-    int linha,coluna;
-    linha = c.linha;
-    coluna = c.coluna;
-    if (obter_estado_casa(e,linha+1,coluna) == '*' ||
-       obter_estado_casa(e,linha,coluna + 1) == '*' ||
-       obter_estado_casa(e,linha + 1,coluna + 1) == '*' ||
-       obter_estado_casa(e,linha - 1,coluna) == '*' ||
-       obter_estado_casa(e,linha,coluna - 1) == '*' ||
-       obter_estado_casa(e,linha - 1,coluna - 1) == '*' ||
-       obter_estado_casa(e,linha - 1,coluna + 1) == '*' ||
-       obter_estado_casa(e,linha + 1,coluna - 1) == '*')
+    if (obter_estado_casa (e, c.linha+1, c.coluna) == '*' ||
+       obter_estado_casa (e, c.linha, c.coluna + 1) == '*' ||
+       obter_estado_casa (e, c.linha + 1, c.coluna + 1) == '*' ||
+       obter_estado_casa (e, c.linha - 1, c.coluna) == '*' ||
+       obter_estado_casa (e, c.linha, c.coluna - 1) == '*' ||
+       obter_estado_casa (e, c.linha - 1, c.coluna - 1) == '*' ||
+       obter_estado_casa (e, c.linha - 1, c.coluna + 1) == '*' ||
+       obter_estado_casa (e, c.linha + 1, c.coluna - 1) == '*')
         return 1;
     else return 0;
 }
@@ -26,7 +23,7 @@ int jogada_valida (ESTADO *e , COORDENADA c) {
     if (c.linha < 0 || c.linha > 7) return (-1);
     if (c.coluna < 0 || c.coluna > 7)  return (-1);
     if (jogada_valida_pecaBranca(e, c) == 1) {
-        if (obter_estado_casa(e,c.linha,c.coluna) == '#')
+        if (obter_estado_casa (e, c.linha,c.coluna) == '#')
             return (-1);
         else return 1;
     }
@@ -37,62 +34,62 @@ int casa_Preta (ESTADO*e, COORDENADA c) {
     int linha,coluna;
     linha = c.linha;
     coluna = c.coluna;
-    if (obter_estado_casa(e,linha + 1,coluna)== '#' &&
-        obter_estado_casa(e,linha,coluna + 1) == '#' &&
-        obter_estado_casa(e,linha - 1,coluna) == '#' &&
-        obter_estado_casa(e,linha,coluna - 1) == '#' &&
-        obter_estado_casa(e,linha - 1,coluna - 1) == '#' &&
-        obter_estado_casa(e,linha - 1,coluna + 1) == '#' &&
-        obter_estado_casa(e,linha + 1,coluna - 1) == '#' &&
-        obter_estado_casa(e,linha + 1,coluna + 1) == '#' )
+    if (obter_estado_casa (e, linha + 1, coluna)== '#' &&
+        obter_estado_casa (e, linha, coluna + 1) == '#' &&
+        obter_estado_casa (e, linha - 1, coluna) == '#' &&
+        obter_estado_casa (e, linha, coluna - 1) == '#' &&
+        obter_estado_casa (e, linha - 1, coluna - 1) == '#' &&
+        obter_estado_casa (e, linha - 1, coluna + 1) == '#' &&
+        obter_estado_casa (e, linha + 1, coluna - 1) == '#' &&
+        obter_estado_casa (e, linha + 1, coluna + 1) == '#' )
         return 1;
     else if (linha == 0 && coluna == 0 &&
-            obter_estado_casa(e,linha + 1,coluna) == '#' &&
-            obter_estado_casa(e,linha + 1,coluna + 1) == '#' &&
-            obter_estado_casa(e,linha,coluna + 1) == '#')
+            obter_estado_casa (e, linha + 1, coluna) == '#' &&
+            obter_estado_casa (e, linha + 1, coluna + 1) == '#' &&
+            obter_estado_casa (e, linha, coluna + 1) == '#')
         return 1;
     else if (linha == 0 && coluna == 7 &&
-            obter_estado_casa(e,linha + 1,coluna) == '#' &&
-            obter_estado_casa(e,linha + 1,coluna - 1) == '#' &&
-            obter_estado_casa(e,linha,coluna - 1) == '#')
+            obter_estado_casa (e, linha + 1, coluna) == '#' &&
+            obter_estado_casa (e, linha + 1, coluna - 1) == '#' &&
+            obter_estado_casa (e, linha, coluna - 1) == '#')
         return 1;
     else if (linha == 7 && coluna == 0 &&
-            obter_estado_casa(e,linha - 1,coluna) == '#' &&
-            obter_estado_casa(e,linha - 1,coluna + 1) == '#' &&
-            obter_estado_casa(e,linha,coluna + 1) == '#')
+            obter_estado_casa (e, linha - 1, coluna) == '#' &&
+            obter_estado_casa (e, linha - 1, coluna + 1) == '#' &&
+            obter_estado_casa (e, linha, coluna + 1) == '#')
         return 1;
     else if (linha == 7 && coluna == 7 &&
-            obter_estado_casa(e,linha - 1,coluna) == '#' &&
-            obter_estado_casa(e,linha - 1,coluna - 1) == '#' &&
-            obter_estado_casa(e,linha,coluna - 1) == '#')
+            obter_estado_casa (e, linha - 1, coluna) == '#' &&
+            obter_estado_casa (e, linha - 1, coluna - 1) == '#' &&
+            obter_estado_casa (e, linha, coluna - 1) == '#')
         return 1;
     else if (linha == 7 &&
-            obter_estado_casa(e,linha - 1,coluna) == '#' &&
-            obter_estado_casa(e,linha - 1,coluna - 1) == '#' &&
-            obter_estado_casa(e,linha,coluna - 1) == '#' &&
-            obter_estado_casa(e,linha,coluna + 1) == '#' &&
-            obter_estado_casa(e,linha - 1,coluna + 1) == '#')
+            obter_estado_casa (e, linha - 1, coluna) == '#' &&
+            obter_estado_casa (e, linha - 1, coluna - 1) == '#' &&
+            obter_estado_casa (e, linha, coluna - 1) == '#' &&
+            obter_estado_casa (e, linha, coluna + 1) == '#' &&
+            obter_estado_casa (e, linha - 1, coluna + 1) == '#')
         return 1;
     else if (linha == 0 &&
-            obter_estado_casa(e,linha + 1,coluna) == '#' &&
-            obter_estado_casa(e,linha + 1,coluna - 1) == '#' &&
-            obter_estado_casa(e,linha,coluna - 1) == '#' &&
-            obter_estado_casa(e,linha,coluna + 1) == '#' &&
-            obter_estado_casa(e,linha + 1,coluna + 1) == '#')
+            obter_estado_casa (e, linha + 1, coluna) == '#' &&
+            obter_estado_casa (e, linha + 1, coluna - 1) == '#' &&
+            obter_estado_casa (e, linha, coluna - 1) == '#' &&
+            obter_estado_casa (e, linha, coluna + 1) == '#' &&
+            obter_estado_casa (e, linha + 1, coluna + 1) == '#')
         return 1;
     else if (coluna == 0 &&
-            obter_estado_casa(e,linha - 1,coluna) == '#' &&
-            obter_estado_casa(e,linha + 1,coluna) == '#' &&
-            obter_estado_casa(e,linha + 1,coluna +1) == '#' &&
-            obter_estado_casa(e,linha - 1,coluna + 1) == '#' &&
-            obter_estado_casa(e,linha,coluna + 1) == '#')
+            obter_estado_casa (e, linha - 1, coluna) == '#' &&
+            obter_estado_casa (e, linha + 1, coluna) == '#' &&
+            obter_estado_casa (e, linha + 1, coluna +1) == '#' &&
+            obter_estado_casa (e, linha - 1, coluna + 1) == '#' &&
+            obter_estado_casa (e, linha, coluna + 1) == '#')
         return 1;
     else if (coluna == 7 &&
-            obter_estado_casa(e,linha,coluna - 1) == '#' &&
-            obter_estado_casa(e,linha - 1,coluna) == '#' &&
-            obter_estado_casa(e,linha + 1,coluna) == '#' &&
-            obter_estado_casa(e,linha - 1,coluna - 1) == '#' &&
-            obter_estado_casa(e,linha + 1,coluna - 1) == '#')
+            obter_estado_casa (e, linha, coluna - 1) == '#' &&
+            obter_estado_casa (e, linha - 1, coluna) == '#' &&
+            obter_estado_casa (e, linha + 1, coluna) == '#' &&
+            obter_estado_casa (e, linha - 1, coluna - 1) == '#' &&
+            obter_estado_casa (e, linha + 1, coluna - 1) == '#')
         return 1;
     else return 0;
 }
@@ -100,7 +97,7 @@ int casa_Preta (ESTADO*e, COORDENADA c) {
 
 int rodeado_pretas (ESTADO *e, COORDENADA c){
     int x;
-    x = casa_Preta(e,c);
+    x = casa_Preta (e,c);
     return x;
 }
 
@@ -119,8 +116,8 @@ int jogo_finalizado (ESTADO *e, COORDENADA c) {
 
 int parabens_jogador (ESTADO *e){
     int x=0;
-    if (obter_estado_casa(e,7,7) == '*') x = 2;
-    else if (obter_estado_casa(e,0,0) == '*') x = 1;
+    if (obter_estado_casa (e, 7, 7) == '*') x = 2;
+    else if (obter_estado_casa(e, 0, 0) == '*') x = 1;
     else {
         if (obter_jogador_atual(e) == 1) x = 2;
         else if (obter_jogador_atual(e) == 2) x = 1;}
@@ -130,32 +127,32 @@ int parabens_jogador (ESTADO *e){
 
 int jogo_finalizado_bot (ESTADO *e, COORDENADA c) {
     int r = 0;
-    if (obter_jogador_atual(e) == 1) {
-         if (obter_numero_de_jogadas(e) == 32 || (c.coluna == 0 && c.linha == 0) ||rodeado_pretas(e, c))
+    if (obter_jogador_atual (e) == 1) {
+         if (obter_numero_de_jogadas (e) == 32 || (c.coluna == 0 && c.linha == 0) ||rodeado_pretas(e, c))
              r = 1;
     }
-    else if (obter_numero_de_jogadas(e) == 32 || (c.coluna == 7 && c.linha == 7) ||rodeado_pretas(e, c))
+    else if (obter_numero_de_jogadas (e) == 32 || (c.coluna == 7 && c.linha == 7) ||rodeado_pretas(e, c))
              r = 1;
     return r;
 }
 
 int jogar(ESTADO *e, COORDENADA c) {
     int x;
-    if (jogada_valida(e, c) == 1) {
+    if (jogada_valida (e, c) == 1) {
         printf("jogar %d %d\n", c.coluna, c.linha);
-        if (e -> posx != 50) {
+        if (devolve_posx(e) != 50) {
             posicao(e);
-            e -> posx = 50; // FIXME mudar e perguntar se podemos usar assim 
+            atualiza_posx(e,50);
         }
-        atualizar_casa_preta(e);
-        atualizar_casa(e, c);
+        atualizar_casa_preta (e);
+        atualizar_casa (e, c);
         atualizar_jogadas (e, c);
-        atualizar_num_jogadas(e);
-        atualizar_jogador_atual(e);
-        if (jogo_finalizado(e, c) == 1){
-            x = parabens_jogador(e);
+        atualizar_num_jogadas (e);
+        atualizar_jogador_atual (e);
+        if (jogo_finalizado (e, c) == 1){
+            x = parabens_jogador (e);
             printf("Jogo Finalizado! Parabéns Jogador %d\n", x);
-            e -> num_jogadas = 32; //FIXME
+            atualiza_num_jogadas_fim (e);
             return 0;
         }
         return 1;
@@ -180,23 +177,23 @@ void jogs (ESTADO *e) {
     COORDENADA *c6 = (COORDENADA *) malloc (sizeof(COORDENADA));
     COORDENADA *c7 = (COORDENADA *) malloc (sizeof(COORDENADA));
     COORDENADA *c8 = (COORDENADA *) malloc (sizeof(COORDENADA));
-    c = e->ultima_jogada;
-    c1->linha = c.linha + 1;
-    c1->coluna = c.coluna - 1;
-    c2->linha = c.linha + 1;
-    c2->coluna = c.coluna;
-    c3->linha = c.linha + 1;
-    c3->coluna = c.coluna + 1;
-    c4->linha = c.linha;
-    c4->coluna = c.coluna - 1;
-    c5->linha = c.linha;
-    c5->coluna = c.coluna + 1;
-    c6->linha = c.linha - 1;
-    c6->coluna = c.coluna - 1;
-    c7->linha = c.linha - 1;
-    c7->coluna = c.coluna;
-    c8->linha = c.linha - 1;
-    c8->coluna = c.coluna + 1;
+    c = e -> ultima_jogada;
+    c1 -> linha = c.linha + 1;
+    c1 -> coluna = c.coluna - 1;
+    c2 -> linha = c.linha + 1;
+    c2 -> coluna = c.coluna;
+    c3 -> linha = c.linha + 1;
+    c3 -> coluna = c.coluna + 1;
+    c4 -> linha = c.linha;
+    c4 -> coluna = c.coluna - 1;
+    c5 -> linha = c.linha;
+    c5 -> coluna = c.coluna + 1;
+    c6 -> linha = c.linha - 1;
+    c6 -> coluna = c.coluna - 1;
+    c7 -> linha = c.linha - 1;
+    c7 -> coluna = c.coluna;
+    c8 -> linha = c.linha - 1;
+    c8 -> coluna = c.coluna + 1;
     COORDENADA *vizinhas[8] = {c1, c2, c3, c4, c5, c6, c7, c8};
     int i = 0;
     LISTA livres = malloc(sizeof(NODO));
@@ -210,15 +207,13 @@ void jogs (ESTADO *e) {
     int x = random() % comprimento_da_lista ;
     i = 0;
     while (i != x) {
-        livres = livres->proximo;
+        livres = livres -> proximo;
         i++;
     }
     COORDENADA *cord = (COORDENADA *) devolve_cabeca(livres);
     jogar(e, *cord);
     free (c1); free (c2) ; free (c3); free (c4) ; free (c5); free (c6) ; free (c7); free (c8);
 }
-
-
 
 int jogada_valida_bot (ESTADO *e ,int linha,int coluna) {
     if (linha < 0 || linha > 7) return (-1);
@@ -300,7 +295,6 @@ void jog2 (ESTADO *e) {
         jogar(e, c);
     } else {
         c = verifica_melhor_pos(arvore);
-        printf ("%d %d",c.linha,c.coluna);
         jogar(e, c);
     }
     free_arvore(arvore,profundidade+1);
