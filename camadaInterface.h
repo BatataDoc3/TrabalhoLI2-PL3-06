@@ -52,3 +52,4 @@ int ler (ESTADO *e,char *filename);
 int interpretador(ESTADO *e);
 
 #endif //PROJETO_LI2_CAMADAINTERFACE_H
+
