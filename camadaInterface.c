@@ -2,7 +2,7 @@
 #include "estrutura.h"
 #include <stdio.h>
 #include <string.h>
-#include "bot.h"
+#include "arvores.h"
 
 void mostrar_tabuleiro (ESTADO *e) {
     int linha,coluna;
@@ -11,10 +11,10 @@ void mostrar_tabuleiro (ESTADO *e) {
         putchar (letra) ;
         letra--;
         for (coluna = 0; coluna < 8; coluna ++) {
-            if (obter_estado_casa(e,coluna,linha) == DOIS) printf (" 2");
-            else if (obter_estado_casa(e,coluna,linha) == UM) printf (" 1");
-            else if (obter_estado_casa(e,coluna,linha)  == VAZIO) printf (" .") ;
-            else if (obter_estado_casa(e,coluna,linha)  == BRANCA) printf (" *");
+            if (obter_estado_casa(e,linha,coluna) == DOIS) printf (" 2");
+            else if (obter_estado_casa(e,linha,coluna) == UM) printf (" 1");
+            else if (obter_estado_casa(e,linha,coluna)  == VAZIO) printf (" .") ;
+            else if (obter_estado_casa(e,linha,coluna)  == BRANCA) printf (" *");
             else printf (" #");
         }
         printf ("\n");
@@ -27,10 +27,10 @@ void gravar_tabuleiro (FILE *f,ESTADO *e) {
     int linha,coluna;
     for (linha = 7; linha >= 0; linha--) {
         for (coluna = 0; coluna < 8; coluna ++) {
-            if (obter_estado_casa(e,coluna,linha) == DOIS) fprintf (f,"2");
-            else if (obter_estado_casa(e,coluna,linha) == UM) fprintf (f,"1");
-            else if (obter_estado_casa(e,coluna,linha)  == VAZIO) fprintf (f,".") ;
-            else if (obter_estado_casa(e,coluna,linha)  == BRANCA) fprintf (f,"*");
+            if (obter_estado_casa(e,linha,coluna) == DOIS) fprintf (f,"2");
+            else if (obter_estado_casa(e,linha,coluna) == UM) fprintf (f,"1");
+            else if (obter_estado_casa(e,linha,coluna)  == VAZIO) fprintf (f,".") ;
+            else if (obter_estado_casa(e,linha,coluna)  == BRANCA) fprintf (f,"*");
             else fprintf (f,"#");
         }
         fprintf (f,"\n");
@@ -61,7 +61,6 @@ void print_array (FILE *f, ESTADO *e){
                 fprintf(f, "\n");
             }
             else {
-                //if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha) ==  0 || e->jogadas[i].jogador2.coluna == 0)){
                 fprintf(f, "\n");
             }
         }
@@ -86,7 +85,7 @@ int ler (ESTADO *e,char *filename){
         return 0;
     }
     le_ficheiro(e, f);
-    mostrar_tabuleiro(e);      //caso nao seja para mostrar o tabuleiro ao fazer a função ler, tirar esta função.
+    mostrar_tabuleiro(e);
     return 1;
 }
 
@@ -94,16 +93,14 @@ int interpretador(ESTADO *e) {
     char linha[BUF_SIZE];
     char col[2], lin[2];
     char filename[BUF_SIZE];
-    //int posx;
     e -> num_comandos++;
     printf("# %02d  Jogador:%d  Número de jogada:%d> ", e -> num_comandos , e -> jogador_atual , e -> num_jogadas);
     if(fgets(linha, BUF_SIZE, stdin) == NULL)
         return 0;
     if(strlen(linha) == 3 && sscanf(linha, "%[a-h]%[1-8]", col, lin) == 2) {
-        COORDENADA coord = {*lin - '1',*col - 'a'};
+        COORDENADA coord = {*lin - '1', *col - 'a'};
         jogar(e, coord);
         mostrar_tabuleiro(e);
-       // printf ("%d %d\n",e->ultima_jogada.coluna,e->ultima_jogada.linha);
     }
     if (sscanf (linha,"gr %s",filename) == 1){
         gravar (e,filename);
@@ -129,9 +126,10 @@ int interpretador(ESTADO *e) {
         mostrar_tabuleiro(e);
     }
      if (strcmp (linha,"jog2\n") == 0) {
-        jog2 (e);
+        jog2 (e);  
         mostrar_tabuleiro(e);
     }
     else return 0;
     return 1;
 }
+
