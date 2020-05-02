@@ -1,4 +1,4 @@
-include "logicaProg.h"
+#include "logicaProg.h"
 #include "estrutura.h"
 #include <stdio.h>
 #include <string.h>
