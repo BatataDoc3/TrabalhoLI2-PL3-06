@@ -5,6 +5,9 @@
 
 #ifndef PROJETO_LI2_CAMADAINTERFACE_H
 #define PROJETO_LI2_CAMADAINTERFACE_H
+
+#include "estrutura.h"
+
 /**
  * \brief Função que atualiza o desenho do tabuleiro.
  * @param e Apontador para o ESTADO.
@@ -30,7 +33,7 @@ void print_array (FILE *f, ESTADO *e);
  * Função que grava o tabuleiro (comando gr).
  * @param e o estado.
  * @param filename o nome do ficheiro.
- * @return
+ * @return 0 caso ficheiro seja NULL , 1 caso contrário
  */
 int gravar (ESTADO *e,char *filename);
 
@@ -39,7 +42,7 @@ int gravar (ESTADO *e,char *filename);
  * Função que lê um tabuleiro.
  * @param e o estado.
  * @param filename o nome do ficheiro.
- * @return
+ * @return 0 caso esse ficheiro não exista, 1 caso contrário
  */
 int ler (ESTADO *e,char *filename);
 
@@ -47,9 +50,8 @@ int ler (ESTADO *e,char *filename);
 /**
  * Função que lê os inputs e efetua as Jogadas no tabuleiro.
  * @param e Apontador para o ESTADO.
- * @return
+ * @return 1 caso não tenha ocorrido nenhum erro
  */
 int interpretador(ESTADO *e);
 
 #endif //PROJETO_LI2_CAMADAINTERFACE_H
-
