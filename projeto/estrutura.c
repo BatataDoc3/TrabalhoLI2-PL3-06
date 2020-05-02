@@ -4,29 +4,16 @@
 
 
 CASA obter_estado_casa (ESTADO *e, int linha, int coluna){
-    CASA casa;
-    casa = e -> tab [linha] [coluna] ;
-    return casa;
+    return e -> tab [linha] [coluna];
 }
 
 int obter_numero_de_jogadas (ESTADO *e) {
-    int num_jogadas;
-    num_jogadas = e -> num_jogadas;
-    return num_jogadas ;
+    return e -> num_jogadas;
 }
+
 
 int obter_jogador_atual (ESTADO *e) {
-    int jogadorAtual;
-    jogadorAtual = e -> jogador_atual;
-    return jogadorAtual;
-}
-
-int devolve_posx (ESTADO *e){
-    return e->posx;
-}
-
-void atualiza_posx (ESTADO *e,int x){ // FIXME DOCUMENTAÇAO
-    e->posx = x;
+    return e -> jogador_atual;
 }
 
 void atualizar_jogador_atual (ESTADO *e) {
@@ -42,12 +29,11 @@ void atualizar_num_jogadas (ESTADO *e) {
     e -> num_jogadas = num;
 }
 
-
 ESTADO *inicializar_estado() {
     int linha, coluna;
     ESTADO *e = (ESTADO *) calloc(1,sizeof(ESTADO));
-    e->jogador_atual = 1;
-    e->num_jogadas = 0;
+    e -> jogador_atual = 1;
+    e -> num_jogadas = 0;
     for (linha = 0; linha < 8 ; linha ++) {
         for (coluna = 0; coluna < 8; coluna ++) {
             if (linha == 4 && coluna == 4)
@@ -80,27 +66,27 @@ void atualizar_casa_preta (ESTADO *e) {
 }
 
 void atualizar_jogadas (ESTADO *e, COORDENADA c) {
-    if (obter_jogador_atual(e)==1) {
-        e->jogadas[obter_numero_de_jogadas(e)].jogador1.coluna = c.coluna;
-        e->jogadas[obter_numero_de_jogadas(e)].jogador1.linha = c.linha;
+    if (obter_jogador_atual(e) == 1) {
+        e -> jogadas [obter_numero_de_jogadas(e)].jogador1.coluna = c.coluna;
+        e -> jogadas [obter_numero_de_jogadas(e)].jogador1.linha = c.linha;
     }
     if (obter_jogador_atual(e)==2) {
-        e->jogadas[obter_numero_de_jogadas(e)].jogador2.coluna = c.coluna;
-        e->jogadas[obter_numero_de_jogadas(e)].jogador2.linha = c.linha;
+        e -> jogadas [obter_numero_de_jogadas(e)].jogador2.coluna = c.coluna;
+        e -> jogadas [obter_numero_de_jogadas(e)].jogador2.linha = c.linha;
     }
-    e-> ultima_jogada = c;
+    e -> ultima_jogada = c;
 }
 
 
-int le_ficheiro (ESTADO *e , FILE *f) {
+void le_ficheiro (ESTADO *e , FILE *f) {
     char linha[BUF_SIZE];
     char *result;
-    int i=0,j;
-    while (i<32){
-        e->jogadas[i].jogador1.linha = 0;
-        e->jogadas[i].jogador1.coluna = 0;
-        e->jogadas[i].jogador2.linha = 0;
-        e->jogadas[i].jogador2.coluna = 0;
+    int i = 0, j;
+    while (i < 32){
+        e -> jogadas[i].jogador1.linha = 0;
+        e -> jogadas[i].jogador1.coluna = 0;
+        e -> jogadas[i].jogador2.linha = 0;
+        e -> jogadas[i].jogador2.coluna = 0;
         i++;
     }
     e ->  num_jogadas = 0;
@@ -110,22 +96,22 @@ int le_ficheiro (ESTADO *e , FILE *f) {
         if (result) {
             if (i <= 7) {
                 for (j = 0; j <= 7; j++) {
-                    if (linha[j] == '.') e->tab[7 - i][j] = VAZIO;
-                    else if (linha[j] == '*') e->tab[7 - i][j] = BRANCA;
-                    else if (linha[j] == '#') e->tab[7 - i][j] = PRETA;
+                    if (linha[j] == '.') e -> tab[7 - i][j] = VAZIO;
+                    else if (linha[j] == '*') e -> tab[7 - i][j] = BRANCA;
+                    else if (linha[j] == '#') e -> tab[7 - i][j] = PRETA;
                 }
             } else if (i>=9){
                 if ((linha[4] >= 'a' && linha[4] <= 'h') && (linha[5]>='1' && linha[5]<='8')) {
-                    e->jogador_atual = 2;
-                    e->jogadas[i - 9].jogador1.linha = linha[5] - '1';
-                    e->jogadas[i - 9].jogador1.coluna = linha[4] - 'a';
+                    e -> jogador_atual = 2;
+                    e -> jogadas[i - 9].jogador1.linha = linha[5] - '1';
+                    e -> jogadas[i - 9].jogador1.coluna = linha[4] - 'a';
                     e -> ultima_jogada.coluna = linha[4] - 'a';
                     e -> ultima_jogada.linha = linha[5] - '1';
                 }
                 if (linha[6] == ' '){
                     atualizar_jogador_atual(e);
-                    e->jogadas[i - 9].jogador2.linha = linha[8] - '1';
-                    e->jogadas[i - 9].jogador2.coluna = linha[7] - 'a';
+                    e -> jogadas[i - 9].jogador2.linha = linha[8] - '1';
+                    e -> jogadas[i - 9].jogador2.coluna = linha[7] - 'a';
                     e -> num_jogadas++;
                     e -> ultima_jogada.coluna = linha[7] - 'a';
                     e -> ultima_jogada.linha = linha[8] - '1';
@@ -134,56 +120,67 @@ int le_ficheiro (ESTADO *e , FILE *f) {
         }
         i++;
     }
-    return 1;
 }
 
 void atualizar_tabuleiro_jogadas (ESTADO *e) {
     int posx = e -> posx;
-    if (posx > e->num_jogadas  || posx < 0) {
+    if (posx > e -> num_jogadas  || posx < 0) {
         printf("Posição Inválida \n");
     }
     else {
         int i = 0, linha, coluna;
         for (linha = 0; linha < 8; linha++) {
             for (coluna = 0; coluna < 8; coluna++) {
-                e->tab[linha][coluna] = VAZIO;
+                e -> tab [linha] [coluna] = VAZIO;
             }
         }
         while (i < posx) {
-            e->tab[e->jogadas[i].jogador1.linha][e->jogadas[i].jogador1.coluna] = PRETA;
-            e->tab[e->jogadas[i].jogador2.linha][e->jogadas[i].jogador2.coluna] = PRETA;
+            e -> tab [e->jogadas[i].jogador1.linha][e->jogadas[i].jogador1.coluna] = PRETA;
+            e -> tab [e->jogadas[i].jogador2.linha][e->jogadas[i].jogador2.coluna] = PRETA;
             i++;
         }
         if (posx != 0)
-                e->tab[e->jogadas[posx - 1].jogador2.linha][e->jogadas[posx - 1].jogador2.coluna] = BRANCA;
-        else e->tab[4][4] = BRANCA;
+                e -> tab [e->jogadas[posx - 1].jogador2.linha] [e->jogadas[posx - 1].jogador2.coluna] = BRANCA;
+        else e -> tab[4] [4] = BRANCA;
         if (posx > 0)
-            e->tab[4][4] = PRETA;
-        e->tab[0][0] = UM;
-        e->tab[7][7] = DOIS;
+            e -> tab [4] [4] = PRETA;
+        e -> tab [0] [0] = UM;
+        e -> tab [7] [7] = DOIS;
     }
 }
 
 void posicao (ESTADO *e) {
     int posx = e -> posx ;
-    if (posx > e->num_jogadas || posx < 0) {
+    if (posx > e -> num_jogadas || posx < 0) {
         printf("Posição Inválida \n");
     } else {
         e -> num_jogadas = posx ;
         e -> jogador_atual = 1;
         if (posx == 0) {
-            e->ultima_jogada.coluna = 4;
-            e->ultima_jogada.linha = 4;
+            e -> ultima_jogada.coluna = 4;
+            e -> ultima_jogada.linha = 4;
         } else {
-            e->ultima_jogada = e->jogadas[posx - 1].jogador2;
+            e -> ultima_jogada = e -> jogadas[posx - 1].jogador2;
         }
         atualizar_tabuleiro_jogadas(e);
         while (posx < 32) {
-            e->jogadas[posx].jogador1.linha = 0;
-            e->jogadas[posx].jogador1.coluna = 0;
-            e->jogadas[posx].jogador2.linha = 0;
-            e->jogadas[posx].jogador2.coluna = 0;
+            e -> jogadas [posx].jogador1.linha = 0;
+            e -> jogadas [posx].jogador1.coluna = 0;
+            e -> jogadas [posx].jogador2.linha = 0;
+            e -> jogadas [posx].jogador2.coluna = 0;
             posx++;
         }
     }
+}
+
+void atualiza_posx (ESTADO *e,int x){
+    e -> posx = x;
+}
+
+int devolve_posx (ESTADO *e){
+    return e -> posx;
+}
+
+void atualiza_num_jogadas_fim (ESTADO *e){
+    e -> num_jogadas = 32;
 }
