@@ -22,7 +22,35 @@ typedef struct nodoArv {
     /**
      * Os movimentos a partir de uma posição : CE-cima e esquerda , CD-cima e direita , CC-centro , DD-direita , EE-esquerda , BE-baixo e esquerda , BD-baixo e direita.
      */
-    struct nodoArv *CE , *CC , *CD , *DD , *BD , *BB, *BE , *EE;
+    struct nodoArv *CE
+                    /**
+                    * Movimento para CC-centro
+                     */
+                    , *CC
+                    /**
+                     * Movimento para CD-cima e direita
+                     */
+                    , *CD
+                    /**
+                     * Movimento para DD-direita
+                     */
+                    , *DD
+                    /**
+                     * Movimento para BD-baixo e direita.
+                     */
+                    , *BD
+                    /**
+                     * Movimento para BB - baixo
+                     */
+                    , *BB
+                    /**
+                     * Movimento para BE - baixo e esquerda.
+                     */
+                    , *BE
+                    /**
+                     * Movimento para EE - esquerda.
+                     */
+                    , *EE;
 } *TREE ;
 
 /**
@@ -66,3 +94,4 @@ void preencher_class (TREE arvore,int profundidade);
 void free_arvore (TREE arvore,int profundidade);
 
 #endif //PROJETO_FINALIZADO_ARVORES_H
+
