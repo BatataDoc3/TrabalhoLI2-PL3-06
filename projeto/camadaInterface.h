@@ -54,3 +54,4 @@ int ler (ESTADO *e,char *filename);
 int interpretador(ESTADO *e);
 
 #endif //PROJETO_FINALIZADO_CAMADAINTERFACE_H
+
