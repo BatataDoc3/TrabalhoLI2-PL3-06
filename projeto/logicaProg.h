@@ -120,6 +120,40 @@ COORDENADA jogo_finalizado_arvore (ESTADO *e,TREE arvore);
 COORDENADA verifica_melhor_pos (TREE arvore);
 
 /**
+ * função que verifica se existe um caminho possível para a casa 1 (caso seja o jogador 1) ou para a casa 2 (casa seja o 2)
+ * @param e pointer do estado
+ * @param linha a linha
+ * @param coluna a coluna
+ * @return retorna 1 caso não seja possível ou 0 se for
+ */
+int bloqueada (ESTADO *e, int linha, int coluna);
+
+/**
+ * função que vê, quando estamos blloqueados e o numero de casas vazias depois da jogada é par, qual caminho deixa mais casas livres
+ * @param e pointer do estado
+ * @param c coordenada
+ * @return coordenada para onde temos de ir
+ */
+COORDENADA conta_mais_casas (ESTADO *e, COORDENADA c);
+
+/**
+ * função que vê, quando estamos encurralados, para que posição nos podemos mover para ficar com um número par de casas vazias
+ * @param e pointer do estado
+ * @param c coordenada
+ * @return coordenada para onde devemos ir
+ */
+COORDENADA paridade (ESTADO *e, COORDENADA c);
+
+/**
+ * função que vê se na próxima jogada vamos ficar bloqueados e se sim, com quantas casas livres (par ou ímpar)
+ * @param e pointer do estado
+ * @param c pointer da coordenada
+ * @return coordenada para nos devemos movimentar
+ */
+COORDENADA verifica_se_vai_bloquear (ESTADO *e, COORDENADA c);
+
+
+/**
  * Função que efetua jogadas com base numa eurística Min-Max.
  * @param e o estado
  */
