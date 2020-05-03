@@ -129,3 +129,4 @@ int interpretador(ESTADO *e) {
     else return 0;
     return 1;
 }
+
