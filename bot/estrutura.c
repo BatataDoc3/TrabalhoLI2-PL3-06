@@ -47,6 +47,14 @@ ESTADO *inicializar_estado() {
     e -> ultima_jogada.coluna = 4;
     e -> ultima_jogada.linha = 4;
     e -> posx = 50;
+    int i = 0;
+    while (i < 32){
+        e -> jogadas[i].jogador1.linha = -1;
+        e -> jogadas[i].jogador1.coluna = -1;
+        e -> jogadas[i].jogador2.linha = -1;
+        e -> jogadas[i].jogador2.coluna = -1;
+        i++;
+    }
     return e ;
 }
 
