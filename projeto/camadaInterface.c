@@ -57,9 +57,9 @@ void print_array (FILE *f, ESTADO *e){
             if (obter_indice_jogadas_linha(e,2,i) != -1|| obter_indice_jogadas_coluna(e,2,i) != -1) {
                 fprintf(f, " %c%d\n", obter_indice_jogadas_coluna(e,2,i) + 'a', obter_indice_jogadas_linha(e,2,i) + 1);
             }
-           // else {
-             //   fprintf(f, "\n");
-           // }
+            else {
+                fprintf(f, "\n");
+            }
         }
     }
 }
