@@ -239,11 +239,6 @@ COR obter_cor (ESTADO *e, int linha, int coluna) {
     else return NAO_PINTADA;
 }
 
-void troca_casa_pintada (ESTADO *e, int linha , int coluna) {
-    e -> tab [linha] [coluna] = PINTADA;
-}
-
-
 int conta_casas_livres (ESTADO *e, int linha, int coluna) {
     int n = 0;
     if (obter_cor(e,linha, coluna) == PINTADA) return 0;
