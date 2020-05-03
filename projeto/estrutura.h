@@ -16,6 +16,15 @@ typedef enum {
 } CASA ;
 
 /**
+ * tipo de dados para a COR
+ */
+typedef enum {
+    PINTADA = '#',
+    NAO_PINTADA = '1'
+} COR;
+
+
+/**
  \brief Tipo de dados para a COORDENADA
  */
 typedef struct {
@@ -55,6 +64,8 @@ typedef JOGADA JOGADAS[32];
 typedef struct {
     /** As peças do tabuleiro */
     CASA tab[8][8];
+    /** Colocar as peças como PINTADAS se forem pretas ou NAO_PINTADAS, caso contrário */
+    COR tab_cor [8] [8];
     /** coordenada da ultima jogada */
     COORDENADA ultima_jogada;
     /** jogadas efetuadas */
@@ -196,5 +207,59 @@ int obter_indice_jogadas_linha (ESTADO  *e,int jogador,int indice);
  * @return valor da coluna do indice do array
  */
 int obter_indice_jogadas_coluna (ESTADO  *e,int jogador,int indice);
+
+/**
+ * \brief função que coloca as peças pretas como "PINTADAS" e as outras como "NAO_PINTADAS"
+ * @param e pointer do estado
+ */
+void preenche_tab_cor (ESTADO *e);
+
+/**
+ * função que devolve a cor de uma certa coordenada (PINTADA ou NAO_PINTADA)
+ * @param e pointer do estado
+ * @param linha que queremos verificar
+ * @param coluna que queremos verificar
+ * @return COR da coordenada
+ */
+COR obter_cor (ESTADO *e, int linha, int coluna);
+
+/**
+ * Esta função troca uma casa para PINTADA
+ * @param e pointer do estado
+ * @param linha a linha
+ * @param coluna a coluna
+ */
+void troca_casa_pintada (ESTADO *e, int linha , int coluna);
+
+/**
+ * função que troca uma peça para BRANCA
+ * @param e pointer do estado
+ * @param c coordenada
+ */
+void atualizar_casa_branca(ESTADO *e,COORDENADA c);
+
+/**
+ * função que troca todas as casas livres para PINTADA
+ * @param e pointer do estado
+ * @param linha a linha
+ * @param coluna a coluna
+ */
+void flood_fill (ESTADO *e ,int linha, int coluna);
+
+/**
+ * função que conta quantas casas livres existem
+ * @param e pointer do estado
+ * @param linha a linha
+ * @param coluna a coluna
+ * @return numero de casas livres
+ */
+int conta_casas_livres (ESTADO *e, int linha, int coluna);
+
+/**
+ * \brief função que devolve as coordenadas da ultima posição
+ * @param e pointer do estado
+ * @return coordenada onde está a peça branca
+ */
+COORDENADA ultima_jogada (ESTADO *e);
 
 #endif //PROJETO_FINALIZADO_ESTRUTURA_H
