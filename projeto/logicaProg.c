@@ -278,22 +278,276 @@ COORDENADA verifica_melhor_pos (TREE arvore){
 }
 
 
+int bloqueada (ESTADO *e, int linha, int coluna) {
+    flood_fill(e, linha, coluna);
+    if (obter_cor(e, 0, 0) == NAO_PINTADA && obter_cor(e, 7, 7) == NAO_PINTADA )
+        return 1;
+    else return 0;
+}
+
+
+COORDENADA conta_mais_casas (ESTADO *e, COORDENADA c) {
+    preenche_tab_cor(e);
+    int i = 0;
+    atualizar_casa_preta(e);
+    COORDENADA cord = c;
+    if (jogada_valida_bot(e, cord.linha + 1, cord.coluna) == 1 && conta_casas_livres(e, c.linha , c.coluna - 1) > i) {
+        i = conta_casas_livres(e, c.linha + 1,c.coluna);
+        c = cord;
+        c.linha = c.linha +1;
+        c.coluna = c.coluna ;
+        preenche_tab_cor(e);
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha + 1, cord.coluna - 1) == 1&& conta_casas_livres(e, c.linha + 1, c.coluna - 1) > i) {
+        i = conta_casas_livres(e, c.linha + 1, c.coluna);
+        c = cord;
+        c.linha = c.linha +1;
+        c.coluna = c.coluna - 1;
+        preenche_tab_cor(e);
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha + 1, cord.coluna + 1) == 1 && conta_casas_livres(e, c.linha + 1, c.coluna + 1) > i) {
+        i = conta_casas_livres(e, c.linha + 1, c.coluna + 1);
+        c = cord;
+        c.linha = c.linha +1;
+        c.coluna = c.coluna + 1;
+        preenche_tab_cor(e);
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha , cord.coluna + 1) == 1 && conta_casas_livres(e, c.linha , c.coluna + 1) >i) {
+        i = conta_casas_livres(e, c.linha , c.coluna + 1);
+        c = cord;
+        c.linha = c.linha ;
+        c.coluna = c.coluna + 1 ;
+        preenche_tab_cor(e);
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha , cord.coluna - 1) == 1 && conta_casas_livres(e, c.linha , c.coluna - 1) > i) {
+        i = conta_casas_livres(e, c.linha , c.coluna - 1);
+        c = cord;
+        c.linha = c.linha ;
+        c.coluna = c.coluna - 1 ;
+        preenche_tab_cor(e);
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha - 1, cord.coluna) == 1 && conta_casas_livres (e, c.linha - 1, c.coluna) > i) {
+        i = conta_casas_livres(e, c.linha - 1, c.coluna);
+        c = cord;
+        c.linha = c.linha - 1;
+        c.coluna = c.coluna ;
+        preenche_tab_cor(e);
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha - 1, cord.coluna - 1) == 1 && conta_casas_livres(e, c.linha - 1, c.coluna - 1) > i ) {
+        i = conta_casas_livres(e, c.linha - 1, c.coluna - 1);
+        c = cord;
+        c.linha = c.linha - 1;
+        c.coluna = c.coluna - 1;
+        preenche_tab_cor(e);
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha - 1, cord.coluna + 1) == 1 && conta_casas_livres(e, c.linha - 1, c.coluna + 1) > i) {
+        i = conta_casas_livres(e, c.linha - 1, c.coluna + 1);
+        c = cord;
+        c.linha = c.linha - 1;
+        c.coluna = c.coluna + 1;
+        preenche_tab_cor(e);
+    }
+    preenche_tab_cor(e);
+    atualizar_casa_branca(e, cord);
+    return c ;
+}
+
+
+COORDENADA paridade (ESTADO *e, COORDENADA c) {
+    preenche_tab_cor(e);
+    atualizar_casa_preta(e);
+    COORDENADA cord = c;
+    if (jogada_valida_bot(e, cord.linha , cord.coluna - 1) == 1 && conta_casas_livres(e, c.linha + 1, c.coluna) % 2 != 0) {
+        atualizar_casa_branca(e, cord);
+        c.linha = c.linha ;
+        c.coluna = c.coluna - 1;
+        return  c ;
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha , cord.coluna + 1) == 1&& conta_casas_livres(e, c.linha + 1, c.coluna - 1) % 2 != 0) {
+        atualizar_casa_branca(e, cord);
+        c.linha = c.linha ;
+        c.coluna = c.coluna + 1;
+        return  c ;
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha + 1, cord.coluna + 1) && conta_casas_livres(e, c.linha + 1, c.coluna + 1) % 2 != 0) {
+        atualizar_casa_branca(e, cord);
+        c.linha = c.linha +1;
+        c.coluna = c.coluna + 1;
+        return  c ;
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha + 1 , cord.coluna ) == 1 && conta_casas_livres(e, c.linha , c.coluna + 1) % 2 != 0) {
+        atualizar_casa_branca(e, cord);
+        c.linha = c.linha + 1 ;
+        c.coluna = c.coluna  ;
+        return  c ;
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha + 1, cord.coluna - 1) == 1 && conta_casas_livres(e, c.linha , c.coluna - 1) % 2 != 0) {
+        atualizar_casa_branca(e, cord);
+        c.linha = c.linha + 1;
+        c.coluna = c.coluna - 1 ;
+        return  c ;
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha - 1, cord.coluna) == 1 && conta_casas_livres (e, c.linha - 1, c.coluna) % 2 != 0) {
+        atualizar_casa_branca(e, cord);
+        c.linha = c.linha - 1;
+        c.coluna = c.coluna ;
+        return  c ;
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha - 1, cord.coluna - 1) == 1 && conta_casas_livres(e, c.linha - 1, c.coluna - 1) % 2 != 0) {
+        atualizar_casa_branca(e, cord);
+        c.linha = c.linha - 1;
+        c.coluna = c.coluna - 1;
+        return  c ;
+    }
+    preenche_tab_cor(e);
+    if (jogada_valida_bot(e, cord.linha - 1, cord.coluna + 1) == 1 && conta_casas_livres(e, c.linha - 1, c.coluna + 1) % 2 != 0) {
+        atualizar_casa_branca(e, cord);
+        c.linha = c.linha - 1;
+        c.coluna = c.coluna + 1;
+        return  c ;
+    }
+    preenche_tab_cor(e);
+    atualizar_casa_branca(e, cord);
+    c = conta_mais_casas (e, cord);
+    return c;
+}
+
+COORDENADA verifica_se_vai_bloquear (ESTADO *e, COORDENADA c) {
+    COORDENADA cord;
+    atualizar_casa_preta(e);
+    preenche_tab_cor(e);
+    if (bloqueada(e, c.linha + 1, c.coluna) == 1) {
+        preenche_tab_cor(e);
+        if ( jogada_valida_bot (e,c.linha + 1, c.coluna) == 1 && conta_casas_livres(e, c.linha + 1, c.coluna ) % 2 != 0 ) {
+            atualizar_casa_branca(e,c);
+            preenche_tab_cor(e);
+            c.linha = c.linha + 1;
+            return c;
+        }
+    }
+    preenche_tab_cor(e);
+    if (bloqueada(e, c.linha + 1, c.coluna + 1) == 1) {
+        preenche_tab_cor(e);
+        if (jogada_valida_bot (e,c.linha + 1, c.coluna + 1) == 1 && conta_casas_livres(e, c.linha + 1, c.coluna + 1 ) % 2 != 0) {
+            atualizar_casa_branca(e,c);
+            preenche_tab_cor(e);
+            c.linha = c.linha + 1;
+            c.coluna =c.coluna + 1;
+            return c;
+        }
+    }
+    preenche_tab_cor(e);
+    if (bloqueada(e, c.linha + 1, c.coluna - 1) == 1) {
+        preenche_tab_cor(e);
+        if (jogada_valida_bot (e,c.linha + 1, c.coluna - 1) == 1&& conta_casas_livres(e, c.linha + 1, c.coluna - 1) % 2 != 0) {
+            atualizar_casa_branca(e,c);
+            preenche_tab_cor(e);
+            c.linha = c.linha + 1;
+            c.coluna =c.coluna - 1;
+            return c;
+        }
+    }
+    preenche_tab_cor(e);
+    if (bloqueada(e, c.linha , c.coluna - 1) == 1) {
+        preenche_tab_cor(e);
+        if (jogada_valida_bot (e,c.linha , c.coluna - 1) == 1&& conta_casas_livres(e, c.linha , c.coluna -1 ) % 2 != 0) {
+            atualizar_casa_branca(e,c);
+            preenche_tab_cor(e);
+            c.coluna =c.coluna - 1;
+            return c;
+        }
+    }
+    preenche_tab_cor(e);
+    if (bloqueada(e, c.linha , c.coluna  + 1) == 1) {
+        preenche_tab_cor(e);
+        if (jogada_valida_bot (e,c.linha , c.coluna + 1) == 1 && conta_casas_livres(e, c.linha , c.coluna + 1) % 2 != 0) {
+            atualizar_casa_branca(e,c);
+            preenche_tab_cor(e);
+            c.coluna =c.coluna + 1;
+            return c;
+        }
+    }
+    preenche_tab_cor(e);
+    if (bloqueada(e, c.linha - 1, c.coluna) == 1) {
+        preenche_tab_cor(e);
+        if (jogada_valida_bot (e,c.linha - 1, c.coluna) == 1 && conta_casas_livres(e, c.linha - 1, c.coluna) % 2 != 0) {
+            atualizar_casa_branca(e,c);
+            preenche_tab_cor(e);
+            c.linha = c.linha - 1;
+            return c;
+        }
+    }
+    preenche_tab_cor(e);
+    if (bloqueada(e, c.linha - 1, c.coluna + 1) == 1) {
+        preenche_tab_cor(e);
+        if (jogada_valida_bot (e,c.linha - 1, c.coluna + 1) == 1 && conta_casas_livres(e, c.linha - 1, c.coluna + 1) %2 != 0) {
+            atualizar_casa_branca(e,c);
+            preenche_tab_cor(e);
+            c.linha = c.linha - 1;
+            c.coluna =c.coluna + 1;
+            return c;
+        }
+    }
+    preenche_tab_cor(e);
+    if (bloqueada(e, c.linha - 1, c.coluna - 1) == 1) {
+        preenche_tab_cor(e);
+        if (jogada_valida_bot (e,c.linha - 1, c.coluna - 1) == 1 && conta_casas_livres(e, c.linha - 1, c.coluna - 1) %2 != 0) {
+            atualizar_casa_branca(e,c);
+            preenche_tab_cor(e);
+            c.linha = c.linha - 1;
+            c.coluna =c.coluna - 1;
+            return c;
+        }
+    }
+    atualizar_casa_branca(e,c);
+    return c;
+}
+
 void jog2 (ESTADO *e) {
     if (devolve_posx(e) != 50) {
         posicao(e);
-        atualiza_posx(e,50);
+        atualiza_posx(e, 50);
     }
     TREE arvore;
-    int profundidade = 1;
-    arvore = criar_arvore (e, e->ultima_jogada.linha, e->ultima_jogada.coluna, profundidade + 1);
-    preencher_class (arvore,profundidade);
-    COORDENADA c;
+    int profundidade = 3;
+    arvore = criar_arvore(e, e->ultima_jogada.linha, e->ultima_jogada.coluna, profundidade + 1);
+    preencher_class(arvore, profundidade);
+    COORDENADA c, cord;
+    cord = ultima_jogada(e);
     c = jogo_finalizado_arvore(e, arvore);
+    preenche_tab_cor(e);
     if (c.linha != 10) {
         jogar(e, c);
-    } else {
-        c = verifica_melhor_pos(arvore);
-        jogar(e, c);
     }
-    free_arvore(arvore,profundidade+1);
+    else {
+        COORDENADA b = cord ;
+        b = (verifica_se_vai_bloquear(e, cord) );
+        preenche_tab_cor(e);
+        if (bloqueada(e, cord.linha, cord.coluna) == 1) {
+            preenche_tab_cor(e);
+            cord = paridade(e, cord);
+            jogar(e, cord);
+        }
+        else if (b.linha != cord.linha || b.coluna != cord.coluna) {
+            jogar(e, b);
+        }
+        else {
+            c = verifica_melhor_pos(arvore);
+            jogar(e, c);
+        }
+        free_arvore(arvore, profundidade + 1);
+    }
 }
