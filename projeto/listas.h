@@ -15,7 +15,11 @@ typedef struct nodo {
     void *valor;
     /** O seguimento da lista ligada. */
     struct nodo *proximo;
-} NODO, *LISTA;
+} NODO,
+    /**
+    * a lista
+    */
+    *LISTA;
 
 
 /**
