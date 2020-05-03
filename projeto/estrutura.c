@@ -213,3 +213,68 @@ int obter_indice_jogadas_coluna (ESTADO  *e,int jogador,int indice) {
     else
         return e->jogadas[indice].jogador2.coluna;
 }
+
+COORDENADA ultima_jogada (ESTADO *e) {
+    if (obter_jogador_atual(e) == 2)
+        return e -> jogadas [obter_numero_de_jogadas(e) ].jogador1;
+    else return e -> jogadas [obter_numero_de_jogadas(e) - 1].jogador2;
+
+}
+
+void preenche_tab_cor (ESTADO *e) {
+    int i, j;
+    for (i = 7; i >= 0; i--) {
+        for (j = 0; j < 8; j++) {
+            if (e -> tab [i] [j] == '#') {
+                e->tab_cor[i][j] = PINTADA;
+            }
+            else e -> tab_cor[i][j] = NAO_PINTADA;
+
+        }
+    }
+}
+
+COR obter_cor (ESTADO *e, int linha, int coluna) {
+    if ( e-> tab_cor [linha] [coluna]  == PINTADA) return PINTADA;
+    else return NAO_PINTADA;
+}
+
+void troca_casa_pintada (ESTADO *e, int linha , int coluna) {
+    e -> tab [linha] [coluna] = PINTADA;
+}
+
+
+int conta_casas_livres (ESTADO *e, int linha, int coluna) {
+    int n = 0;
+    if (obter_cor(e,linha, coluna) == PINTADA) return 0;
+    if (obter_cor(e,linha, coluna) == NAO_PINTADA && linha < 8 && linha >= 0 && coluna >= 0 && coluna < 8) {
+        n++ ;
+        e -> tab_cor [linha] [coluna] = PINTADA;
+        n = n + conta_casas_livres (e, linha + 1, coluna - 1);
+        n = n + conta_casas_livres (e, linha + 1, coluna);
+        n = n + conta_casas_livres (e, linha + 1, coluna + 1 );
+        n = n + conta_casas_livres (e, linha, coluna - 1);
+        n = n + conta_casas_livres (e, linha, coluna + 1);
+        n = n + conta_casas_livres (e, linha - 1, coluna + 1);
+        n = n + conta_casas_livres (e, linha - 1, coluna);
+        n = n + conta_casas_livres (e, linha - 1, coluna - 1);
+    }
+    return n;
+}
+
+void flood_fill (ESTADO *e ,int linha, int coluna) {
+    if (obter_cor(e,linha, coluna) == PINTADA ) {
+        return;
+    }
+    if (obter_cor(e,linha, coluna) == NAO_PINTADA && linha < 8 && linha >= 0 && coluna >= 0 && coluna < 8) {
+        e -> tab_cor [linha] [coluna] = PINTADA;
+        flood_fill(e, linha + 1, coluna - 1);
+        flood_fill(e, linha + 1, coluna);
+        flood_fill(e, linha + 1, coluna + 1);
+        flood_fill(e, linha, coluna - 1);
+        flood_fill(e, linha, coluna + 1);
+        flood_fill(e, linha - 1, coluna + 1);
+        flood_fill(e, linha - 1, coluna);
+        flood_fill(e, linha - 1, coluna - 1);
+    }
+}
