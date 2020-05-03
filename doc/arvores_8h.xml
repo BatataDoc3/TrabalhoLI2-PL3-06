@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.18">
+  <compounddef id="arvores_8h" kind="file" language="C++">
+    <compoundname>arvores.h</compoundname>
+    <includes refid="estrutura_8h" local="yes">estrutura.h</includes>
+    <includedby refid="arvores_8c" local="yes">arvores.c</includedby>
+    <includedby refid="logica_prog_8h" local="yes">logicaProg.h</includedby>
+    <includedby refid="camada_interface_8c" local="yes">camadaInterface.c</includedby>
+    <includedby refid="logica_prog_8c" local="yes">logicaProg.c</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>stdio.h</label>
+      </node>
+      <node id="1">
+        <label>arvores.h</label>
+        <link refid="arvores_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>estrutura.h</label>
+        <link refid="estrutura_8h_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>logicaProg.h</label>
+        <link refid="logica_prog_8h"/>
+      </node>
+      <node id="1">
+        <label>arvores.h</label>
+        <link refid="arvores_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structnodo_arv" prot="public">nodoArv</innerclass>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="arvores_8h_1a0f732add4d8a47795385064c3e499c3c" prot="public" static="no">
+        <type>struct <ref refid="structnodo_arv" kindref="compound">nodoArv</ref> *</type>
+        <definition>typedef struct nodoArv * TREE</definition>
+        <argsstring></argsstring>
+        <name>TREE</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Struct de uma árvore com um valor e os respetivos nodos. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="arvores.h" line="58" column="8"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="arvores_8h_1a3391d67b1624e9c3eb0d4f28783a10bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="arvores_8h_1a0f732add4d8a47795385064c3e499c3c" kindref="member">TREE</ref></type>
+        <definition>TREE criar_arvore</definition>
+        <argsstring>(ESTADO *e, int linha, int coluna, int profundidade)</argsstring>
+        <name>criar_arvore</name>
+        <param>
+          <type><ref refid="struct_e_s_t_a_d_o" kindref="compound">ESTADO</ref> *</type>
+          <declname>e</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>linha</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>coluna</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>profundidade</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Função que cria uma árvore com classificação nas ultimas folhas <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>estado </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>linha</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>para a coordenada a meter no valor da struct <ref refid="structnodo_arv" kindref="compound">nodoArv</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coluna</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>para a coordenada a meter no valor da struct <ref refid="structnodo_arv" kindref="compound">nodoArv</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>profundidade</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>da arvore </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>arvore </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="arvores.h" line="68" column="6" bodyfile="arvores.c" bodystart="7" bodyend="62" declfile="arvores.h" declline="68" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="arvores_8h_1af928f6fb1881e08d08f4aad08ff96552" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float min8</definition>
+        <argsstring>(float *a, int n)</argsstring>
+        <name>min8</name>
+        <param>
+          <type>float *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Função que dado um array de 8 elementos retorna o menor <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>array </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>numero de elementos do array </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>menor elemento </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="arvores.h" line="76" column="7" bodyfile="arvores.c" bodystart="64" bodyend="71" declfile="arvores.h" declline="76" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="arvores_8h_1aa6d94df1b670171095f3d248c46bf348" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float max8</definition>
+        <argsstring>(float *a, int n)</argsstring>
+        <name>max8</name>
+        <param>
+          <type>float *</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Função que dado um array de 8 elementos retorna o maior <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>array </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>numero de elementos do array </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>maior elemento </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="arvores.h" line="84" column="7" bodyfile="arvores.c" bodystart="73" bodyend="80" declfile="arvores.h" declline="84" declcolumn="7"/>
+      </memberdef>
+      <memberdef kind="function" id="arvores_8h_1ac0ba69df71c4cfdbf454e3e56d4db9a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void preencher_class</definition>
+        <argsstring>(TREE arvore, int profundidade)</argsstring>
+        <name>preencher_class</name>
+        <param>
+          <type><ref refid="arvores_8h_1a0f732add4d8a47795385064c3e499c3c" kindref="member">TREE</ref></type>
+          <declname>arvore</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>profundidade</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Função que preenche o resto das classificações da arvore de acordo com a heurística min-max <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arvore</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a arvore </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>profundidade</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a profundidade </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="arvores.h" line="91" column="6" bodyfile="arvores.c" bodystart="82" bodyend="168" declfile="arvores.h" declline="91" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="arvores_8h_1a093a1c1f401a07aa880943f6f94f8ed2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void free_arvore</definition>
+        <argsstring>(TREE arvore, int profundidade)</argsstring>
+        <name>free_arvore</name>
+        <param>
+          <type><ref refid="arvores_8h_1a0f732add4d8a47795385064c3e499c3c" kindref="member">TREE</ref></type>
+          <declname>arvore</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>profundidade</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Função que dá free à árvore <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>arvore</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a arvore </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>profundidade</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>a profundidade </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="arvores.h" line="98" column="6" bodyfile="arvores.c" bodystart="170" bodyend="183" declfile="arvores.h" declline="98" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>conjunto de funções correspondentes às arvores </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="5"><highlight class="preprocessor">#ifndef<sp/>PROJETO_FINALIZADO_ARVORES_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PROJETO_FINALIZADO_ARVORES_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;estrutura.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="structnodo_arv" refkind="compound"><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structnodo_arv" kindref="compound">nodoArv</ref><sp/>{</highlight></codeline>
+<codeline lineno="17" refid="structnodo_arv_1abf163b4c4c3f037058fceb34fd7f8930" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_c_o_o_r_d_e_n_a_d_a" kindref="compound">COORDENADA</ref><sp/><ref refid="structnodo_arv_1abf163b4c4c3f037058fceb34fd7f8930" kindref="member">valor</ref>;</highlight></codeline>
+<codeline lineno="21" refid="structnodo_arv_1aa27ceeb03c8d0d371ed34e53d99a66de" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="structnodo_arv_1aa27ceeb03c8d0d371ed34e53d99a66de" kindref="member">classificacao</ref>;</highlight></codeline>
+<codeline lineno="25" refid="structnodo_arv_1aca84e48b9e55bed88dcfd4924219ddb6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structnodo_arv" kindref="compound">nodoArv</ref><sp/>*<ref refid="structnodo_arv_1aca84e48b9e55bed88dcfd4924219ddb6" kindref="member">CE</ref></highlight></codeline>
+<codeline lineno="29" refid="structnodo_arv_1a1ce16bcdd774672ccf46b12376f78710" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,*<ref refid="structnodo_arv_1a1ce16bcdd774672ccf46b12376f78710" kindref="member">CC</ref></highlight></codeline>
+<codeline lineno="33" refid="structnodo_arv_1a0154c23cbc53edc852a27ee46d2deb41" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,*<ref refid="structnodo_arv_1a0154c23cbc53edc852a27ee46d2deb41" kindref="member">CD</ref></highlight></codeline>
+<codeline lineno="37" refid="structnodo_arv_1acba3c761f5fead66ae148615b6dffd91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,*<ref refid="structnodo_arv_1acba3c761f5fead66ae148615b6dffd91" kindref="member">DD</ref></highlight></codeline>
+<codeline lineno="41" refid="structnodo_arv_1aa0cb6152045127af72a5d9e098d68987" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,*<ref refid="structnodo_arv_1aa0cb6152045127af72a5d9e098d68987" kindref="member">BD</ref></highlight></codeline>
+<codeline lineno="45" refid="structnodo_arv_1a9cd3785f6a629877de6fb7e42e97cce3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,*<ref refid="structnodo_arv_1a9cd3785f6a629877de6fb7e42e97cce3" kindref="member">BB</ref></highlight></codeline>
+<codeline lineno="49" refid="structnodo_arv_1ae62568792db9ea9521386f6dbe9f18ac" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,*<ref refid="structnodo_arv_1ae62568792db9ea9521386f6dbe9f18ac" kindref="member">BE</ref></highlight></codeline>
+<codeline lineno="53" refid="structnodo_arv_1a88ef64a6350945b405e6e06080cc1d0e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,*<ref refid="structnodo_arv_1a88ef64a6350945b405e6e06080cc1d0e" kindref="member">EE</ref></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="58" refid="arvores_8h_1a0f732add4d8a47795385064c3e499c3c" refkind="member"><highlight class="normal">}<sp/>*<ref refid="arvores_8h_1a0f732add4d8a47795385064c3e499c3c" kindref="member">TREE</ref><sp/>;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><ref refid="structnodo_arv" kindref="compound">TREE</ref><sp/><ref refid="arvores_8h_1a3391d67b1624e9c3eb0d4f28783a10bf" kindref="member">criar_arvore</ref><sp/>(<ref refid="struct_e_s_t_a_d_o" kindref="compound">ESTADO</ref><sp/>*e,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>linha,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>coluna,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>profundidade);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="arvores_8h_1af928f6fb1881e08d08f4aad08ff96552" kindref="member">min8</ref><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*a,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="arvores_8h_1aa6d94df1b670171095f3d248c46bf348" kindref="member">max8</ref><sp/><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*a,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="arvores_8h_1ac0ba69df71c4cfdbf454e3e56d4db9a2" kindref="member">preencher_class</ref><sp/>(<ref refid="structnodo_arv" kindref="compound">TREE</ref><sp/>arvore,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>profundidade);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="arvores_8h_1a093a1c1f401a07aa880943f6f94f8ed2" kindref="member">free_arvore</ref><sp/>(<ref refid="structnodo_arv" kindref="compound">TREE</ref><sp/>arvore,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>profundidade);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//PROJETO_FINALIZADO_ARVORES_H</highlight></codeline>
+    </programlisting>
+    <location file="arvores.h"/>
+  </compounddef>
+</doxygen>
