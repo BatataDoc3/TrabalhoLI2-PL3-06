@@ -1,5 +1,5 @@
 /**
- * @file arvore.h
+ * @file arvores.h
  * \brief conjunto de funções correspondentes às arvores
  */
 #ifndef PROJETO_FINALIZADO_ARVORES_H
@@ -20,37 +20,41 @@ typedef struct nodoArv {
      */
     float classificacao;
     /**
-     * Os movimentos a partir de uma posição : CE-cima e esquerda , CD-cima e direita , CC-centro , DD-direita , EE-esquerda , BE-baixo e esquerda , BD-baixo e direita.
+     * Os movimentos a partir de uma posição :
      */
     struct nodoArv *CE
-                    /**
-                    * Movimento para CC-centro
-                     */
-                    , *CC
-                    /**
-                     * Movimento para CD-cima e direita
-                     */
-                    , *CD
-                    /**
-                     * Movimento para DD-direita
-                     */
-                    , *DD
-                    /**
-                     * Movimento para BD-baixo e direita.
-                     */
-                    , *BD
-                    /**
-                     * Movimento para BB - baixo
-                     */
-                    , *BB
-                    /**
-                     * Movimento para BE - baixo e esquerda.
-                     */
-                    , *BE
-                    /**
-                     * Movimento para EE - esquerda.
-                     */
-                    , *EE;
+            /**
+             *  CE-cima e esquerda
+             */
+            ,*CC
+            /**
+             * CC-centro
+             */
+            ,*CD
+            /**
+             * cD-cima e direita
+             */
+            ,*DD
+            /**
+             * DD-direita
+             */
+            ,*BD
+            /**
+             * BD-baixo e direita
+             */
+            ,*BB
+            /**
+             * BB - baixo
+             */
+            ,*BE
+            /**
+             * BE-baixo e esquerda
+             */
+            ,*EE
+            /**
+             * EE-esquerda
+             */
+            ;
 } *TREE ;
 
 /**
@@ -94,4 +98,3 @@ void preencher_class (TREE arvore,int profundidade);
 void free_arvore (TREE arvore,int profundidade);
 
 #endif //PROJETO_FINALIZADO_ARVORES_H
-
