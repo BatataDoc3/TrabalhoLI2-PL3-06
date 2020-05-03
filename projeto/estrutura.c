@@ -47,6 +47,14 @@ ESTADO *inicializar_estado() {
     e -> ultima_jogada.coluna = 4;
     e -> ultima_jogada.linha = 4;
     e -> posx = 50;
+    int i = 0;
+    while (i < 32){
+        e -> jogadas[i].jogador1.linha = -1;
+        e -> jogadas[i].jogador1.coluna = -1;
+        e -> jogadas[i].jogador2.linha = -1;
+        e -> jogadas[i].jogador2.coluna = -1;
+        i++;
+    }
     return e ;
 }
 
@@ -83,10 +91,10 @@ void le_ficheiro (ESTADO *e , FILE *f) {
     char *result;
     int i = 0, j;
     while (i < 32){
-        e -> jogadas[i].jogador1.linha = 0;
-        e -> jogadas[i].jogador1.coluna = 0;
-        e -> jogadas[i].jogador2.linha = 0;
-        e -> jogadas[i].jogador2.coluna = 0;
+        e -> jogadas[i].jogador1.linha = -1;
+        e -> jogadas[i].jogador1.coluna = -1;
+        e -> jogadas[i].jogador2.linha = -1;
+        e -> jogadas[i].jogador2.coluna = -1;
         i++;
     }
     e ->  num_jogadas = 0;
@@ -205,4 +213,3 @@ int obter_indice_jogadas_coluna (ESTADO  *e,int jogador,int indice) {
     else
         return e->jogadas[indice].jogador2.coluna;
 }
-
