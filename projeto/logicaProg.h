@@ -90,7 +90,8 @@ void jogs ( ESTADO *e);
 /**
  * Função que avalia se uma jogada do bot é válida.
  * @param e o estado.
- * @param c a coordenada.
+ * @param linha a linha
+ * @param coluna a coluna
  * @return 1 caso seja válida, (-1) caso não seja
  */
 int jogada_valida_bot (ESTADO *e ,int linha,int coluna);
