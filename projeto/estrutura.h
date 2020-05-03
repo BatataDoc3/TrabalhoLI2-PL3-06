@@ -167,4 +167,22 @@ void atualiza_num_jogadas_fim (ESTADO *e);
  */
 void atualizar_casa_branca(ESTADO *e,COORDENADA c);
 
+/**
+ * Função que devolve a linha que está no array jogadas no indice que recebe
+ * @param e estado
+ * @param jogador jogador
+ * @param indice indice
+ * @return valor da linha do indice do array
+ */
+int obter_indice_jogadas_linha (ESTADO  *e,int jogador,int indice);
+
+/**
+ * Função que devolve a coluna que está no array jogadas no indice que recebe
+ * @param e estado
+ * @param jogador jogador
+ * @param indice indice
+ * @return valor da coluna do indice do array
+ */
+int obter_indice_jogadas_coluna (ESTADO  *e,int jogador,int indice);
+
 #endif //PROJETO_FINALIZADO_ESTRUTURA_H
