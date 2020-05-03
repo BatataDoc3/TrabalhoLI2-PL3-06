@@ -38,30 +38,28 @@ void gravar_tabuleiro (FILE *f,ESTADO *e) {
 
 void print_array (FILE *f, ESTADO *e){
     int i;
-    for (i=0;i <= (obter_numero_de_jogadas(e)); i++ ){
+    for (i = 0;i <= (obter_numero_de_jogadas(e)) && i  < 32; i++ ){
         if (i<9){
-            if ((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) {
-                fprintf(f, "0%d: %c%d", i + 1, (e->jogadas[i].jogador1.coluna) + 'a', e->jogadas[i].jogador1.linha + 1);
+            if (obter_indice_jogadas_linha(e,1,i) != -1|| obter_indice_jogadas_coluna(e,1,i) != -1) {
+                fprintf(f, "0%d: %c%d", i + 1, (obter_indice_jogadas_coluna(e,1,i)) + 'a', obter_indice_jogadas_linha(e,1,i) + 1);
             }
-            if ((e->jogadas[i].jogador2.linha)!= 0 || e->jogadas[i].jogador2.coluna != 0) {
-                fprintf(f, " %c%d ", (e->jogadas[i].jogador2.coluna) + 'a', e->jogadas[i].jogador2.linha + 1);
-                fprintf(f, "\n");
+            if (obter_indice_jogadas_linha(e,2,i) != -1 || obter_indice_jogadas_coluna(e,2,i) != -1) {
+                fprintf(f, " %c%d\n", (obter_indice_jogadas_coluna(e,2,i)) + 'a', obter_indice_jogadas_linha(e,2,i) + 1);
             }
-            if (((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) && ((e->jogadas[i].jogador2.linha)== 0 && e->jogadas[i].jogador2.coluna == 0)){
-                fprintf(f, "\n");
+            if ((obter_indice_jogadas_linha(e,1,i) != -1 && obter_indice_jogadas_coluna(e,1,i) != -1) && (obter_indice_jogadas_linha(e,2,i) == -1 && obter_indice_jogadas_coluna(e,2,i) == -1)){
+                fprintf(f,"\n");
             }
         }
         else {
-            if ((e->jogadas[i].jogador1.linha)!= 0 || e->jogadas[i].jogador1.coluna != 0) {
-                fprintf(f, "%d: %c%d", i + 1, (e->jogadas[i].jogador1.coluna) + 'a', e->jogadas[i].jogador1.linha + 1);
+            if (obter_indice_jogadas_linha(e,1,i) != -1|| obter_indice_jogadas_coluna(e,1,i) != -1) {
+                fprintf(f, "%d: %c%d", i + 1, obter_indice_jogadas_coluna(e,1,i) + 'a', obter_indice_jogadas_linha(e,1,i) + 1);
             }
-            if ((e->jogadas[i].jogador2.linha)!= 0 || e->jogadas[i].jogador2.coluna != 0) {
-                fprintf(f, " %c%d ", (e->jogadas[i].jogador2.coluna) + 'a', e->jogadas[i].jogador2.linha + 1);
-                fprintf(f, "\n");
+            if (obter_indice_jogadas_linha(e,2,i) != -1|| obter_indice_jogadas_coluna(e,2,i) != -1) {
+                fprintf(f, " %c%d\n", obter_indice_jogadas_coluna(e,2,i) + 'a', obter_indice_jogadas_linha(e,2,i) + 1);
             }
-            else {
-                fprintf(f, "\n");
-            }
+           // else {
+             //   fprintf(f, "\n");
+           // }
         }
     }
 }
