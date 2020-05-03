@@ -1,5 +1,5 @@
-#ifndef TRABALHOLI2_PL3_06_MASTER_8_2_CÓPIA_ARVORES_H
-#define TRABALHOLI2_PL3_06_MASTER_8_2_CÓPIA_ARVORES_H
+#ifndef TRABALHOLI2_PL3_06_MASTER_8_2_COPIA_ARVORES_H
+#define TRABALHOLI2_PL3_06_MASTER_8_2_COPIA_ARVORES_H
 #include "estrutura.h"
 
 /**
@@ -60,4 +60,4 @@ void preencher_class (TREE arvore,int profundidade);
  */
 void free_arvore (TREE arvore,int profundidade);
 
-#endif //TRABALHOLI2_PL3_06_MASTER_8_2_CÓPIA_ARVORES_H
+#endif //TRABALHOLI2_PL3_06_MASTER_8_2_COPIA_ARVORES_H
