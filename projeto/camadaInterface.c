@@ -64,7 +64,6 @@ void print_array (FILE *f, ESTADO *e){
     }
 }
 
-
 int gravar (ESTADO *e,char *filename) {
     FILE *f = fopen (filename,"w");
     if (f == NULL)
