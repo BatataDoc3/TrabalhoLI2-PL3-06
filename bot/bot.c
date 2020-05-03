@@ -8,7 +8,6 @@ int main (int x , char *array[]){
        ler (e,array[1]);
        jog2(e);
        gravar(e,array[2]);
-       printf ("OK");
    }
 }
 
