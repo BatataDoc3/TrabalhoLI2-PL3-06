@@ -426,7 +426,6 @@ COORDENADA paridade (ESTADO *e, COORDENADA c) {
 }
 
 COORDENADA verifica_se_vai_bloquear (ESTADO *e, COORDENADA c) {
-    COORDENADA cord;
     atualizar_casa_preta(e);
     preenche_tab_cor(e);
     if (bloqueada(e, c.linha + 1, c.coluna) == 1) {
