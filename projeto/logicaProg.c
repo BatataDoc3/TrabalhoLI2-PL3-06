@@ -94,13 +94,11 @@ int casa_Preta (ESTADO*e, COORDENADA c) {
     else return 0;
 }
 
-
 int rodeado_pretas (ESTADO *e, COORDENADA c){
     int x;
     x = casa_Preta (e,c);
     return x;
 }
-
 
 int jogo_finalizado (ESTADO *e, COORDENADA c) {
     int colunaJog, linhaJog;
