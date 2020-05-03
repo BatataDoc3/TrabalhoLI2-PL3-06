@@ -82,11 +82,6 @@ int casa_Preta (ESTADO*e, COORDENADA c);
  */
 int parabens_jogador (ESTADO *e);
 
-/**
- * Fução que efetua jogadas aleatorias (comando jog1).
- * @param e o estado.
- */
-void jogs ( ESTADO *e);
 
 /**
  * Função que avalia se uma jogada do bot é válida.
