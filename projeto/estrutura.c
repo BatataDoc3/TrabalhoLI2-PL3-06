@@ -172,10 +172,10 @@ void posicao (ESTADO *e) {
         }
         atualizar_tabuleiro_jogadas(e);
         while (posx < 32) {
-            e -> jogadas [posx].jogador1.linha = 0;
-            e -> jogadas [posx].jogador1.coluna = 0;
-            e -> jogadas [posx].jogador2.linha = 0;
-            e -> jogadas [posx].jogador2.coluna = 0;
+            e -> jogadas [posx].jogador1.linha = -1;
+            e -> jogadas [posx].jogador1.coluna = -1;
+            e -> jogadas [posx].jogador2.linha = -1;
+            e -> jogadas [posx].jogador2.coluna = -1;
             posx++;
         }
     }
