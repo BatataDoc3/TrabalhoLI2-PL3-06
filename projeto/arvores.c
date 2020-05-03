@@ -181,3 +181,4 @@ void free_arvore (TREE arvore,int profundidade) {
     if (arvore -> EE != NULL) free_arvore (arvore -> EE,profundidade);
     free (arvore);
 }
+
