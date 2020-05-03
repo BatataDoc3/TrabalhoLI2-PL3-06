@@ -188,3 +188,21 @@ void atualiza_num_jogadas_fim (ESTADO *e){
 void atualizar_casa_branca(ESTADO *e,COORDENADA c){
     e -> tab [c.linha] [c.coluna] = BRANCA;
 }
+
+int obter_indice_jogadas_linha (ESTADO  *e,int jogador,int indice) {
+    if (jogador == 1) {
+        return e->jogadas[indice].jogador1.linha;
+    }
+    else
+        return e->jogadas[indice].jogador2.linha;
+}
+
+
+int obter_indice_jogadas_coluna (ESTADO  *e,int jogador,int indice) {
+    if (jogador == 1) {
+        return e->jogadas[indice].jogador1.coluna;
+    }
+    else
+        return e->jogadas[indice].jogador2.coluna;
+}
+
