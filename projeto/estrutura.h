@@ -18,14 +18,31 @@ typedef enum {
 /**
  \brief Tipo de dados para a COORDENADA
  */
-typedef struct {int linha;int coluna;} COORDENADA;
+typedef struct {
+    /**
+     * linha
+     */
+    int linha;
+    /**
+     * coluna
+     */
+    int coluna;
+} COORDENADA;
 
 /**
- * \brief Tipo de dados para a JOGADA
- */
-typedef struct {COORDENADA jogador1;
+* \brief Tipo de dados para a JOGADA
+*/
+typedef struct {
+    /**
+    * Coordenada do jogador 1.
+    */
+    COORDENADA jogador1;
+    /**
+     * Coordenada do jogador 2.
+     */
     COORDENADA jogador2;
 } JOGADA;
+
 
 /**
  * \brief Tipo de dados para as JOGADAS
@@ -111,25 +128,21 @@ void atualizar_num_jogadas (ESTADO *e);
 void atualizar_jogadas (ESTADO *e, COORDENADA c);
 
 /**
- * \brief função quê vai ao ficheiro guardado e altera o estado das casas, o jogadoe e o numero de jogadas de acordo com o que está no ficheiro
+ * \brief função quê vai ao ficheiro guardado e altera o estado das casas, o jogador e o número de jogadas de acordo com o que está no ficheiro
  * @param e pointer do edtado
- * @param f coordenada
- * @param a numero de jogadas
- * @param b jogador atual
+ * @param f ficheiro
  */
 void le_ficheiro (ESTADO *e,FILE *f);
 
 /**
  * \brief função atualiza o estado para uma posição anterior (usada no comando pos)
  * @param e estado
- * @param posx número de uma jogada anterior
  */
 void posicao (ESTADO *e);
 
 /**
  * \brief esta função atualiza o tabuleiro dependendo do input da pos
- * @param e Estado 
- * @param posx input do jogador para o comando pos
+ * @param e Estado
  */
 void atualizar_tabuleiro_jogadas (ESTADO *e);
 
@@ -140,10 +153,9 @@ void atualizar_tabuleiro_jogadas (ESTADO *e);
 ESTADO *inicializar_estado();
 
 /**
- * \brief Função que verifica se o jogo terminou
+ * \brief Função que coloca o x na variável posx do estado
  * @param e pointer do estado
- * @param c coordenada
- * @return 1 caso o jogo finalizou ou 0 se não
+ * @param x valor
  */
 void atualiza_posx (ESTADO *e,int x);
 
