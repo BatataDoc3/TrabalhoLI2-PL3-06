@@ -83,10 +83,10 @@ void le_ficheiro (ESTADO *e , FILE *f) {
     char *result;
     int i = 0, j;
     while (i < 32){
-        e -> jogadas[i].jogador1.linha = 0;
-        e -> jogadas[i].jogador1.coluna = 0;
-        e -> jogadas[i].jogador2.linha = 0;
-        e -> jogadas[i].jogador2.coluna = 0;
+        e -> jogadas[i].jogador1.linha = -1;
+        e -> jogadas[i].jogador1.coluna = -1;
+        e -> jogadas[i].jogador2.linha = -1;
+        e -> jogadas[i].jogador2.coluna = -1;
         i++;
     }
     e ->  num_jogadas = 0;
@@ -140,7 +140,7 @@ void atualizar_tabuleiro_jogadas (ESTADO *e) {
             i++;
         }
         if (posx != 0)
-                e -> tab [e->jogadas[posx - 1].jogador2.linha] [e->jogadas[posx - 1].jogador2.coluna] = BRANCA;
+            e -> tab [e->jogadas[posx - 1].jogador2.linha] [e->jogadas[posx - 1].jogador2.coluna] = BRANCA;
         else e -> tab[4] [4] = BRANCA;
         if (posx > 0)
             e -> tab [4] [4] = PRETA;
@@ -189,3 +189,19 @@ void atualizar_casa_branca(ESTADO *e,COORDENADA c){
     e -> tab [c.linha] [c.coluna] = BRANCA;
 }
 
+int obter_indice_jogadas_linha (ESTADO  *e,int jogador,int indice) {
+    if (jogador == 1) {
+        return e->jogadas[indice].jogador1.linha;
+    }
+    else
+        return e->jogadas[indice].jogador2.linha;
+}
+
+
+int obter_indice_jogadas_coluna (ESTADO  *e,int jogador,int indice) {
+    if (jogador == 1) {
+        return e->jogadas[indice].jogador1.coluna;
+    }
+    else
+        return e->jogadas[indice].jogador2.coluna;
+}
