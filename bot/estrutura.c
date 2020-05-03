@@ -128,7 +128,7 @@ void le_ficheiro (ESTADO *e , FILE *f) {
         }
         i++;
     }
-} //FIXME MUDEI PARA VOID E TINHA RETURN 1 NO FIM
+}
 
 void atualizar_tabuleiro_jogadas (ESTADO *e) {
     int posx = e -> posx;
