@@ -4,7 +4,10 @@
  */
 #ifndef PROJETO_FINALIZADO_LISTAS_H
 #define PROJETO_FINALIZADO_LISTAS_H
-
+/**
+ * Definir BUF_SIZE para 1024
+ */
+#define BUF_SIZE 1024
 #include "estrutura.h"
 
 /**
