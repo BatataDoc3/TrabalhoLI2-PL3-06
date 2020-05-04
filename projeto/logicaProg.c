@@ -1,3 +1,8 @@
+/**
+ * @file logicaProg.c
+ * \brief conjunto de funções que verificam se a jogada é válida e faz a jogada
+**/
+
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
