@@ -1,3 +1,8 @@
+/**
+ * @file arvores.c
+ * \brief conjunto de funções correspondentes às arvores
+ */
+
 #include "arvores.h"
 #include "logicaProg.h"
 #include "estrutura.h"
