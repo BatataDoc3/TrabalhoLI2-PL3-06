@@ -1,3 +1,8 @@
+/**
+ * @file estrutura.c
+ * \brief conjunto de funções que alteram o estado
+ */
+
 #include "estrutura.h"
 #include <stdlib.h>
 #include <stdio.h>
