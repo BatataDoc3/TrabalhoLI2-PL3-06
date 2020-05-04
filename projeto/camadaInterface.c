@@ -1,3 +1,8 @@
+/**
+ * @file camadaInterface.c
+ * \brief conjunto de funções que desenham o tabuleiro e recebem o input do jogador, e fazem várias ações dependendo do input
+ */
+
 #include "logicaProg.h"
 #include "estrutura.h"
 #include <stdio.h>
