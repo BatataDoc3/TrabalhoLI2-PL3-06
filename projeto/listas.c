@@ -1,8 +1,12 @@
+/**
+ * @file listas.c
+ \brief funções relativas às listas ligadas.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "listas.h"
-#define BUF_SIZE 1024
 
 LISTA criar_lista(){
     LISTA new = malloc (sizeof (NODO));
