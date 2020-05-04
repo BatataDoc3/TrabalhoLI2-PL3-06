@@ -1,6 +1,13 @@
+/**
+ * @file estrutura.h
+ * \brief conjunto de funções que alteram o estado
+ */
 #ifndef PROJETO_FINALIZADO_ESTRUTURA_H
 #define PROJETO_FINALIZADO_ESTRUTURA_H
 
+/**
+ * Defiir BUF_SIZE PARA 1024
+ */
 #define BUF_SIZE 1024
 #include <stdio.h>
 
@@ -8,18 +15,39 @@
  *\brief tipo de dados para a CASA
  */
 typedef enum {
+    /**
+     CASA UM
+     */
     UM = '1',
+    /**
+    CASA DOIS
+    */
     DOIS = '2',
+    /**
+    CASA VAZIO
+    */
     VAZIO = '.',
+    /**
+     * CASA BRANCA
+     */
     BRANCA = '*',
+    /**
+     * CASA PRETA
+     */
     PRETA = '#'
 } CASA ;
 
 /**
- * tipo de dados para a COR
+ * \brief tipo de dados para a COR
  */
 typedef enum {
+    /**
+     * COR PINTADA
+     */
     PINTADA = '#',
+    /**
+     * COR NAO_PINTADA
+     */
     NAO_PINTADA = '1'
 } COR;
 
